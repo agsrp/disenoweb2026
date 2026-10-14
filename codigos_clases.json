@@ -1,0 +1,197 @@
+{
+  "curso": "Curso de Diseño Web — Contexto Buenos Aires 2026",
+  "docente": "Prof. Agustín R. Pérez",
+  "carga_horaria": "84 horas (21 clases)",
+  "codigo_maestro_docente": "PROFE2026",
+  "clases": [
+    {
+      "numero": 1,
+      "id": "c1",
+      "modulo": 1,
+      "titulo": "Bienvenida y Anatomía de la Web",
+      "resumen": "Internet vs. Web, Cliente-Servidor, DNS, Dominio y Hosting, capas HTML/CSS/JS, Navegadores, User Persona e Inspector F12.",
+      "codigo": "ANATOMIA01",
+      "estado_contenido": "disponible"
+    },
+    {
+      "numero": 2,
+      "id": "c2",
+      "modulo": 1,
+      "titulo": "Diseño Visual: Color, Tipografía y Jerarquía",
+      "resumen": "Teoría y psicología del color, HEX/RGB/HSL, Regla 60-30-10, Contraste WCAG 4.5:1, Google Fonts y Moodboard en Canva.",
+      "codigo": "COLOR02",
+      "estado_contenido": "disponible"
+    },
+    {
+      "numero": 3,
+      "id": "c3",
+      "modulo": 1,
+      "titulo": "Estructura y Wireframes (Pensar antes de codificar)",
+      "resumen": "Arquitectura de la información, Sitemap de 4 secciones, bocetos Lo-Fi en papel y fibra, pensar en cajas y Mobile First.",
+      "codigo": "PAPEL03",
+      "estado_contenido": "disponible"
+    },
+    {
+      "numero": 4,
+      "id": "c4",
+      "modulo": 2,
+      "titulo": "HTML5: La Estructura de la Web",
+      "resumen": "Lenguaje de marcado, anatomía de etiquetas y atributos, esqueleto index.html, HTML Semántico y traducción del papel al código.",
+      "codigo": "HTML04",
+      "estado_contenido": "disponible"
+    },
+    {
+      "numero": 5,
+      "id": "c5",
+      "modulo": 2,
+      "titulo": "CSS: Dándole Vida al Diseño",
+      "resumen": "Enlazar CSS externo, selectores (etiqueta, clase, id), paleta y fuentes del Moodboard, y el Modelo de Caja (margin, border, padding).",
+      "codigo": "ESTILOS05",
+      "estado_contenido": "proximamente"
+    },
+    {
+      "numero": 6,
+      "id": "c6",
+      "modulo": 2,
+      "titulo": "Maquetación con Flexbox",
+      "resumen": "Teoría de display: flex, justify-content, align-items, flex-direction. Maquetación de barras de navegación (navbars) y tarjetas.",
+      "codigo": "FLEXBOX06",
+      "estado_contenido": "proximamente"
+    },
+    {
+      "numero": 7,
+      "id": "c7",
+      "modulo": 2,
+      "titulo": "Responsividad, Media Queries y Checkpoint 1",
+      "resumen": "Diseño Mobile First, breakpoints, unidades relativas (%, em, rem, vw, vh), imágenes responsivas y evaluación formativa.",
+      "codigo": "MOBILE07",
+      "estado_contenido": "proximamente"
+    },
+    {
+      "numero": 8,
+      "id": "c8",
+      "modulo": 3,
+      "titulo": "Diseño de Assets con Canva e IA",
+      "resumen": "Exportación y optimización de recursos web (SVG, PNG, WebP) e integración de IA para generar textos reales (copywriting).",
+      "codigo": "CANVA08",
+      "estado_contenido": "proximamente"
+    },
+    {
+      "numero": 9,
+      "id": "c9",
+      "modulo": 3,
+      "titulo": "CSS Avanzado: Grid, Variables y Estados",
+      "resumen": "CSS Grid para galerías, variables globales (:root), estados interactivos (:hover, :active, :focus) y transiciones suaves.",
+      "codigo": "GRID09",
+      "estado_contenido": "proximamente"
+    },
+    {
+      "numero": 10,
+      "id": "c10",
+      "modulo": 3,
+      "titulo": "IA en el Código y Organización con Trello",
+      "resumen": "Asistencia de IA en el IDE para autocompletado y debugging en vivo. Gestión del proyecto con tableros Kanban en Trello.",
+      "codigo": "TRELLO10",
+      "estado_contenido": "proximamente"
+    },
+    {
+      "numero": 11,
+      "id": "c11",
+      "modulo": 4,
+      "titulo": "Lanzamiento del Proyecto Integrador",
+      "resumen": "Consignas del sitio final de 4 secciones, rúbrica de evaluación, planificación individual en Trello e inicio fuerte de maquetación.",
+      "codigo": "PROYECTO11",
+      "estado_contenido": "proximamente"
+    },
+    {
+      "numero": 12,
+      "id": "c12",
+      "modulo": 4,
+      "titulo": "Taller de Proyecto + Animaciones CSS",
+      "resumen": "Transiciones y @keyframes básicos para suavizar cambios de estado sin abusar de las animaciones + producción intensiva en aula.",
+      "codigo": "ANIMA12",
+      "estado_contenido": "proximamente"
+    },
+    {
+      "numero": 13,
+      "id": "c13",
+      "modulo": 4,
+      "titulo": "Repaso General y Simulación de Parcial",
+      "resumen": "Repaso integrador de Modelo de Caja, Flexbox, Grid, responsividad y semántica HTML + simulacro práctico cronometrado.",
+      "codigo": "REPASO13",
+      "estado_contenido": "proximamente"
+    },
+    {
+      "numero": 14,
+      "id": "c14",
+      "modulo": 4,
+      "titulo": "Examen Parcial Teórico-Práctico",
+      "resumen": "Desarrollo en aula: maquetación completa de una Landing Page simple aplicando estructura semántica y estilos responsivos.",
+      "codigo": "PARCIAL14",
+      "estado_contenido": "proximamente"
+    },
+    {
+      "numero": 15,
+      "id": "c15",
+      "modulo": 4,
+      "titulo": "Taller Intensivo Post-Parcial",
+      "resumen": "Devolución grupal y corrección de errores frecuentes del parcial + producción pura para llevar el proyecto al 60%.",
+      "codigo": "TALLER15",
+      "estado_contenido": "proximamente"
+    },
+    {
+      "numero": 16,
+      "id": "c16",
+      "modulo": 5,
+      "titulo": "Presupuestos y Trato con el Cliente",
+      "resumen": "¿Cuánto cobrar una web en Argentina? Valor vs. hora, tarifarios de referencia, adelanto del 50% y límites de revisiones.",
+      "codigo": "COBRAR16",
+      "estado_contenido": "proximamente"
+    },
+    {
+      "numero": 17,
+      "id": "c17",
+      "modulo": 5,
+      "titulo": "SEO On-Page y Landing Pages de Conversión",
+      "resumen": "Etiquetas meta, jerarquía H1-H6, atributos alt, anatomía de una Landing Page sin puntos de fuga y auditoría SEO propia.",
+      "codigo": "SEO17",
+      "estado_contenido": "proximamente"
+    },
+    {
+      "numero": 18,
+      "id": "c18",
+      "modulo": 5,
+      "titulo": "Deploy Temprano en Vivo + Entrega de Avance",
+      "resumen": "Subida del proyecto a Vercel / Netlify para compartir el link por WhatsApp, testing en celulares reales y entrega del 70%.",
+      "codigo": "DEPLOY18",
+      "estado_contenido": "proximamente"
+    },
+    {
+      "numero": 19,
+      "id": "c19",
+      "modulo": 6,
+      "titulo": "Devoluciones y Optimización (WPO / Lighthouse)",
+      "resumen": "Compresión de imágenes, auditoría con Google Lighthouse buscando score verde en Performance y Accessibility, y re-deploy.",
+      "codigo": "OPTIMIZA19",
+      "estado_contenido": "proximamente"
+    },
+    {
+      "numero": 20,
+      "id": "c20",
+      "modulo": 6,
+      "titulo": "Clínica Final de Código y Simulacro de Pitch",
+      "resumen": "Ajuste de detalles finales de código y práctica cronometrada de la presentación oral para defender decisiones de diseño.",
+      "codigo": "PITCH20",
+      "estado_contenido": "proximamente"
+    },
+    {
+      "numero": 21,
+      "id": "c21",
+      "modulo": 6,
+      "titulo": "Defensa de Proyectos y Cierre del Curso",
+      "resumen": "Exposición en vivo de cada sitio desplegado, armado de CV profesional con el nuevo rol y cierre de la cursada.",
+      "codigo": "DEFENSA21",
+      "estado_contenido": "proximamente"
+    }
+  ]
+}

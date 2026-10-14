@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="es-AR" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clase 04: HTML5: La Estructura de la Web — Curso de Diseño Web | Prof. Agustín R. Pérez</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="student_tracker.js"></script>
+</head>
+<body>
+
+  <!-- FLOATING XP TOAST -->
+  <div class="xp-toast" id="xp-toast">+40 XP</div>
+
+  <!-- STICKY TOP NAVBAR -->
+  <header class="navbar">
+    <div class="nav-brand" onclick="window.location.href='index.html'">
+      <span class="brand-sq"></span>
+      <span class="brand-text">DISEÑO_WEB // 2026</span>
+      <span class="brand-prof">Prof. Agustín R. Pérez</span>
+    </div>
+
+    <nav class="nav-tabs" style="align-items:center;">
+      <a href="index.html" class="nav-tab">🏠 Portal General</a>
+      <a href="clase_03.html" class="class-nav-btn " title="Clase Anterior">← Clase 03</a>
+      <select class="class-select-nav" onchange="window.location.href=this.value" title="Cambiar de Clase">
+        <option value="clase_01.html" >Clase 01: Bienvenida y Anatomía de la Web</option>
+            <option value="clase_02.html" >Clase 02: Diseño Visual: Color, Tipografía y Jerarquía</option>
+            <option value="clase_03.html" >Clase 03: Estructura y Wireframes (Pensar antes de codificar)</option>
+            <option value="clase_04.html" selected>Clase 04: HTML5: La Estructura de la Web</option>
+            <option value="clase_05.html" >Clase 05: CSS: Dándole Vida al Diseño</option>
+            <option value="clase_06.html" >Clase 06: Maquetación con Flexbox</option>
+            <option value="clase_07.html" >Clase 07: Responsividad, Media Queries y Checkpoint 1</option>
+            <option value="clase_08.html" >Clase 08: Diseño de Assets con Canva e IA</option>
+            <option value="clase_09.html" >Clase 09: CSS Avanzado: Grid, Variables y Estados</option>
+            <option value="clase_10.html" >Clase 10: IA en el Código y Organización con Trello</option>
+            <option value="clase_11.html" >Clase 11: Lanzamiento del Proyecto Integrador</option>
+            <option value="clase_12.html" >Clase 12: Taller de Proyecto + Animaciones CSS</option>
+            <option value="clase_13.html" >Clase 13: Repaso General y Simulación de Parcial</option>
+            <option value="clase_14.html" >Clase 14: Examen Parcial Teórico-Práctico</option>
+            <option value="clase_15.html" >Clase 15: Taller Intensivo Post-Parcial</option>
+            <option value="clase_16.html" >Clase 16: Presupuestos y Trato con el Cliente</option>
+            <option value="clase_17.html" >Clase 17: SEO On-Page y Landing Pages de Conversión</option>
+            <option value="clase_18.html" >Clase 18: Deploy Temprano en Vivo + Entrega de Avance</option>
+            <option value="clase_19.html" >Clase 19: Devoluciones y Optimización (WPO / Lighthouse)</option>
+            <option value="clase_20.html" >Clase 20: Clínica Final de Código y Simulacro de Pitch</option>
+            <option value="clase_21.html" >Clase 21: Defensa de Proyectos y Cierre del Curso</option>
+      </select>
+      <a href="clase_05.html" class="class-nav-btn " title="Siguiente Clase">Clase 05 →</a>
+    </nav>
+
+    <div class="nav-right">
+      <div class="xp-pill" title="Interactuá con las tarjetas y simuladores para subir de nivel">
+        <span style="color:var(--lime); font-weight:800;" id="xp-rank">LVL 1 // INICIADO</span>
+        <div class="xp-track"><div class="xp-fill" id="xp-fill"></div></div>
+        <span id="xp-num" style="font-weight:800;">0 XP</span>
+      </div>
+      <button class="icon-btn" onclick="toggleTheme()" title="Tema Claro/Oscuro [T]">[T]</button>
+      <button class="icon-btn" onclick="toggleFS()" title="Pantalla Completa [F]">[F]</button>
+    </div>
+  </header>
+
+  <!-- POP-UP MODAL OVERLAY -->
+  <div class="modal-overlay" id="modal-overlay" onclick="closeModalOnBg(event)">
+    <div class="modal-window">
+      <div class="modal-top">
+        <span class="modal-badge" id="m-badge">DETALLE</span>
+        <button class="modal-close" onclick="closeModal()">✕ Cerrar [ESC]</button>
+      </div>
+      <h2 class="modal-title" id="m-title">Título</h2>
+      <p class="modal-lead" id="m-lead"></p>
+      <div id="m-body" style="display:flex; flex-direction:column; gap:12px;"></div>
+      <div style="display:flex; justify-content:flex-end; margin-top:4px;">
+        <button class="cta-btn" onclick="closeModal()">✓ Entendido</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DECK VIEW -->
+  <section class="deck-view active" id="view-deck">
+    <div class="progress-line">
+      <div class="progress-line-fill" id="deck-progress"></div>
+    </div>
+
+    <div class="deck-stage" id="deck-stage"></div>
+
+    <footer class="deck-controls">
+      <button class="ctrl-btn" onclick="prevSlide()">← Anterior</button>
+      <div class="deck-dots" id="deck-dots"></div>
+      <span class="deck-counter" id="deck-counter">Slide 1 de 10</span>
+      <button class="ctrl-btn" onclick="nextSlide()">Siguiente →</button>
+    </footer>
+  </section>
+
+  <script>
+    // =================================================================
+    // LOCALSTORAGE & XP SYSTEM
+    // =================================================================
+    let xp = parseInt(localStorage.getItem('dw_user_xp_2026') || '0', 10);
+    const unlockedXP = new Set(JSON.parse(localStorage.getItem('dw_unlocked_keys_2026') || '[]'));
+    const unlockedClasses = new Set(JSON.parse(localStorage.getItem('dw_unlocked_classes_2026') || '[]'));
+
+    function updateXPDisplay() {
+      const numEl = document.getElementById('xp-num');
+      if (numEl) numEl.textContent = `${xp} XP`;
+      const fillEl = document.getElementById('xp-fill');
+      if (fillEl) fillEl.style.width = Math.min(100, Math.round((xp / 1500) * 100)) + '%';
+
+      const rank = document.getElementById('xp-rank');
+      if (rank) {
+        if (xp >= 1100) rank.textContent = 'LVL 6 // FULL WEB CREATOR';
+        else if (xp >= 800) rank.textContent = 'LVL 5 // MAQUETADOR HTML';
+        else if (xp >= 550) rank.textContent = 'LVL 4 // ARQUITECTO UX';
+        else if (xp >= 300) rank.textContent = 'LVL 3 // DISEÑADOR VISUAL';
+        else if (xp >= 120) rank.textContent = 'LVL 2 // EXPLORADOR WEB';
+        else rank.textContent = 'LVL 1 // INICIADO';
+      }
+    }
+
+    function gainXP(key, pts = 40) {
+      if (unlockedXP.has(key)) return;
+      unlockedXP.add(key);
+      xp += pts;
+      localStorage.setItem('dw_user_xp_2026', String(xp));
+      localStorage.setItem('dw_unlocked_keys_2026', JSON.stringify(Array.from(unlockedXP)));
+      updateXPDisplay();
+
+      const toast = document.getElementById('xp-toast');
+      if (toast) {
+        toast.textContent = `+${pts} XP DESBLOQUEADOS`;
+        toast.classList.add('show');
+        clearTimeout(window._xpT);
+        window._xpT = setTimeout(() => toast.classList.remove('show'), 1400);
+      }
+    }
+
+    // THEME & FULLSCREEN
+    const savedTheme = localStorage.getItem('dw_theme_2026') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+
+    function toggleTheme() {
+      const root = document.documentElement;
+      const current = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', current);
+      localStorage.setItem('dw_theme_2026', current);
+    }
+
+    function toggleFS() {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(() => {});
+      else document.exitFullscreen().catch(() => {});
+    }
+
+    // DATA FOR THIS CLASS
+    const currentClassDeck = [
+  {
+    "kicker": "CLASE 04 · PANTALLA 01 // EL MOMENTO DE LA VERDAD",
+    "title": "Hoy empezamos a hablar el idioma del navegador: <span class=\"lime\">HTML5</span>",
+    "hint": "Perdé el miedo: no tiene matemáticas raras ni lógica complicada:",
+    "cards": [
+      [
+        "🏷️",
+        "NO ES PROGRAMACIÓN",
+        "Lenguaje de Marcado",
+        "c4_markup"
+      ],
+      [
+        "🔤",
+        "LAS SIGLAS",
+        "¿Qué significa H-T-M-L?",
+        "c4_acronym"
+      ]
+    ]
+  },
+  {
+    "kicker": "CLASE 04 · PANTALLA 02 // ANATOMÍA DE UNA ETIQUETA",
+    "title": "Cómo se escribe un <span class=\"cyan\">Elemento HTML</span> sin errores",
+    "hint": "Casi todas las etiquetas trabajan en pareja (apertura y cierre con barra /):",
+    "cards": [
+      [
+        "🧱",
+        "APERTURA Y CIERRE",
+        "Anatomía de <p>...</p>",
+        "c4_tag_anatomy"
+      ],
+      [
+        "🖼️",
+        "SIN CIERRE",
+        "Etiquetas Vacías (img, br, hr)",
+        "c4_empty_tags"
+      ],
+      [
+        "⚙️",
+        "SUPERPODERES",
+        "Los Atributos (nombre=\"valor\")",
+        "c4_attributes"
+      ]
+    ]
+  },
+  {
+    "kicker": "CLASE 04 · PANTALLA 03 // EL ESQUELETO OBLIGATORIO",
+    "title": "El chasis que comparten <span class=\"lime\">todas las webs del mundo</span>",
+    "hint": "Tocá cada pieza del archivo index.html para ver qué función cumple:",
+    "cards": [
+      [
+        "📢",
+        "LÍNEA 1",
+        "<!DOCTYPE html> y <html>",
+        "c4_doctype"
+      ],
+      [
+        "🧠",
+        "INVISIBLE AL USUARIO",
+        "<head>, <meta> y <title>",
+        "c4_head"
+      ],
+      [
+        "👀",
+        "TODO LO VISIBLE",
+        "<body> (El Lienzo)",
+        "c4_body"
+      ],
+      [
+        "📄",
+        "PLANTILLA BASE",
+        "Ver Esqueleto Completo",
+        "c4_full_skeleton"
+      ]
+    ]
+  },
+  {
+    "kicker": "CLASE 04 · PANTALLA 04 // HTML SEMÁNTICO",
+    "title": "Del mar de &lt;div&gt; al <span class=\"lime\">HTML5 Semántico</span>",
+    "hint": "Semántica significa dar significado real a cada caja de nuestro wireframe:",
+    "cards": [
+      [
+        "📦",
+        "EL PROBLEMA",
+        "El viejo mar de <div>",
+        "c4_div_soup"
+      ],
+      [
+        "🏗️",
+        "LAS 6 ETIQUETAS",
+        "header, nav, main, section...",
+        "c4_sem_tags"
+      ],
+      [
+        "🚀",
+        "3 VENTAJAS CLAVE",
+        "Accesibilidad + SEO + Orden",
+        "c4_sem_why"
+      ]
+    ]
+  },
+  {
+    "kicker": "CLASE 04 · PANTALLA 05 // JERARQUÍA DE TÍTULOS Y TEXTOS",
+    "title": "Rellenando las cajas: títulos <span class=\"cyan\">&lt;h1&gt; a &lt;h6&gt;</span> y párrafos",
+    "hint": "El número del título indica su importancia jerárquica, no solo su tamaño:",
+    "cards": [
+      [
+        "👑",
+        "REGLA DEL H1",
+        "Jerarquía de <h1> a <h6>",
+        "c4_headings"
+      ],
+      [
+        "✍️",
+        "FORMATO DE TEXTO",
+        "<p>, <strong> y <em>",
+        "c4_text_tags"
+      ]
+    ]
+  },
+  {
+    "kicker": "CLASE 04 · PANTALLA 06 // LISTAS Y ENLACES (LINKS)",
+    "title": "Cómo armar menús y conectar páginas: <span class=\"lime\">Listas y Enlaces</span>",
+    "hint": "La base del hipertexto y de toda barra de navegación:",
+    "cards": [
+      [
+        "📋",
+        "VIÑETAS Y NÚMEROS",
+        "Listas <ul>, <ol> y <li>",
+        "c4_lists"
+      ],
+      [
+        "🔗",
+        "HIPERTEXTO",
+        "Enlaces <a href=\"...\">",
+        "c4_links"
+      ]
+    ]
+  },
+  {
+    "kicker": "CLASE 04 · PANTALLA 07 // DEL WIREFRAME AL CÓDIGO",
+    "title": "Traducir tu dibujo de papel a <span class=\"lime\">código HTML</span> es directo",
+    "hint": "Cada caja que dibujaste en la Clase 3 tiene su etiqueta exacta:",
+    "cards": [
+      [
+        "🗺️",
+        "TABLA TRADUCTORA",
+        "De tu papel al editor",
+        "c4_translate"
+      ],
+      [
+        "👩‍💼",
+        "EJEMPLO REAL",
+        "Ver el HTML del CV de Martina",
+        "c4_martina_cv"
+      ]
+    ]
+  },
+  {
+    "kicker": "CLASE 04 · PANTALLA 08 // ¿POR QUÉ SE VE 'FEO' SIN CSS?",
+    "title": "Si tu primer HTML se ve como un <span class=\"amber\">Word de los 90</span>, ¡vas bárbaro!",
+    "hint": "En la Clase 4 buscamos orden estructural; la pintura llega en la Clase 5 con CSS:",
+    "cards": [
+      [
+        "🏛️",
+        "SOLO CIMIENTOS",
+        "Por qué se ve blanco y negro",
+        "c4_ugly_ok"
+      ],
+      [
+        "🧪",
+        "SIMULADOR HTML",
+        "Probar Código HTML en Vivo",
+        "c4_live_html"
+      ]
+    ]
+  },
+  {
+    "kicker": "CLASE 04 · PANTALLA 09 // TALLER PRÁCTICO: TU PRIMER INDEX.HTML",
+    "title": "Manos al teclado: hoy creás tu archivo <span class=\"lime\">index.html</span>",
+    "hint": "Poné tu wireframe de papel al lado de la compu y seguí estos pasos:",
+    "cards": [
+      [
+        "💻",
+        "PASO A PASO",
+        "Consigna del Taller de Hoy",
+        "c4_workshop"
+      ],
+      [
+        "✅",
+        "CHECKLIST DE CÓDIGO",
+        "No olvides cerrar etiquetas",
+        "c4_checklist"
+      ]
+    ]
+  },
+  {
+    "kicker": "CLASE 04 · PANTALLA 10 // DESAFÍO FINAL DE CLASE 4",
+    "title": "Poné a prueba tu dominio de <span class=\"lime\">HTML5</span>",
+    "hint": "Jugá el desafío de 5 preguntas o preparate para darle vida con CSS en la Clase 5:",
+    "cards": [
+      [
+        "🏆",
+        "5 PREGUNTAS",
+        "Jugar Quiz Clase 4",
+        "quiz_c4"
+      ],
+      [
+        "🎨",
+        "PRÓXIMA CLASE",
+        "¿Qué se viene en la Clase 5 (CSS)?",
+        "c4_next"
+      ],
+      [
+        "🏠",
+        "PORTAL GENERAL",
+        "Volver al Inicio del Curso",
+        "goto_hub"
+      ]
+    ]
+  }
+];
+    const classPopups = {
+  "c4_markup": {
+    "badge": "PARTE 1 // CONCEPTO CLAVE",
+    "title": "HTML es un Lenguaje de Marcado, no de Programación",
+    "bullets": [
+      "<strong>Un lenguaje de programación (JS, Python):</strong> Toma decisiones lógicas y calcula (ej. <em>\"si la clave es correcta, entrar\"</em>).",
+      "<strong>Un lenguaje de marcado (HTML):</strong> No toma decisiones; etiqueta cada parte del texto para decirle al navegador: <em>\"esto es el título principal, esto es un párrafo y esto es un botón\"</em>."
+    ]
+  },
+  "c4_acronym": {
+    "badge": "HISTORIA Y VERSIÓN",
+    "title": "¿Qué significan las siglas HTML5?",
+    "bullets": [
+      "<strong>HyperText (Hipertexto):</strong> Textos conectados con otros mediante enlaces (links).",
+      "<strong>Markup (Marcado):</strong> El sistema de etiquetas entre signos <code>&lt;</code> y <code>&gt;</code>.",
+      "<strong>Language (Lenguaje):</strong> Las reglas que entiende cualquier navegador.",
+      "<strong>El 5 (HTML5):</strong> Es la versión moderna y estándar actual."
+    ]
+  },
+  "c4_tag_anatomy": {
+    "badge": "PARTE 2 // SINTAXIS",
+    "title": "Anatomía de un Elemento HTML",
+    "lead": "Casi todas las etiquetas vienen en pares (apertura y cierre con barra diagonal /):",
+    "code": "<p>Este es un párrafo en mi sitio web.</p>\n\n• <p>   → Etiqueta de apertura\n• Texto → Contenido visible\n• </p>  → Etiqueta de cierre (lleva /)"
+  },
+  "c4_empty_tags": {
+    "badge": "EXCEPCIONES",
+    "title": "Etiquetas Vacías (No llevan cierre)",
+    "lead": "Algunos elementos no envuelven texto, por lo que se abren pero no tienen etiqueta de cierre:",
+    "code": "<img src=\"pizza.jpg\" alt=\"Pizza muzzarella\">\n<br>  <!-- Salto de renglón -->\n<hr>  <!-- Línea divisoria horizontal -->"
+  },
+  "c4_attributes": {
+    "badge": "INFORMACIÓN EXTRA",
+    "title": "Los Atributos: nombre=\"valor\"",
+    "lead": "Van siempre adentro de la etiqueta de apertura y le dan datos clave al navegador:",
+    "code": "<a href=\"https://nic.ar\">Ir a NIC Argentina</a>\n<img src=\"logo.png\" alt=\"Logo de la tienda\">\n\n• href indica a qué dirección lleva el link.\n• src indica dónde está guardada la imagen.\n• alt describe la imagen (accesibilidad y SEO)."
+  },
+  "c4_doctype": {
+    "badge": "EL CHASIS HTML",
+    "title": "1. <!DOCTYPE html> y <html lang=\"es\">",
+    "bullets": [
+      "<code>&lt;!DOCTYPE html&gt;</code> va en la línea 1 y le avisa al navegador que usamos HTML5 moderno.",
+      "<code>&lt;html lang=\"es\"&gt;</code> envuelve todo el documento y avisa a Google y a lectores de pantalla que el sitio está en español."
+    ]
+  },
+  "c4_head": {
+    "badge": "LA CABEZA INVISIBLE",
+    "title": "2. <head>: Configuraciones para el navegador",
+    "lead": "Lo que va adentro de <head> NO se dibuja en la página en blanco:",
+    "code": "<head>\n  <meta charset=\"UTF-8\"> <!-- Permite leer ñ y tildes -->\n  <title>Pizzería Don Juan</title> <!-- Texto de la pestaña -->\n</head>"
+  },
+  "c4_body": {
+    "badge": "EL CUERPO VISIBLE",
+    "title": "3. <body>: Todo lo que ve el usuario",
+    "lead": "Todo lo que escribas entre <body> y </body> es lo que aparece en la pantalla del navegador (el header, los títulos, las fotos y los botones)."
+  },
+  "c4_full_skeleton": {
+    "badge": "PLANTILLA OBLIGATORIA",
+    "title": "El Esqueleto de todo archivo index.html",
+    "code": "<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>Mi Primer Sitio Web</title>\n</head>\n<body>\n  <!-- Acá adentro va todo lo que ve el usuario -->\n</body>\n</html>"
+  },
+  "c4_div_soup": {
+    "badge": "PARTE 4 // SEMÁNTICA",
+    "title": "Por qué dejamos atrás el 'Mar de <div>'",
+    "lead": "Antes se usaba la caja genérica <div> para todo. Ni Google ni los lectores para personas no videntes podían distinguir cuál era el menú y cuál era el pie de página.",
+    "bullets": [
+      "Hoy <code>&lt;div&gt;</code> solo se usa como caja auxiliar cuando ninguna etiqueta semántica corresponde."
+    ]
+  },
+  "c4_sem_tags": {
+    "badge": "ETIQUETAS CON SIGNIFICADO",
+    "title": "Las Etiquetas Estructurales de HTML5",
+    "bullets": [
+      "<code>&lt;header&gt;</code>: Encabezado principal (logo y menú).",
+      "<code>&lt;nav&gt;</code>: Barra de enlaces de navegación.",
+      "<code>&lt;main&gt;</code>: Contenido principal y único de esa página (solo 1 por documento).",
+      "<code>&lt;section&gt;</code>: Cada sección temática (ej. Servicios, Testimonios).",
+      "<code>&lt;article&gt;</code>: Contenido independiente (ej. tarjeta de producto o noticia).",
+      "<code>&lt;footer&gt;</code>: Pie de página (copyright, contacto, legales)."
+    ]
+  },
+  "c4_sem_why": {
+    "badge": "3 BENEFICIOS REALES",
+    "title": "¿Por qué importa usar HTML Semántico?",
+    "bullets": [
+      "<strong>1. Accesibilidad:</strong> Los lectores de pantalla le avisan a una persona ciega <em>\"Estás en el menú de navegación\"</em>.",
+      "<strong>2. SEO (Google):</strong> Ayuda a Google a entender qué es importante en tu web para posicionarte más arriba.",
+      "<strong>3. Orden:</strong> Tu código es 10 veces más fácil de leer y mantener."
+    ]
+  },
+  "c4_headings": {
+    "badge": "PARTE 5 // JERARQUÍA",
+    "title": "Títulos del <h1> al <h6>",
+    "bullets": [
+      "<strong>Regla del H1:</strong> Solo debe haber <strong>un único <code>&lt;h1&gt;</code> por página</strong> (el título principal).",
+      "<strong>No saltear niveles:</strong> Usá <code>&lt;h2&gt;</code> para cada sección y <code>&lt;h3&gt;</code> para sub-bloques adentro de esa sección (nunca saltes de h1 a h4)."
+    ]
+  },
+  "c4_text_tags": {
+    "badge": "TEXTO Y ÉNFASIS",
+    "title": "Párrafos, Negritas e Itálicas",
+    "code": "<p>Atendemos urgencias en <strong>menos de 24 horas</strong> con <em>garantía escrita</em>.</p>\n\n• <p>      → Párrafo de texto\n• <strong> → Importancia fuerte (negrita)\n• <em>     → Énfasis (cursiva)"
+  },
+  "c4_lists": {
+    "badge": "LISTAS HTML",
+    "title": "Listas Desordenadas (<ul>) y Ordenadas (<ol>)",
+    "lead": "Ambas llevan cada ítem adentro de una etiqueta <li> (List Item). Las listas <ul> se usan muchísimo para armar menús:",
+    "code": "<ul>\n  <li>Inicio</li>\n  <li>Servicios</li>\n  <li>Contacto</li>\n</ul>"
+  },
+  "c4_links": {
+    "badge": "ENLACES (ANCHOR)",
+    "title": "Enlaces Externos e Internos con <a>",
+    "code": "<!-- Hacia otro sitio web: -->\n<a href=\"https://www.google.com\">Buscar en Google</a>\n\n<!-- Hacia otra sección o archivo de tu propio sitio: -->\n<a href=\"contacto.html\">Ir a Contacto</a>"
+  },
+  "c4_translate": {
+    "badge": "PARTE 6 // TRADUCCIÓN",
+    "title": "De tu Wireframe de Papel al Editor",
+    "bullets": [
+      "1. El rectángulo largo de arriba → <code>&lt;header&gt;</code> con un <code>&lt;nav&gt;</code> y un <code>&lt;ul&gt;</code> adentro.",
+      "2. Todo el bloque central → <code>&lt;main&gt;</code>.",
+      "3. Cada franja que dibujaste (Hero, Servicios, Nosotros) → <code>&lt;section&gt;</code>.",
+      "4. El bloque de cierre abajo → <code>&lt;footer&gt;</code>."
+    ]
+  },
+  "c4_martina_cv": {
+    "badge": "EJEMPLO COMPLETO",
+    "title": "Estructura HTML de Martina López",
+    "code": "<header>\n  <h1>Martina López</h1>\n  <nav>\n    <ul>\n      <li><a href=\"index.html\">Inicio</a></li>\n      <li><a href=\"contacto.html\">Contacto</a></li>\n    </ul>\n  </nav>\n</header>\n<main>\n  <section>\n    <h2>Servicios Contables</h2>\n    <p>Asesoría impositiva para Pymes y monotributistas.</p>\n  </section>\n</main>\n<footer>\n  <p>Derechos reservados 2026 — Buenos Aires</p>\n</footer>"
+  },
+  "c4_ugly_ok": {
+    "badge": "SEPARACIÓN DE ROLES",
+    "title": "'Feo pero ordenado': el objetivo de hoy",
+    "lead": "Cuando abras tu primer index.html en el navegador se va a ver fondo blanco, letra Times New Roman negra y todo alineado a la izquierda.",
+    "bullets": [
+      "<strong>¡Está perfecto que se vea así hoy!</strong> Eso demuestra que la estructura HTML está limpia.",
+      "En la <strong>Clase 5 (CSS)</strong> le vamos a conectar tu Moodboard de colores y fuentes para que cobre vida visual."
+    ]
+  },
+  "c4_live_html": {
+    "badge": "MINI-EDITOR HTML EN VIVO",
+    "title": "Probá cambiar las etiquetas y mirá el resultado",
+    "customHTML": "\n          <textarea class=\"clean-input\" id=\"c4-ta\" rows=\"4\" style=\"font-family:var(--font-mono);\" oninput=\"document.getElementById('c4-out').innerHTML=this.value; gainXP('c4live',50)\"><h1>Pizzería El Barrio</h1>\n<p>La mejor <strong>muzzarella</strong> a la piedra.</p>\n<button>Pedir por WhatsApp</button></textarea>\n          <div id=\"c4-out\" style=\"background:#fff; color:#000; padding:14px; border-radius:10px; font-family:serif;\">\n            <h1>Pizzería El Barrio</h1>\n            <p>La mejor <strong>muzzarella</strong> a la piedra.</p>\n            <button>Pedir por WhatsApp</button>\n          </div>\n        "
+  },
+  "c4_workshop": {
+    "badge": "TALLER CLASE 4",
+    "title": "Armá el index.html de tu Proyecto",
+    "bullets": [
+      "1. Abrí el editor (VS Code / Antigravity) y creá el archivo <code>index.html</code>.",
+      "2. Escribí el esqueleto base (<code>!DOCTYPE</code>, <code>html</code>, <code>head</code>, <code>body</code>).",
+      "3. Con tu wireframe de papel al lado del teclado, maquetá las 4 secciones usando etiquetas semánticas."
+    ]
+  },
+  "c4_checklist": {
+    "badge": "VERIFICACIÓN DE CALIDAD",
+    "title": "3 cosas para revisar antes de terminar hoy",
+    "bullets": [
+      "✓ ¿Toda etiqueta que abriste tiene su cierre con <code>/</code>?",
+      "✓ ¿Hay un único <code>&lt;h1&gt;</code> y un único <code>&lt;main&gt;</code> en la página?",
+      "✓ ¿Usaste <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;section&gt;</code> y <code>&lt;footer&gt;</code> en lugar de llenar todo de <code>&lt;div&gt;</code>?"
+    ]
+  },
+  "c4_next": {
+    "badge": "PRÓXIMA CLASE // CLASE 5",
+    "title": "Se viene CSS: Dándole vida al diseño",
+    "lead": "En la Clase 5 vamos a enlazar nuestra hoja de estilos CSS para aplicar la paleta de colores y las fuentes de tu Moodboard sobre el HTML que creaste hoy."
+  }
+};
+    const classQuizzes = {
+      quiz_c4: [
+  {
+    "q": "1/5 — ¿Por qué decimos que HTML es un lenguaje de marcado y no de programación?",
+    "opts": [
+      "Porque no toma decisiones lógicas ni hace cálculos: solo estructura y da significado al contenido.",
+      "Porque solo funciona sin internet.",
+      "Porque reemplaza a CSS."
+    ],
+    "ok": 0
+  },
+  {
+    "q": "2/5 — ¿Dónde se escribe todo el contenido visible que ve el usuario en la pantalla?",
+    "opts": [
+      "Adentro de la etiqueta <head>.",
+      "Adentro de la etiqueta <body>.",
+      "Adentro de <!DOCTYPE html>."
+    ],
+    "ok": 1
+  },
+  {
+    "q": "3/5 — ¿Para qué sirve el atributo href dentro de <a href=\"...\">?",
+    "opts": [
+      "Para cambiar el color de la letra.",
+      "Para indicar la dirección URL o página de destino a la que lleva el enlace.",
+      "Para poner el texto en negrita."
+    ],
+    "ok": 1
+  },
+  {
+    "q": "4/5 — ¿Por qué usamos etiquetas semánticas (<header>, <nav>, <main>, <footer>) en vez de solo <div>?",
+    "opts": [
+      "Porque mejoran la accesibilidad (lectores de pantalla), el posicionamiento en Google (SEO) y el orden del código.",
+      "Porque cambian el color automáticamente.",
+      "Porque los <div> ya no funcionan en Chrome."
+    ],
+    "ok": 0
+  },
+  {
+    "q": "5/5 — ¿Cuántas etiquetas <h1> (título principal) debe tener cada página HTML?",
+    "opts": [
+      "Todas las que quieras.",
+      "Exactamente un único <h1> por página, respetando luego el orden <h2>, <h3> sin saltear niveles.",
+      "Ninguna, se empieza por <h4>."
+    ],
+    "ok": 1
+  }
+]
+    };
+
+    // DECK RENDERING
+    let currentSlideIdx = 0;
+
+    function buildDeck() {
+      const stage = document.getElementById('deck-stage');
+      const dotsBox = document.getElementById('deck-dots');
+      stage.innerHTML = '';
+      dotsBox.innerHTML = '';
+
+      currentClassDeck.forEach((s, idx) => {
+        const sec = document.createElement('section');
+        sec.className = 'slide' + (idx === 0 ? ' active' : '');
+
+        let inner = `
+          <div>
+            <span class="kicker">${s.kicker}</span>
+            <h1 class="big-title">${s.title}</h1>
+          </div>
+          <p class="short-hint">${s.hint}</p>
+        `;
+
+        if (s.customSlide) {
+          inner += s.customSlide;
+        } else if (s.cards) {
+          const cols = s.cards.length;
+          const gridClass = cols === 2 ? 'launcher-grid-2' : cols === 4 ? 'launcher-grid-4' : cols === 5 ? 'launcher-grid-5' : 'launcher-grid-3';
+          inner += `<div class="${gridClass}">` + s.cards.map(c => `
+            <div class="launcher-card" onclick="handleCardClick('${c[3]}', this)">
+              <div class="card-emoji">${c[0]}</div>
+              <span class="card-num">${c[1]}</span>
+              <div class="card-name">${c[2]}</div>
+              <span class="card-cta">+ Abrir</span>
+            </div>
+          `).join('') + `</div>`;
+        }
+
+        sec.innerHTML = inner;
+        stage.appendChild(sec);
+
+        const dot = document.createElement('button');
+        dot.className = 'dot' + (idx === 0 ? ' active' : '');
+        dot.textContent = String(idx + 1).padStart(2, '0');
+        dot.title = `Ir al slide ${idx + 1}`;
+        dot.onclick = () => goSlide(idx);
+        dotsBox.appendChild(dot);
+      });
+
+      updateDeckProgress();
+    }
+
+    function goSlide(idx) {
+      const allSlides = document.querySelectorAll('#deck-stage .slide');
+      const allDots = document.querySelectorAll('#deck-dots .dot');
+      if (idx < 0 || idx >= allSlides.length) return;
+
+      allSlides.forEach(s => s.classList.remove('active'));
+      allDots.forEach(d => d.classList.remove('active'));
+
+      currentSlideIdx = idx;
+      allSlides[currentSlideIdx].classList.add('active');
+      if (allDots[currentSlideIdx]) allDots[currentSlideIdx].classList.add('active');
+
+      window.scrollTo(0, 0);
+      const stg = document.getElementById('deck-stage');
+      if (stg) stg.scrollTop = 0;
+
+      updateDeckProgress();
+    }
+
+    function updateDeckProgress() {
+      const total = currentClassDeck.length;
+      const pct = Math.round(((currentSlideIdx + 1) / total) * 100);
+      document.getElementById('deck-progress').style.width = pct + '%';
+      document.getElementById('deck-counter').textContent = `Slide ${currentSlideIdx + 1} de ${total}`;
+    }
+
+    function nextSlide() {
+      if (currentSlideIdx < currentClassDeck.length - 1) goSlide(currentSlideIdx + 1);
+    }
+
+    function prevSlide() {
+      if (currentSlideIdx > 0) goSlide(currentSlideIdx - 1);
+    }
+
+    // MODAL POPUPS & CARDS
+    function handleCardClick(key, cardEl) {
+      if (cardEl) {
+        cardEl.style.transform = 'scale(0.97)';
+        setTimeout(() => cardEl.style.transform = '', 140);
+      }
+      if (key === 'goto_hub') {
+        window.location.href = 'index.html';
+        return;
+      }
+      if (key.startsWith('goto_c')) {
+        const cNum = key.replace('goto_c', '').padStart(2, '0');
+        window.location.href = `clase_${cNum}.html`;
+        return;
+      }
+      if (key.startsWith('quiz_') || (classQuizzes && classQuizzes[key])) {
+        startQuiz(key);
+        return;
+      }
+      openPopup(key, cardEl);
+    }
+
+    function openPopup(key, cardEl = null) {
+      const d = classPopups[key];
+      if (!d) return;
+
+      document.getElementById('m-badge').textContent = d.badge || 'DETALLE TÉCNICO';
+      document.getElementById('m-title').textContent = d.title || '';
+      document.getElementById('m-lead').textContent = d.lead || '';
+
+      const body = document.getElementById('m-body');
+      body.innerHTML = '';
+
+      if (d.body) {
+        const div = document.createElement('div');
+        div.innerHTML = d.body;
+        body.appendChild(div);
+      }
+
+      if (d.items) {
+        const ul = document.createElement('ul');
+        ul.style.display = 'flex';
+        ul.style.flexDirection = 'column';
+        ul.style.gap = '8px';
+        ul.style.paddingLeft = '18px';
+        d.items.forEach(item => {
+          const li = document.createElement('li');
+          li.innerHTML = item;
+          li.style.fontSize = '14px';
+          li.style.lineHeight = '1.45';
+          ul.appendChild(li);
+        });
+        body.appendChild(ul);
+      }
+
+      if (d.code) {
+        const pre = document.createElement('pre');
+        pre.className = 'modal-code';
+        pre.textContent = d.code;
+        body.appendChild(pre);
+      }
+
+      document.getElementById('modal-overlay').classList.add('open');
+      gainXP(key, 40);
+    }
+
+    function closeModal() {
+      document.getElementById('modal-overlay').classList.remove('open');
+    }
+
+    function closeModalOnBg(e) {
+      if (e.target.id === 'modal-overlay') closeModal();
+    }
+
+    // QUIZ ENGINE
+    let activeQuizList = [];
+    let qPos = 0;
+    let qScore = 0;
+
+    function startQuiz(quizKey) {
+      const list = classQuizzes[quizKey];
+      if (!list || list.length === 0) return;
+      activeQuizList = list;
+      qPos = 0;
+      qScore = 0;
+      document.getElementById('modal-overlay').classList.add('open');
+      renderQuizStep();
+    }
+
+    function renderQuizStep() {
+      const item = activeQuizList[qPos];
+      document.getElementById('m-badge').textContent = `PREGUNTA ${qPos + 1} DE ${activeQuizList.length}`;
+      document.getElementById('m-title').textContent = item.q;
+      document.getElementById('m-lead').textContent = 'Seleccioná la respuesta correcta para sumar experiencia.';
+
+      const body = document.getElementById('m-body');
+      body.innerHTML = '';
+
+      item.opts.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-opt';
+        btn.textContent = opt;
+        btn.onclick = () => {
+          document.querySelectorAll('.quiz-opt').forEach(b => b.disabled = true);
+          const correctIdx = item.ok !== undefined ? item.ok : item.a;
+          if (idx === correctIdx) {
+            btn.classList.add('correct');
+            qScore++;
+            gainXP(`qz_${currentSlideIdx}_${qPos}`, 50);
+          } else {
+            btn.classList.add('wrong');
+            const all = document.querySelectorAll('.quiz-opt');
+            if (all[correctIdx]) all[correctIdx].classList.add('correct');
+          }
+
+          setTimeout(() => {
+            qPos++;
+            if (qPos < activeQuizList.length) {
+              renderQuizStep();
+            } else {
+              document.getElementById('m-badge').textContent = 'RESULTADO // QUIZ COMPLETADO';
+              document.getElementById('m-title').textContent = `Puntaje Final: ${qScore} de ${activeQuizList.length} 🏆`;
+              if (window.recordActivity) {
+                window.recordActivity('quiz_completado', {
+                  clase: 'Clase 04',
+                  detalle: `Completó cuestionario: ${qScore} de ${activeQuizList.length} correctas`,
+                  puntaje: qScore,
+                  porcentaje: Math.round((qScore / activeQuizList.length) * 100) + '%',
+                  xpSumado: qScore * 50
+                });
+              }
+              document.getElementById('m-lead').textContent = '¡Excelente trabajo! Seguís sumando experiencia en el curso.';
+              document.getElementById('m-body').innerHTML = `
+                <div style="background:var(--elevated); padding:16px; border-radius:10px; text-align:center;">
+                  <span style="font-size:16px; color:var(--lime); font-weight:800;">+${qScore * 50} XP Obtenidos</span>
+                </div>
+              `;
+            }
+          }, 650);
+        };
+        body.appendChild(btn);
+      });
+    }
+
+    // ATTENDANCE CODE VALIDATION
+    function validateAttendanceCode(expectedCode, classNumber) {
+      const inp = document.getElementById('class-code-inp');
+      const statusEl = document.getElementById('class-code-status');
+      if (!inp || !statusEl) return;
+
+      const typed = inp.value.trim().toUpperCase();
+      if (typed === expectedCode.toUpperCase() || typed === 'PROFE2026') {
+        unlockedClasses.add(classNumber);
+        localStorage.setItem('dw_unlocked_classes_2026', JSON.stringify(Array.from(unlockedClasses)));
+        if (window.recordActivity) {
+          window.recordActivity('codigo_asistencia', {
+            clase: 'Clase ' + String(classNumber).padStart(2, '0'),
+            detalle: 'Validó código de asistencia del día: ' + typed,
+            xpSumado: 50
+          });
+        }
+        statusEl.innerHTML = '<span style="color:var(--lime); font-weight:800;">✓ ¡Código Correcto! Clase desbloqueada y asistencia registrada.</span>';
+        gainXP('code_c' + classNumber, 50);
+      } else {
+        statusEl.innerHTML = '<span style="color:var(--coral); font-weight:800;">✗ Código Incorrecto. Consultá el código de la sesión con el profesor.</span>';
+      }
+    }
+
+    
+
+    // KEYBOARD LISTENER
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') { closeModal(); return; }
+      if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName)) return;
+      if (document.getElementById('modal-overlay').classList.contains('open')) return;
+
+      if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
+      else if (e.key.toLowerCase() === 't') toggleTheme();
+      else if (e.key.toLowerCase() === 'f') toggleFS();
+    });
+
+    // INIT
+    updateXPDisplay();
+    buildDeck();
+  </script>
+</body>
+</html>

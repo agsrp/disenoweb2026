@@ -1,0 +1,8 @@
+# Sistema y dependencias locales
+node_modules/
+.DS_Store
+Thumbs.db
+
+# Logs y temporales
+*.log
+temp_*.js

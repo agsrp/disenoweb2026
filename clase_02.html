@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="es-AR" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clase 02: Diseño Visual: Color, Tipografía y Jerarquía — Curso de Diseño Web | Prof. Agustín R. Pérez</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="student_tracker.js"></script>
+</head>
+<body>
+
+  <!-- FLOATING XP TOAST -->
+  <div class="xp-toast" id="xp-toast">+40 XP</div>
+
+  <!-- STICKY TOP NAVBAR -->
+  <header class="navbar">
+    <div class="nav-brand" onclick="window.location.href='index.html'">
+      <span class="brand-sq"></span>
+      <span class="brand-text">DISEÑO_WEB // 2026</span>
+      <span class="brand-prof">Prof. Agustín R. Pérez</span>
+    </div>
+
+    <nav class="nav-tabs" style="align-items:center;">
+      <a href="index.html" class="nav-tab">🏠 Portal General</a>
+      <a href="clase_01.html" class="class-nav-btn " title="Clase Anterior">← Clase 01</a>
+      <select class="class-select-nav" onchange="window.location.href=this.value" title="Cambiar de Clase">
+        <option value="clase_01.html" >Clase 01: Bienvenida y Anatomía de la Web</option>
+            <option value="clase_02.html" selected>Clase 02: Diseño Visual: Color, Tipografía y Jerarquía</option>
+            <option value="clase_03.html" >Clase 03: Estructura y Wireframes (Pensar antes de codificar)</option>
+            <option value="clase_04.html" >Clase 04: HTML5: La Estructura de la Web</option>
+            <option value="clase_05.html" >Clase 05: CSS: Dándole Vida al Diseño</option>
+            <option value="clase_06.html" >Clase 06: Maquetación con Flexbox</option>
+            <option value="clase_07.html" >Clase 07: Responsividad, Media Queries y Checkpoint 1</option>
+            <option value="clase_08.html" >Clase 08: Diseño de Assets con Canva e IA</option>
+            <option value="clase_09.html" >Clase 09: CSS Avanzado: Grid, Variables y Estados</option>
+            <option value="clase_10.html" >Clase 10: IA en el Código y Organización con Trello</option>
+            <option value="clase_11.html" >Clase 11: Lanzamiento del Proyecto Integrador</option>
+            <option value="clase_12.html" >Clase 12: Taller de Proyecto + Animaciones CSS</option>
+            <option value="clase_13.html" >Clase 13: Repaso General y Simulación de Parcial</option>
+            <option value="clase_14.html" >Clase 14: Examen Parcial Teórico-Práctico</option>
+            <option value="clase_15.html" >Clase 15: Taller Intensivo Post-Parcial</option>
+            <option value="clase_16.html" >Clase 16: Presupuestos y Trato con el Cliente</option>
+            <option value="clase_17.html" >Clase 17: SEO On-Page y Landing Pages de Conversión</option>
+            <option value="clase_18.html" >Clase 18: Deploy Temprano en Vivo + Entrega de Avance</option>
+            <option value="clase_19.html" >Clase 19: Devoluciones y Optimización (WPO / Lighthouse)</option>
+            <option value="clase_20.html" >Clase 20: Clínica Final de Código y Simulacro de Pitch</option>
+            <option value="clase_21.html" >Clase 21: Defensa de Proyectos y Cierre del Curso</option>
+      </select>
+      <a href="clase_03.html" class="class-nav-btn " title="Siguiente Clase">Clase 03 →</a>
+    </nav>
+
+    <div class="nav-right">
+      <div class="xp-pill" title="Interactuá con las tarjetas y simuladores para subir de nivel">
+        <span style="color:var(--lime); font-weight:800;" id="xp-rank">LVL 1 // INICIADO</span>
+        <div class="xp-track"><div class="xp-fill" id="xp-fill"></div></div>
+        <span id="xp-num" style="font-weight:800;">0 XP</span>
+      </div>
+      <button class="icon-btn" onclick="toggleTheme()" title="Tema Claro/Oscuro [T]">[T]</button>
+      <button class="icon-btn" onclick="toggleFS()" title="Pantalla Completa [F]">[F]</button>
+    </div>
+  </header>
+
+  <!-- POP-UP MODAL OVERLAY -->
+  <div class="modal-overlay" id="modal-overlay" onclick="closeModalOnBg(event)">
+    <div class="modal-window">
+      <div class="modal-top">
+        <span class="modal-badge" id="m-badge">DETALLE</span>
+        <button class="modal-close" onclick="closeModal()">✕ Cerrar [ESC]</button>
+      </div>
+      <h2 class="modal-title" id="m-title">Título</h2>
+      <p class="modal-lead" id="m-lead"></p>
+      <div id="m-body" style="display:flex; flex-direction:column; gap:12px;"></div>
+      <div style="display:flex; justify-content:flex-end; margin-top:4px;">
+        <button class="cta-btn" onclick="closeModal()">✓ Entendido</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DECK VIEW -->
+  <section class="deck-view active" id="view-deck">
+    <div class="progress-line">
+      <div class="progress-line-fill" id="deck-progress"></div>
+    </div>
+
+    <div class="deck-stage" id="deck-stage"></div>
+
+    <footer class="deck-controls">
+      <button class="ctrl-btn" onclick="prevSlide()">← Anterior</button>
+      <div class="deck-dots" id="deck-dots"></div>
+      <span class="deck-counter" id="deck-counter">Slide 1 de 10</span>
+      <button class="ctrl-btn" onclick="nextSlide()">Siguiente →</button>
+    </footer>
+  </section>
+
+  <script>
+    // =================================================================
+    // LOCALSTORAGE & XP SYSTEM
+    // =================================================================
+    let xp = parseInt(localStorage.getItem('dw_user_xp_2026') || '0', 10);
+    const unlockedXP = new Set(JSON.parse(localStorage.getItem('dw_unlocked_keys_2026') || '[]'));
+    const unlockedClasses = new Set(JSON.parse(localStorage.getItem('dw_unlocked_classes_2026') || '[]'));
+
+    function updateXPDisplay() {
+      const numEl = document.getElementById('xp-num');
+      if (numEl) numEl.textContent = `${xp} XP`;
+      const fillEl = document.getElementById('xp-fill');
+      if (fillEl) fillEl.style.width = Math.min(100, Math.round((xp / 1500) * 100)) + '%';
+
+      const rank = document.getElementById('xp-rank');
+      if (rank) {
+        if (xp >= 1100) rank.textContent = 'LVL 6 // FULL WEB CREATOR';
+        else if (xp >= 800) rank.textContent = 'LVL 5 // MAQUETADOR HTML';
+        else if (xp >= 550) rank.textContent = 'LVL 4 // ARQUITECTO UX';
+        else if (xp >= 300) rank.textContent = 'LVL 3 // DISEÑADOR VISUAL';
+        else if (xp >= 120) rank.textContent = 'LVL 2 // EXPLORADOR WEB';
+        else rank.textContent = 'LVL 1 // INICIADO';
+      }
+    }
+
+    function gainXP(key, pts = 40) {
+      if (unlockedXP.has(key)) return;
+      unlockedXP.add(key);
+      xp += pts;
+      localStorage.setItem('dw_user_xp_2026', String(xp));
+      localStorage.setItem('dw_unlocked_keys_2026', JSON.stringify(Array.from(unlockedXP)));
+      updateXPDisplay();
+
+      const toast = document.getElementById('xp-toast');
+      if (toast) {
+        toast.textContent = `+${pts} XP DESBLOQUEADOS`;
+        toast.classList.add('show');
+        clearTimeout(window._xpT);
+        window._xpT = setTimeout(() => toast.classList.remove('show'), 1400);
+      }
+    }
+
+    // THEME & FULLSCREEN
+    const savedTheme = localStorage.getItem('dw_theme_2026') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+
+    function toggleTheme() {
+      const root = document.documentElement;
+      const current = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', current);
+      localStorage.setItem('dw_theme_2026', current);
+    }
+
+    function toggleFS() {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(() => {});
+      else document.exitFullscreen().catch(() => {});
+    }
+
+    // DATA FOR THIS CLASS
+    const currentClassDeck = [
+  {
+    "kicker": "CLASE 02 · PANTALLA 01 // TEORÍA Y PSICOLOGÍA DEL COLOR",
+    "title": "El color habla <span class=\"lime\">antes de que lean</span> una sola palabra",
+    "hint": "Es lo primero que procesa el cerebro. Tocá para explorar cada concepto:",
+    "cards": [
+      [
+        "🧠",
+        "PERCEPCIÓN",
+        "¿Por qué importa tanto?",
+        "c2_why_color"
+      ],
+      [
+        "🎡",
+        "NEWTON 1666",
+        "La Rueda Cromática",
+        "c2_wheel"
+      ],
+      [
+        "🎭",
+        "PSICOLOGÍA",
+        "Qué transmite cada color",
+        "c2_psych"
+      ]
+    ]
+  },
+  {
+    "kicker": "CLASE 02 · PANTALLA 02 // MODELOS DE COLOR EN LA WEB",
+    "title": "Tres formas de escribir el mismo color: <span class=\"cyan\">HEX</span>, <span class=\"lime\">RGB</span> y <span class=\"amber\">HSL</span>",
+    "hint": "Tocá cada sistema o abrí el mezclador de color en vivo:",
+    "cards": [
+      [
+        "#️⃣",
+        "#RRGGBB",
+        "Código Hexadecimal",
+        "c2_hex"
+      ],
+      [
+        "🚦",
+        "0 A 255 + ALFA",
+        "RGB y RGBA",
+        "c2_rgb"
+      ],
+      [
+        "🌈",
+        "MATIZ / LUZ",
+        "Modelo HSL",
+        "c2_hsl"
+      ],
+      [
+        "🧪",
+        "LABORATORIO",
+        "Mezclador en Vivo",
+        "c2_mixer"
+      ]
+    ]
+  },
+  {
+    "kicker": "CLASE 02 · PANTALLA 03 // ARMONÍAS DE COLOR",
+    "title": "Cómo combinar colores sin equivocarse: <span class=\"lime\">Armonías</span>",
+    "hint": "Combinaciones geométricas probadas en la rueda cromática:",
+    "cards": [
+      [
+        "🔵",
+        "1 SOLO COLOR",
+        "Monocromática",
+        "c2_mono"
+      ],
+      [
+        "🟠",
+        "OPUESTOS",
+        "Complementaria",
+        "c2_comp"
+      ],
+      [
+        "🟢",
+        "VECINOS",
+        "Análoga",
+        "c2_analog"
+      ],
+      [
+        "🔺",
+        "3 COLORES",
+        "Triádica y Split",
+        "c2_triad"
+      ]
+    ]
+  },
+  {
+    "kicker": "CLASE 02 · PANTALLA 04 // LA REGLA 60-30-10",
+    "title": "El equilibrio visual perfecto: la <span class=\"lime\">Regla 60 - 30 - 10</span>",
+    "hint": "Tomada del diseño de interiores para que ningún color sature la pantalla:",
+    "cards": [
+      [
+        "60%",
+        "DOMINANTE",
+        "Fondos y áreas grandes",
+        "c2_60"
+      ],
+      [
+        "30%",
+        "SECUNDARIO",
+        "Secciones y tarjetas",
+        "c2_30"
+      ],
+      [
+        "10%",
+        "ACENTO (CTA)",
+        "Botones y destacados",
+        "c2_10"
+      ],
+      [
+        "🎨",
+        "SIMULADOR",
+        "Probar Paletas 60-30-10",
+        "c2_603010_sim"
+      ]
+    ]
+  },
+  {
+    "kicker": "CLASE 02 · PANTALLA 05 // CONTRASTE Y ACCESIBILIDAD WCAG",
+    "title": "Si cuesta leerlo, el diseño falló: <span class=\"cyan\">Contraste WCAG</span>",
+    "hint": "Responsabilidad profesional para que todas las personas puedan leer:",
+    "cards": [
+      [
+        "👁️",
+        "ACCESIBILIDAD",
+        "¿Qué son las normas WCAG?",
+        "c2_wcag"
+      ],
+      [
+        "4.5:1",
+        "NIVEL MÍNIMO AA",
+        "Tabla de Ratios Reales",
+        "c2_ratios"
+      ],
+      [
+        "⚡",
+        "PROBADOR EN VIVO",
+        "Testear Contraste",
+        "c2_contrast_sim"
+      ]
+    ]
+  },
+  {
+    "kicker": "CLASE 02 · PANTALLA 06 // HERRAMIENTAS DE PALETAS",
+    "title": "Herramientas gratuitas para crear <span class=\"lime\">paletas profesionales</span>",
+    "hint": "No hace falta adivinar códigos HEX de memoria:",
+    "cards": [
+      [
+        "🎲",
+        "BARRA ESPACIADORA",
+        "Coolors.co",
+        "c2_coolors"
+      ],
+      [
+        "🎯",
+        "RUEDA INTERACTIVA",
+        "Adobe Color",
+        "c2_adobe"
+      ],
+      [
+        "🌐",
+        "VISTA EN TIEMPO REAL",
+        "Realtime Colors & Color Hunt",
+        "c2_other_tools"
+      ]
+    ]
+  },
+  {
+    "kicker": "CLASE 02 · PANTALLA 07 // TIPOGRAFÍA PARA LA WEB",
+    "title": "Las 4 familias tipográficas y la <span class=\"lime\">legibilidad</span> en pantalla",
+    "hint": "El texto es el 90% de la web. Tocá cada familia para ver cómo se lee:",
+    "cards": [
+      [
+        "🏛️",
+        "CON REMATES",
+        "1. Serif",
+        "c2_serif"
+      ],
+      [
+        "📱",
+        "LIMPIA Y MODERNA",
+        "2. Sans-Serif",
+        "c2_sans"
+      ],
+      [
+        "💻",
+        "ANCHO FIJO",
+        "3. Monospace",
+        "c2_mono_font"
+      ],
+      [
+        "🔥",
+        "IMPACTO EN TÍTULOS",
+        "4. Display + Reglas",
+        "c2_display_font"
+      ]
+    ]
+  },
+  {
+    "kicker": "CLASE 02 · PANTALLA 08 // JERARQUÍA TIPOGRÁFICA",
+    "title": "Las 5 herramientas para guiar el ojo: <span class=\"cyan\">Jerarquía</span>",
+    "hint": "Sin jerarquía todo parece igual de importante y abruma al lector:",
+    "cards": [
+      [
+        "📏",
+        "H1 A SMALL",
+        "1. Escala de Tamaños",
+        "c2_h_size"
+      ],
+      [
+        "🏋️",
+        "REGULAR A BOLD",
+        "2. Peso y 3. Color",
+        "c2_h_weight"
+      ],
+      [
+        "🌬️",
+        "AIRE Y MEZCLA",
+        "4. Espaciado y 5. Contraste",
+        "c2_h_space"
+      ]
+    ]
+  },
+  {
+    "kicker": "CLASE 02 · PANTALLA 09 // GOOGLE FONTS Y MOODBOARD",
+    "title": "Elegir 2 fuentes en <span class=\"lime\">Google Fonts</span> y armar el <span class=\"cyan\">Moodboard</span>",
+    "hint": "Cómo combinar tipografías sin ruido visual y plasmar todo en Canva:",
+    "cards": [
+      [
+        "🔤",
+        "1.500+ FUENTES",
+        "Las 10 Más Seguras",
+        "c2_top10_fonts"
+      ],
+      [
+        "🤝",
+        "REGLAS DE PAREJA",
+        "Combinaciones Probadas",
+        "c2_font_pairs"
+      ],
+      [
+        "🖼️",
+        "EN CANVA (16:9)",
+        "¿Qué lleva el Moodboard?",
+        "c2_moodboard"
+      ]
+    ]
+  },
+  {
+    "kicker": "CLASE 02 · PANTALLA 10 // TALLER PRÁCTICO Y CIERRE CLASE 2",
+    "title": "Práctica en aula: <span class=\"lime\">Paleta + Fuentes + Moodboard</span>",
+    "hint": "Completá los 3 ejercicios del taller y poné a prueba tu ojo con el Quiz:",
+    "cards": [
+      [
+        "🛠️",
+        "3 EJERCICIOS",
+        "Consigna del Taller Hoy",
+        "c2_workshop"
+      ],
+      [
+        "🏆",
+        "5 PREGUNTAS",
+        "Jugar Quiz Clase 2",
+        "quiz_c2"
+      ],
+      [
+        "📐",
+        "SIGUIENTE CLASE",
+        "Ir a Clase 03 →",
+        "goto_c3"
+      ]
+    ]
+  }
+];
+    const classPopups = {
+  "c2_why_color": {
+    "badge": "PARTE 1 // TEORÍA DEL COLOR",
+    "title": "El color comunica en milisegundos",
+    "lead": "Antes de leer el primer título, el cerebro ya procesó la sensación del color:",
+    "bullets": [
+      "<strong>Bancos y salud:</strong> Usan azul o celeste para transmitir confianza, calma y seguridad.",
+      "<strong>Comida rápida y ofertas:</strong> Usan rojo y amarillo para activar la urgencia y el apetito.",
+      "<strong>Marcas premium y lujo:</strong> Usan negro y dorado para comunicar sofisticación.",
+      "<strong>Ecología y finanzas:</strong> Usan verde asociado a naturaleza y crecimiento."
+    ]
+  },
+  "c2_wheel": {
+    "badge": "ISAAC NEWTON (1666)",
+    "title": "La Rueda Cromática y los Colores de Luz",
+    "lead": "Organiza los colores en círculo según cómo se relacionan entre sí:",
+    "bullets": [
+      "<strong>Primarios en pantallas (Luz RGB):</strong> Rojo, Verde y Azul (mezclados al máximo dan luz blanca).",
+      "<strong>Secundarios:</strong> Se crean mezclando dos primarios (Cian, Magenta, Amarillo).",
+      "<strong>Terciarios:</strong> Mezcla de un primario con un secundario vecino (ej. azul-violeta, rojo-anaranjado)."
+    ]
+  },
+  "c2_psych": {
+    "badge": "PARTE 2 // PSICOLOGÍA DEL COLOR",
+    "title": "¿Qué transmite cada color en diseño web?",
+    "bullets": [
+      "<strong>Rojo / Naranja:</strong> Energía, pasión, creatividad y urgencia (muy usados en botones CTA y gastronomía).",
+      "<strong>Amarillo / Verde:</strong> Optimismo y atención (amarillo); salud, naturaleza y dinero (verde).",
+      "<strong>Azul / Violeta:</strong> Confianza, tecnología y estabilidad (azul); creatividad y lujo (violeta).",
+      "<strong>Negro / Blanco / Gris:</strong> Elegancia moderna (negro); pureza, aire y minimalismo (blanco); equilibrio neutro (gris)."
+    ]
+  },
+  "c2_hex": {
+    "badge": "FORMATO #RRGGBB",
+    "title": "Código Hexadecimal (HEX)",
+    "lead": "Es el más usado en CSS. Empieza con # seguido de 6 caracteres (del 0 al 9 y de la A a la F):",
+    "bullets": [
+      "Los primeros dos son <strong>Rojo (RR)</strong>, los del medio <strong>Verde (GG)</strong> y los últimos <strong>Azul (BB)</strong>.",
+      "<code>#000000</code> = Negro total (luz apagada) • <code>#FFFFFF</code> = Blanco puro (máxima luz).",
+      "<code>#FF0000</code> = Rojo puro • <code>#00FF00</code> = Verde puro • <code>#0000FF</code> = Azul puro."
+    ]
+  },
+  "c2_rgb": {
+    "badge": "0 A 255 + TRANSPARENCIA",
+    "title": "Modelos RGB y RGBA",
+    "lead": "Usa números decimales del 0 al 255 para cada canal de luz:",
+    "code": "color: rgb(255, 0, 0); /* Rojo puro */\ncolor: rgb(51, 51, 51); /* Gris oscuro (#333333) */\n\n/* RGBA suma un 4.º valor (Alfa) de 0 a 1 para transparencia: */\nbackground-color: rgba(0, 0, 0, 0.5); /* Negro al 50% */"
+  },
+  "c2_hsl": {
+    "badge": "EL MÁS INTUITIVO",
+    "title": "HSL: Matiz, Saturación y Luminosidad",
+    "lead": "Permite crear variaciones claras u oscuras de un mismo color sin adivinar códigos:",
+    "bullets": [
+      "<strong>H (Hue / Matiz):</strong> Ángulo en la rueda de 0° a 360° (0° rojo, 120° verde, 240° azul).",
+      "<strong>S (Saturation):</strong> 0% es gris apagado; 100% es color vibrante puro.",
+      "<strong>L (Lightness):</strong> 0% es negro, 50% es el color normal y 100% es blanco."
+    ],
+    "code": "color: hsl(210, 80%, 50%); /* Azul intenso */\ncolor: hsl(210, 80%, 90%); /* El mismo azul muy claro */"
+  },
+  "c2_mixer": {
+    "badge": "LABORATORIO DE COLOR",
+    "title": "Probá cómo cambia un color en HSL / HEX",
+    "customHTML": "\n          <div id=\"c2-swatch\" style=\"height:80px; border-radius:12px; background:hsl(200, 85%, 50%); display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-weight:800; color:#000; font-size:16px;\">\n            hsl(200, 85%, 50%)\n          </div>\n          <label style=\"font-size:12px; font-family:var(--font-mono);\">Cambiar Matiz (Hue 0° a 360°):</label>\n          <input type=\"range\" min=\"0\" max=\"360\" value=\"200\" oninput=\"const el=document.getElementById('c2-swatch'); el.style.background='hsl('+this.value+',85%,50%)'; el.textContent='hsl('+this.value+', 85%, 50%)'; gainXP('c2mix',40)\" />\n        "
+  },
+  "c2_mono": {
+    "badge": "ARMONÍA 01",
+    "title": "Paleta Monocromática",
+    "lead": "Usa un único color en distintos tonos de luz y saturación (ej. azul oscuro #1a365d, azul medio #2b6cb0 y celeste claro #ebf8ff).",
+    "bullets": [
+      "<strong>Ventaja:</strong> Imposible equivocarse; siempre se ve limpia y coherente."
+    ]
+  },
+  "c2_comp": {
+    "badge": "ARMONÍA 02",
+    "title": "Paleta Complementaria",
+    "lead": "Usa dos colores opuestos en la rueda cromática (ej. azul y naranja, o violeta y amarillo).",
+    "bullets": [
+      "<strong>Regla de uso:</strong> Uno debe dominar el fondo y el opuesto usarse solo en pequeños acentos (botones CTA)."
+    ]
+  },
+  "c2_analog": {
+    "badge": "ARMONÍA 03",
+    "title": "Paleta Análoga",
+    "lead": "Usa colores vecinos en la rueda (ej. azul, azul-verdoso y verde).",
+    "bullets": [
+      "<strong>Ideal para:</strong> Sitios de naturaleza, salud o gastronomía que buscan armonía suave."
+    ]
+  },
+  "c2_triad": {
+    "badge": "ARMONÍA 04 Y 05",
+    "title": "Triádica y Split-Complementaria",
+    "bullets": [
+      "<strong>Triádica:</strong> 3 colores en triángulo equidistante (mucha energía, ideal para proyectos creativos).",
+      "<strong>Split-Complementaria:</strong> Tu color base + los dos vecinos de su opuesto. Tiene gran contraste pero es mucho más fácil de equilibrar."
+    ]
+  },
+  "c2_60": {
+    "badge": "60% DOMINANTE",
+    "title": "60% — Color Dominante",
+    "lead": "Ocupa la mayor parte de la pantalla: el fondo general y los espacios de respiro (por ejemplo blanco #FFFFFF o gris carbón oscuro)."
+  },
+  "c2_30": {
+    "badge": "30% SECUNDARIO",
+    "title": "30% — Color Secundario",
+    "lead": "Estructura las tarjetas, encabezados, barras laterales y secciones destacadas (ej. azul profundo #1a365d)."
+  },
+  "c2_10": {
+    "badge": "10% ACENTO",
+    "title": "10% — Color de Acento",
+    "lead": "Reservado exclusivamente para lo que el usuario debe tocar: botones de acción (CTA), enlaces e íconos clave (ej. naranja #dd6b20 o verde lima)."
+  },
+  "c2_603010_sim": {
+    "badge": "SIMULADOR 60-30-10",
+    "title": "Cambiá el esquema 60-30-10 en un clic",
+    "customHTML": "\n          <div id=\"sim-603010\" style=\"background:#ffffff; color:#111; padding:18px; border-radius:12px; border:1px solid var(--border);\">\n            <div id=\"sim-30\" style=\"background:#1a365d; color:#fff; padding:10px 14px; border-radius:8px; margin-bottom:12px; font-weight:700;\">30% Secundario (Header / Secciones)</div>\n            <p style=\"color:inherit; margin-bottom:12px; font-size:14px;\">60% Color Dominante (Fondo limpio para lectura cómoda)</p>\n            <span id=\"sim-10\" style=\"display:inline-block; background:#dd6b20; color:#fff; padding:8px 16px; border-radius:6px; font-weight:800; font-size:12px;\">10% Botón CTA de Acento</span>\n          </div>\n          <div style=\"display:flex; gap:8px; flex-wrap:wrap;\">\n            <button class=\"icon-btn\" onclick=\"const b=document.getElementById('sim-603010'); b.style.background='#ffffff'; b.style.color='#111'; document.getElementById('sim-30').style.background='#1a365d'; document.getElementById('sim-10').style.background='#dd6b20'; gainXP('s60a',30)\">Estudio Corporativo</button>\n            <button class=\"icon-btn\" onclick=\"const b=document.getElementById('sim-603010'); b.style.background='#0b0f17'; b.style.color='#f4f7fb'; document.getElementById('sim-30').style.background='#1e293b'; document.getElementById('sim-10').style.background='#00e599'; document.getElementById('sim-10').style.color='#05100a'; gainXP('s60b',30)\">Torneo Gaming Oscuro</button>\n            <button class=\"icon-btn\" onclick=\"const b=document.getElementById('sim-603010'); b.style.background='#f5f0eb'; b.style.color='#2d1b0e'; document.getElementById('sim-30').style.background='#2d1b0e'; document.getElementById('sim-10').style.background='#d4a76a'; document.getElementById('sim-10').style.color='#1a1a1a'; gainXP('s60c',30)\">Cafetería de Especialidad</button>\n          </div>\n        "
+  },
+  "c2_wcag": {
+    "badge": "ACCESIBILIDAD WEB",
+    "title": "Por qué el contraste no es opcional",
+    "lead": "Cerca del 15% de la población mundial tiene alguna dificultad visual (baja visión, daltonismo) y todos usamos el celular bajo el sol o con brillo bajo.",
+    "bullets": [
+      "Las normas internacionales <strong>WCAG</strong> miden el contraste de luminosidad entre el texto y el fondo desde <strong>1:1</strong> (ilegible) hasta <strong>21:1</strong> (negro sobre blanco)."
+    ]
+  },
+  "c2_ratios": {
+    "badge": "TABLA WCAG",
+    "title": "Ratios Mínimos que tenés que cumplir",
+    "bullets": [
+      "<strong>Nivel AA (Mínimo obligatorio):</strong> Ratio de al menos <code>4.5:1</code> en texto normal (o <code>3:1</code> en títulos grandes de 18px+ en bold).",
+      "<strong>Nivel AAA (Excelencia):</strong> Ratio de al menos <code>7:1</code> en texto normal.",
+      "<strong>Ejemplos reales:</strong> Blanco sobre azul oscuro (#1a365d) da <code>12.1:1</code> (Excelente). Amarillo (#FFFF00) sobre blanco da <code>1.1:1</code> (Ilegible)."
+    ]
+  },
+  "c2_contrast_sim": {
+    "badge": "PROBADOR DE CONTRASTE",
+    "title": "Compará combinaciones AA vs. Ilegibles",
+    "customHTML": "\n          <div style=\"display:grid; grid-template-columns:1fr 1fr; gap:10px;\">\n            <div style=\"background:#ffffff; color:#999999; padding:16px; border-radius:10px; border:1px solid #ccc;\">\n              <strong>✗ Ratio 2.8:1 (Falla AA)</strong>\n              <p style=\"font-size:13px; color:#aaa;\">Gris muy claro sobre fondo blanco: cansa la vista y no se lee en el celular al sol.</p>\n            </div>\n            <div style=\"background:#1a365d; color:#ffffff; padding:16px; border-radius:10px;\">\n              <strong>✓ Ratio 12.1:1 (Pasa AAA)</strong>\n              <p style=\"font-size:13px; color:#e2e8f0;\">Blanco sobre azul profundo: lectura instantánea y accesible para todos.</p>\n            </div>\n          </div>\n        "
+  },
+  "c2_coolors": {
+    "badge": "COOLORS.CO",
+    "title": "Coolors: Paletas con la Barra Espaciadora",
+    "bullets": [
+      "Presionás <code>Espacio</code> y genera 5 colores armónicos al instante.",
+      "Bloqueás con el candado los colores que te gustan y seguís girando el resto.",
+      "Incluye verificador de contraste y simulador de daltonismo."
+    ]
+  },
+  "c2_adobe": {
+    "badge": "COLOR.ADOBE.COM",
+    "title": "Adobe Color: La Rueda Profesional",
+    "bullets": [
+      "Gratuita y sin registro obligatorio.",
+      "Elegís la regla (monocromática, complementaria, triádica) y movés los nodos en vivo sobre el círculo cromático."
+    ]
+  },
+  "c2_other_tools": {
+    "badge": "MÁS HERRAMIENTAS",
+    "title": "Realtime Colors, Color Hunt y WebAIM",
+    "bullets": [
+      "<strong>Realtime Colors (realtimecolors.com):</strong> Aplica tu paleta sobre una página web de prueba en vivo.",
+      "<strong>Color Hunt (colorhunt.co):</strong> Catálogo de paletas listas curadas por diseñadores.",
+      "<strong>WebAIM Contrast Checker:</strong> Verificador rápido de ratios AA y AAA."
+    ]
+  },
+  "c2_serif": {
+    "badge": "FAMILIA 01 // CON REMATES",
+    "title": "Fuentes Serif (Tradición y Elegancia)",
+    "lead": "Tienen pequeñas 'patitas' o remates al final de cada letra.",
+    "bullets": [
+      "<strong>Ejemplos en Google Fonts:</strong> Playfair Display, Merriweather, Lora.",
+      "<strong>Qué transmiten:</strong> Seriedad, historia, prestigio editorial, estudios jurídicos o contables."
+    ]
+  },
+  "c2_sans": {
+    "badge": "FAMILIA 02 // SIN REMATES",
+    "title": "Fuentes Sans-Serif (La Reina de las Pantallas)",
+    "lead": "Trazos limpios y modernos sin remates. Son las más legibles en celulares y monitores.",
+    "bullets": [
+      "<strong>Ejemplos en Google Fonts:</strong> Inter, Roboto, Open Sans, Montserrat (inspirada en los carteles del barrio porteño de Montserrat), Poppins, Lato.",
+      "<strong>Uso:</strong> Es la opción más segura para el cuerpo de texto de casi cualquier sitio web."
+    ]
+  },
+  "c2_mono_font": {
+    "badge": "FAMILIA 03 // ANCHO FIJO",
+    "title": "Fuentes Monospace (Código y Precisión)",
+    "lead": "Cada letra ocupa exactamente el mismo ancho horizontal.",
+    "bullets": [
+      "<strong>Ejemplos:</strong> JetBrains Mono, Fira Code, Source Code Pro.",
+      "<strong>Uso:</strong> Etiquetas técnicas, precios, estadísticas o estética tecnológica (nunca para textos largos)."
+    ]
+  },
+  "c2_display_font": {
+    "badge": "FAMILIA 04 + REGLAS DE LECTURA",
+    "title": "Fuentes Display y las 3 Reglas de Legibilidad",
+    "bullets": [
+      "<strong>Display (Bebas Neue, Lobster):</strong> Solo para títulos gigantes o banners, jamás en párrafos.",
+      "<strong>Regla 1:</strong> Tamaño mínimo de <code>16px</code> para párrafos.",
+      "<strong>Regla 2:</strong> Interlineado (leading) entre <code>1.5 y 1.7</code>.",
+      "<strong>Regla 3:</strong> Largo de renglón cómodo de <code>45 a 75 caracteres</code>."
+    ]
+  },
+  "c2_h_size": {
+    "badge": "HERRAMIENTA 01 DE JERARQUÍA",
+    "title": "Escala de Tamaños (Desktop)",
+    "bullets": [
+      "<code>h1</code> (Título principal): <strong>36px a 48px</strong>",
+      "<code>h2</code> (Título de sección): <strong>28px a 36px</strong>",
+      "<code>h3</code> (Subtítulo): <strong>22px a 28px</strong>",
+      "<code>p</code> (Cuerpo de lectura): <strong>16px a 18px</strong>",
+      "<code>small</code> (Notas al pie): <strong>12px a 14px</strong>"
+    ]
+  },
+  "c2_h_weight": {
+    "badge": "HERRAMIENTAS 02 Y 03",
+    "title": "Peso (Grosor) y Color del Texto",
+    "bullets": [
+      "<strong>Peso (Weight):</strong> Va de Thin (100) a Black (900). Usamos <code>Regular (400)</code> para párrafos y <code>Bold (700)</code> para títulos y palabras clave.",
+      "<strong>Color jerárquico:</strong> Texto principal con alto contraste, gris medio para subtítulos o fechas, y color de acento para links y botones."
+    ]
+  },
+  "c2_h_space": {
+    "badge": "HERRAMIENTAS 04 Y 05",
+    "title": "Espaciado (Aire) y Contraste de Fuentes",
+    "bullets": [
+      "<strong>Espaciado:</strong> Un título rodeado de aire (margen) atrae la mirada de inmediato.",
+      "<strong>Contraste de fuentes:</strong> Una fuente con carácter para títulos + una sans-serif neutra para los párrafos."
+    ]
+  },
+  "c2_top10_fonts": {
+    "badge": "GOOGLE FONTS (FONTS.GOOGLE.COM)",
+    "title": "Las 10 Fuentes Gratuitas que Nunca Fallan",
+    "bullets": [
+      "<strong>Sans-serif (Cuerpo y UI):</strong> 1. Inter • 2. Roboto • 3. Open Sans • 4. Lato • 5. Poppins • 6. Montserrat.",
+      "<strong>Serif (Títulos y Editorial):</strong> 7. Playfair Display • 8. Merriweather • 9. Lora.",
+      "<strong>Display (Impacto en Banners):</strong> 10. Bebas Neue."
+    ]
+  },
+  "c2_font_pairs": {
+    "badge": "REGLAS DE COMBINACIÓN",
+    "title": "Máximo 2 Fuentes y 3–4 Pesos",
+    "lead": "Cargar demasiadas fuentes frena la carga del sitio en celulares con 4G:",
+    "bullets": [
+      "<strong>Pareja 1 (Elegante + Moderna):</strong> Playfair Display (Títulos) + Inter (Cuerpo).",
+      "<strong>Pareja 2 (Moderna + Limpia):</strong> Montserrat Bold (Títulos) + Open Sans (Cuerpo).",
+      "<strong>Pareja 3 (Impactante + Cálida):</strong> Bebas Neue (Títulos) + Lato (Cuerpo)."
+    ]
+  },
+  "c2_moodboard": {
+    "badge": "PARTE 9 // EL MOODBOARD",
+    "title": "¿Qué lleva tu Moodboard en Canva (1920x1080)?",
+    "lead": "Es el tablero visual que define la personalidad del sitio antes de diseñar o programar:",
+    "bullets": [
+      "<strong>1. Paleta de 5 colores</strong> con sus códigos HEX escritos.",
+      "<strong>2. Tus 2 fuentes de Google Fonts</strong> aplicadas en título, subtítulo, párrafo y botón.",
+      "<strong>3. De 4 a 6 fotos de referencia</strong> coherentes con el rubro.",
+      "<strong>4. De 3 a 5 palabras clave</strong> que definan la onda del proyecto (ej. artesanal, cálido, gamer, veloz)."
+    ]
+  },
+  "c2_workshop": {
+    "badge": "TALLER PRÁCTICO CLASE 2",
+    "title": "Tus 3 Entregables de Hoy en el Aula",
+    "bullets": [
+      "<strong>1. Paleta (30 min):</strong> Crear en Coolors o Adobe Color la paleta de 5 colores HEX para tu cliente ficticio y validar ratio 4.5:1.",
+      "<strong>2. Tipografías (20 min):</strong> Elegir en Google Fonts 1 fuente de títulos y 1 de cuerpo.",
+      "<strong>3. Moodboard en Canva (1h 30m):</strong> Armar el lienzo 1920x1080 con paleta, fuentes, fotos y palabras clave, y descargarlo en PNG."
+    ]
+  }
+};
+    const classQuizzes = {
+      quiz_c2: [
+  {
+    "q": "1/5 — En la regla 60-30-10 de color, ¿para qué se usa el 10%?",
+    "opts": [
+      "Para el fondo general de la página.",
+      "Para el color de acento: botones de acción (CTA) y elementos a destacar.",
+      "Para los párrafos largos."
+    ],
+    "ok": 1
+  },
+  {
+    "q": "2/5 — ¿Cuál es el ratio mínimo de contraste que pide la norma WCAG Nivel AA para texto normal?",
+    "opts": [
+      "1.1:1",
+      "Al menos 4.5:1",
+      "21:1 obligatorio en todo."
+    ],
+    "ok": 1
+  },
+  {
+    "q": "3/5 — ¿Qué familia tipográfica NO tiene remates y es la más segura para leer en pantallas?",
+    "opts": [
+      "Sans-serif (ej. Inter, Roboto, Open Sans).",
+      "Display decorativa.",
+      "Monospace."
+    ],
+    "ok": 0
+  },
+  {
+    "q": "4/5 — ¿Cuántas fuentes de Google Fonts se recomienda combinar como máximo en un sitio?",
+    "opts": [
+      "Entre 6 y 8 fuentes distintas.",
+      "Máximo 2 fuentes (buscando contraste entre título y cuerpo) y 3–4 pesos.",
+      "1 sola fuente en peso Thin."
+    ],
+    "ok": 1
+  },
+  {
+    "q": "5/5 — ¿Qué es un Moodboard?",
+    "opts": [
+      "El código final en JavaScript.",
+      "Un tablero visual (paleta HEX, fuentes, fotos y palabras clave) que define el estilo antes de codificar.",
+      "Un servidor de hosting."
+    ],
+    "ok": 1
+  }
+]
+    };
+
+    // DECK RENDERING
+    let currentSlideIdx = 0;
+
+    function buildDeck() {
+      const stage = document.getElementById('deck-stage');
+      const dotsBox = document.getElementById('deck-dots');
+      stage.innerHTML = '';
+      dotsBox.innerHTML = '';
+
+      currentClassDeck.forEach((s, idx) => {
+        const sec = document.createElement('section');
+        sec.className = 'slide' + (idx === 0 ? ' active' : '');
+
+        let inner = `
+          <div>
+            <span class="kicker">${s.kicker}</span>
+            <h1 class="big-title">${s.title}</h1>
+          </div>
+          <p class="short-hint">${s.hint}</p>
+        `;
+
+        if (s.customSlide) {
+          inner += s.customSlide;
+        } else if (s.cards) {
+          const cols = s.cards.length;
+          const gridClass = cols === 2 ? 'launcher-grid-2' : cols === 4 ? 'launcher-grid-4' : cols === 5 ? 'launcher-grid-5' : 'launcher-grid-3';
+          inner += `<div class="${gridClass}">` + s.cards.map(c => `
+            <div class="launcher-card" onclick="handleCardClick('${c[3]}', this)">
+              <div class="card-emoji">${c[0]}</div>
+              <span class="card-num">${c[1]}</span>
+              <div class="card-name">${c[2]}</div>
+              <span class="card-cta">+ Abrir</span>
+            </div>
+          `).join('') + `</div>`;
+        }
+
+        sec.innerHTML = inner;
+        stage.appendChild(sec);
+
+        const dot = document.createElement('button');
+        dot.className = 'dot' + (idx === 0 ? ' active' : '');
+        dot.textContent = String(idx + 1).padStart(2, '0');
+        dot.title = `Ir al slide ${idx + 1}`;
+        dot.onclick = () => goSlide(idx);
+        dotsBox.appendChild(dot);
+      });
+
+      updateDeckProgress();
+    }
+
+    function goSlide(idx) {
+      const allSlides = document.querySelectorAll('#deck-stage .slide');
+      const allDots = document.querySelectorAll('#deck-dots .dot');
+      if (idx < 0 || idx >= allSlides.length) return;
+
+      allSlides.forEach(s => s.classList.remove('active'));
+      allDots.forEach(d => d.classList.remove('active'));
+
+      currentSlideIdx = idx;
+      allSlides[currentSlideIdx].classList.add('active');
+      if (allDots[currentSlideIdx]) allDots[currentSlideIdx].classList.add('active');
+
+      window.scrollTo(0, 0);
+      const stg = document.getElementById('deck-stage');
+      if (stg) stg.scrollTop = 0;
+
+      updateDeckProgress();
+    }
+
+    function updateDeckProgress() {
+      const total = currentClassDeck.length;
+      const pct = Math.round(((currentSlideIdx + 1) / total) * 100);
+      document.getElementById('deck-progress').style.width = pct + '%';
+      document.getElementById('deck-counter').textContent = `Slide ${currentSlideIdx + 1} de ${total}`;
+    }
+
+    function nextSlide() {
+      if (currentSlideIdx < currentClassDeck.length - 1) goSlide(currentSlideIdx + 1);
+    }
+
+    function prevSlide() {
+      if (currentSlideIdx > 0) goSlide(currentSlideIdx - 1);
+    }
+
+    // MODAL POPUPS & CARDS
+    function handleCardClick(key, cardEl) {
+      if (cardEl) {
+        cardEl.style.transform = 'scale(0.97)';
+        setTimeout(() => cardEl.style.transform = '', 140);
+      }
+      if (key === 'goto_hub') {
+        window.location.href = 'index.html';
+        return;
+      }
+      if (key.startsWith('goto_c')) {
+        const cNum = key.replace('goto_c', '').padStart(2, '0');
+        window.location.href = `clase_${cNum}.html`;
+        return;
+      }
+      if (key.startsWith('quiz_') || (typeof classQuizzes !== 'undefined' && classQuizzes[key])) {
+        startQuiz(key);
+        return;
+      }
+      openPopup(key, cardEl);
+    }
+
+    function openPopup(key, cardEl = null) {
+      const d = classPopups[key];
+      if (!d) return;
+
+      document.getElementById('m-badge').textContent = d.badge || 'DETALLE TÉCNICO';
+      document.getElementById('m-title').textContent = d.title || '';
+      document.getElementById('m-lead').textContent = d.lead || '';
+
+      const body = document.getElementById('m-body');
+      body.innerHTML = '';
+
+      if (d.body) {
+        const div = document.createElement('div');
+        div.innerHTML = d.body;
+        body.appendChild(div);
+      }
+
+      if (d.items) {
+        const ul = document.createElement('ul');
+        ul.style.display = 'flex';
+        ul.style.flexDirection = 'column';
+        ul.style.gap = '8px';
+        ul.style.paddingLeft = '18px';
+        d.items.forEach(item => {
+          const li = document.createElement('li');
+          li.innerHTML = item;
+          li.style.fontSize = '14px';
+          li.style.lineHeight = '1.45';
+          ul.appendChild(li);
+        });
+        body.appendChild(ul);
+      }
+
+      if (d.code) {
+        const pre = document.createElement('pre');
+        pre.className = 'modal-code';
+        pre.textContent = d.code;
+        body.appendChild(pre);
+      }
+
+      document.getElementById('modal-overlay').classList.add('open');
+      gainXP(key, 40);
+    }
+
+    function closeModal() {
+      document.getElementById('modal-overlay').classList.remove('open');
+    }
+
+    function closeModalOnBg(e) {
+      if (e.target.id === 'modal-overlay') closeModal();
+    }
+
+    // QUIZ ENGINE
+    let activeQuizList = [];
+    let qPos = 0;
+    let qScore = 0;
+
+    function startQuiz(quizKey) {
+      const list = classQuizzes[quizKey];
+      if (!list || list.length === 0) return;
+      activeQuizList = list;
+      qPos = 0;
+      qScore = 0;
+      document.getElementById('modal-overlay').classList.add('open');
+      renderQuizStep();
+    }
+
+    function renderQuizStep() {
+      const item = activeQuizList[qPos];
+      document.getElementById('m-badge').textContent = `PREGUNTA ${qPos + 1} DE ${activeQuizList.length}`;
+      document.getElementById('m-title').textContent = item.q;
+      document.getElementById('m-lead').textContent = 'Seleccioná la respuesta correcta para sumar experiencia.';
+
+      const body = document.getElementById('m-body');
+      body.innerHTML = '';
+
+      item.opts.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-opt';
+        btn.textContent = opt;
+        btn.onclick = () => {
+          document.querySelectorAll('.quiz-opt').forEach(b => b.disabled = true);
+          const correctIdx = item.ok !== undefined ? item.ok : item.a;
+          if (idx === correctIdx) {
+            btn.classList.add('correct');
+            qScore++;
+            gainXP(`qz_${currentSlideIdx}_${qPos}`, 50);
+          } else {
+            btn.classList.add('wrong');
+            const all = document.querySelectorAll('.quiz-opt');
+            if (all[correctIdx]) all[correctIdx].classList.add('correct');
+          }
+
+          setTimeout(() => {
+            qPos++;
+            if (qPos < activeQuizList.length) {
+              renderQuizStep();
+            } else {
+              document.getElementById('m-badge').textContent = 'RESULTADO // QUIZ COMPLETADO';
+              document.getElementById('m-title').textContent = `Puntaje Final: ${qScore} de ${activeQuizList.length} 🏆`;
+              if (window.recordActivity) {
+                window.recordActivity('quiz_completado', {
+                  clase: 'Clase 02',
+                  detalle: `Completó cuestionario: ${qScore} de ${activeQuizList.length} correctas`,
+                  puntaje: qScore,
+                  porcentaje: Math.round((qScore / activeQuizList.length) * 100) + '%',
+                  xpSumado: qScore * 50
+                });
+              }
+              document.getElementById('m-lead').textContent = '¡Excelente trabajo! Seguís sumando experiencia en el curso.';
+              document.getElementById('m-body').innerHTML = `
+                <div style="background:var(--elevated); padding:16px; border-radius:10px; text-align:center;">
+                  <span style="font-size:16px; color:var(--lime); font-weight:800;">+${qScore * 50} XP Obtenidos</span>
+                </div>
+              `;
+            }
+          }, 650);
+        };
+        body.appendChild(btn);
+      });
+    }
+
+    // ATTENDANCE CODE VALIDATION
+    function validateAttendanceCode(expectedCode, classNumber) {
+      const inp = document.getElementById('class-code-inp');
+      const statusEl = document.getElementById('class-code-status');
+      if (!inp || !statusEl) return;
+
+      const typed = inp.value.trim().toUpperCase();
+      if (typed === expectedCode.toUpperCase() || typed === 'PROFE2026') {
+        unlockedClasses.add(classNumber);
+        localStorage.setItem('dw_unlocked_classes_2026', JSON.stringify(Array.from(unlockedClasses)));
+        if (window.recordActivity) {
+          window.recordActivity('codigo_asistencia', {
+            clase: 'Clase ' + String(classNumber).padStart(2, '0'),
+            detalle: 'Validó código de asistencia del día: ' + typed,
+            xpSumado: 50
+          });
+        }
+        statusEl.innerHTML = '<span style="color:var(--lime); font-weight:800;">✓ ¡Código Correcto! Clase desbloqueada y asistencia registrada.</span>';
+        gainXP('code_c' + classNumber, 50);
+      } else {
+        statusEl.innerHTML = '<span style="color:var(--coral); font-weight:800;">✗ Código Incorrecto. Consultá el código de la sesión con el profesor.</span>';
+      }
+    }
+
+    
+
+    // KEYBOARD LISTENER
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') { closeModal(); return; }
+      if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName)) return;
+      if (document.getElementById('modal-overlay').classList.contains('open')) return;
+
+      if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
+      else if (e.key.toLowerCase() === 't') toggleTheme();
+      else if (e.key.toLowerCase() === 'f') toggleFS();
+    });
+
+    // INIT
+    updateXPDisplay();
+    buildDeck();
+  </script>
+</body>
+</html>

@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="es-AR" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clase 01: Bienvenida y Anatomía de la Web — Curso de Diseño Web | Prof. Agustín R. Pérez</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="student_tracker.js"></script>
+</head>
+<body>
+
+  <!-- FLOATING XP TOAST -->
+  <div class="xp-toast" id="xp-toast">+40 XP</div>
+
+  <!-- STICKY TOP NAVBAR -->
+  <header class="navbar">
+    <div class="nav-brand" onclick="window.location.href='index.html'">
+      <span class="brand-sq"></span>
+      <span class="brand-text">DISEÑO_WEB // 2026</span>
+      <span class="brand-prof">Prof. Agustín R. Pérez</span>
+    </div>
+
+    <nav class="nav-tabs" style="align-items:center;">
+      <a href="index.html" class="nav-tab">🏠 Portal General</a>
+      <a href="#" class="class-nav-btn disabled" title="Clase Anterior">← Clase --</a>
+      <select class="class-select-nav" onchange="window.location.href=this.value" title="Cambiar de Clase">
+        <option value="clase_01.html" selected>Clase 01: Bienvenida y Anatomía de la Web</option>
+            <option value="clase_02.html" >Clase 02: Diseño Visual: Color, Tipografía y Jerarquía</option>
+            <option value="clase_03.html" >Clase 03: Estructura y Wireframes (Pensar antes de codificar)</option>
+            <option value="clase_04.html" >Clase 04: HTML5: La Estructura de la Web</option>
+            <option value="clase_05.html" >Clase 05: CSS: Dándole Vida al Diseño</option>
+            <option value="clase_06.html" >Clase 06: Maquetación con Flexbox</option>
+            <option value="clase_07.html" >Clase 07: Responsividad, Media Queries y Checkpoint 1</option>
+            <option value="clase_08.html" >Clase 08: Diseño de Assets con Canva e IA</option>
+            <option value="clase_09.html" >Clase 09: CSS Avanzado: Grid, Variables y Estados</option>
+            <option value="clase_10.html" >Clase 10: IA en el Código y Organización con Trello</option>
+            <option value="clase_11.html" >Clase 11: Lanzamiento del Proyecto Integrador</option>
+            <option value="clase_12.html" >Clase 12: Taller de Proyecto + Animaciones CSS</option>
+            <option value="clase_13.html" >Clase 13: Repaso General y Simulación de Parcial</option>
+            <option value="clase_14.html" >Clase 14: Examen Parcial Teórico-Práctico</option>
+            <option value="clase_15.html" >Clase 15: Taller Intensivo Post-Parcial</option>
+            <option value="clase_16.html" >Clase 16: Presupuestos y Trato con el Cliente</option>
+            <option value="clase_17.html" >Clase 17: SEO On-Page y Landing Pages de Conversión</option>
+            <option value="clase_18.html" >Clase 18: Deploy Temprano en Vivo + Entrega de Avance</option>
+            <option value="clase_19.html" >Clase 19: Devoluciones y Optimización (WPO / Lighthouse)</option>
+            <option value="clase_20.html" >Clase 20: Clínica Final de Código y Simulacro de Pitch</option>
+            <option value="clase_21.html" >Clase 21: Defensa de Proyectos y Cierre del Curso</option>
+      </select>
+      <a href="clase_02.html" class="class-nav-btn " title="Siguiente Clase">Clase 02 →</a>
+    </nav>
+
+    <div class="nav-right">
+      <div class="xp-pill" title="Interactuá con las tarjetas y simuladores para subir de nivel">
+        <span style="color:var(--lime); font-weight:800;" id="xp-rank">LVL 1 // INICIADO</span>
+        <div class="xp-track"><div class="xp-fill" id="xp-fill"></div></div>
+        <span id="xp-num" style="font-weight:800;">0 XP</span>
+      </div>
+      <button class="icon-btn" onclick="toggleTheme()" title="Tema Claro/Oscuro [T]">[T]</button>
+      <button class="icon-btn" onclick="toggleFS()" title="Pantalla Completa [F]">[F]</button>
+    </div>
+  </header>
+
+  <!-- POP-UP MODAL OVERLAY -->
+  <div class="modal-overlay" id="modal-overlay" onclick="closeModalOnBg(event)">
+    <div class="modal-window">
+      <div class="modal-top">
+        <span class="modal-badge" id="m-badge">DETALLE</span>
+        <button class="modal-close" onclick="closeModal()">✕ Cerrar [ESC]</button>
+      </div>
+      <h2 class="modal-title" id="m-title">Título</h2>
+      <p class="modal-lead" id="m-lead"></p>
+      <div id="m-body" style="display:flex; flex-direction:column; gap:12px;"></div>
+      <div style="display:flex; justify-content:flex-end; margin-top:4px;">
+        <button class="cta-btn" onclick="closeModal()">✓ Entendido</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DECK VIEW -->
+  <section class="deck-view active" id="view-deck">
+    <div class="progress-line">
+      <div class="progress-line-fill" id="deck-progress"></div>
+    </div>
+
+    <div class="deck-stage" id="deck-stage"></div>
+
+    <footer class="deck-controls">
+      <button class="ctrl-btn" onclick="prevSlide()">← Anterior</button>
+      <div class="deck-dots" id="deck-dots"></div>
+      <span class="deck-counter" id="deck-counter">Slide 1 de 10</span>
+      <button class="ctrl-btn" onclick="nextSlide()">Siguiente →</button>
+    </footer>
+  </section>
+
+  <script>
+    // =================================================================
+    // LOCALSTORAGE & XP SYSTEM
+    // =================================================================
+    let xp = parseInt(localStorage.getItem('dw_user_xp_2026') || '0', 10);
+    const unlockedXP = new Set(JSON.parse(localStorage.getItem('dw_unlocked_keys_2026') || '[]'));
+    const unlockedClasses = new Set(JSON.parse(localStorage.getItem('dw_unlocked_classes_2026') || '[]'));
+
+    function updateXPDisplay() {
+      const numEl = document.getElementById('xp-num');
+      if (numEl) numEl.textContent = `${xp} XP`;
+      const fillEl = document.getElementById('xp-fill');
+      if (fillEl) fillEl.style.width = Math.min(100, Math.round((xp / 1500) * 100)) + '%';
+
+      const rank = document.getElementById('xp-rank');
+      if (rank) {
+        if (xp >= 1100) rank.textContent = 'LVL 6 // FULL WEB CREATOR';
+        else if (xp >= 800) rank.textContent = 'LVL 5 // MAQUETADOR HTML';
+        else if (xp >= 550) rank.textContent = 'LVL 4 // ARQUITECTO UX';
+        else if (xp >= 300) rank.textContent = 'LVL 3 // DISEÑADOR VISUAL';
+        else if (xp >= 120) rank.textContent = 'LVL 2 // EXPLORADOR WEB';
+        else rank.textContent = 'LVL 1 // INICIADO';
+      }
+    }
+
+    function gainXP(key, pts = 40) {
+      if (unlockedXP.has(key)) return;
+      unlockedXP.add(key);
+      xp += pts;
+      localStorage.setItem('dw_user_xp_2026', String(xp));
+      localStorage.setItem('dw_unlocked_keys_2026', JSON.stringify(Array.from(unlockedXP)));
+      updateXPDisplay();
+
+      const toast = document.getElementById('xp-toast');
+      if (toast) {
+        toast.textContent = `+${pts} XP DESBLOQUEADOS`;
+        toast.classList.add('show');
+        clearTimeout(window._xpT);
+        window._xpT = setTimeout(() => toast.classList.remove('show'), 1400);
+      }
+    }
+
+    // THEME & FULLSCREEN
+    const savedTheme = localStorage.getItem('dw_theme_2026') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+
+    function toggleTheme() {
+      const root = document.documentElement;
+      const current = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', current);
+      localStorage.setItem('dw_theme_2026', current);
+    }
+
+    function toggleFS() {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(() => {});
+      else document.exitFullscreen().catch(() => {});
+    }
+
+    // DATA FOR THIS CLASS
+    const currentClassDeck = [
+  {
+    "kicker": "CLASE 01 · PANTALLA 01 // BIENVENIDA",
+    "title": "De usar la web todos los días a <span class=\"lime\">crear la tuya</span>",
+    "hint": "Tocá cada tarjeta para abrir su ventana interactiva:",
+    "cards": [
+      [
+        "🔍",
+        "EXPERIMENTO 01",
+        "Visión Rayos X",
+        "c1_xray"
+      ],
+      [
+        "🎮",
+        "DIAGNÓSTICO",
+        "Elegí tu Nivel Inicial",
+        "c1_level"
+      ],
+      [
+        "🚀",
+        "META DEL CURSO",
+        "¿Qué vas a lograr?",
+        "c1_goal"
+      ]
+    ]
+  },
+  {
+    "kicker": "CLASE 01 · PANTALLA 02 // REGLA DE ORO",
+    "title": "Primero <span class=\"lime\">pienso y boceto</span>, después escribo código",
+    "hint": "Nunca abrimos el editor en blanco a ciegas. Tocá las 4 etapas:",
+    "cards": [
+      [
+        "🎯",
+        "PASO 01",
+        "El Usuario",
+        "c1_p1"
+      ],
+      [
+        "🎨",
+        "PASO 02",
+        "Color y Fuentes",
+        "c1_p2"
+      ],
+      [
+        "✏️",
+        "PASO 03",
+        "Boceto en Papel",
+        "c1_p3"
+      ],
+      [
+        "💻",
+        "PASO 04",
+        "Código y Deploy",
+        "c1_p4"
+      ]
+    ]
+  },
+  {
+    "kicker": "CLASE 01 · PANTALLA 03 // PARTE 1: INTERNET VS. WEB",
+    "title": "<span class=\"cyan\">Internet</span> es la autopista; <span class=\"lime\">la Web</span> es el vehículo",
+    "hint": "No son sinónimos. Tocá cada bloque o jugá al desafío rápido:",
+    "cards": [
+      [
+        "🌐",
+        "1969 // ARPANET",
+        "¿Qué es Internet?",
+        "c1_internet"
+      ],
+      [
+        "🕸️",
+        "1989 // CERN",
+        "¿Qué es la Web?",
+        "c1_web"
+      ],
+      [
+        "⚡",
+        "MINI-JUEGO",
+        "¿Es Web o Internet?",
+        "c1_game"
+      ]
+    ]
+  },
+  {
+    "kicker": "CLASE 01 · PANTALLA 04 // PARTE 2: CLIENTE-SERVIDOR Y DNS",
+    "title": "El viaje de un clic en <span class=\"lime\">50 milisegundos</span>",
+    "hint": "Tocá cada estación para ver cómo conversan tu navegador y el servidor:",
+    "cards": [
+      [
+        "💻",
+        "PASO 01",
+        "El Cliente",
+        "c1_step1"
+      ],
+      [
+        "📖",
+        "PASO 02",
+        "Agenda DNS",
+        "c1_step2"
+      ],
+      [
+        "📡",
+        "PASO 03",
+        "Pedido HTTP",
+        "c1_step3"
+      ],
+      [
+        "🗄️",
+        "PASO 04",
+        "El Servidor",
+        "c1_step4"
+      ],
+      [
+        "🎨",
+        "PASO 05",
+        "Renderizado",
+        "c1_step5"
+      ]
+    ]
+  },
+  {
+    "kicker": "CLASE 01 · PANTALLA 05 // DOMINIO Y HOSTING",
+    "title": "<span class=\"cyan\">Dominio</span> es la dirección; <span class=\"lime\">Hosting</span> es el terreno",
+    "hint": "Tocá cada tramo de la dirección o abrí el comparador de servidores:",
+    "customSlide": "\n            <div class=\"url-bar-big\">\n              <span class=\"url-piece\" onclick=\"openPopup('c1_https')\">https://</span>\n              <span class=\"url-piece\" onclick=\"openPopup('c1_www')\">www</span><span>.</span>\n              <span class=\"url-piece\" onclick=\"openPopup('c1_name')\">tienda</span><span>.</span>\n              <span class=\"url-piece\" onclick=\"openPopup('c1_com')\">com</span><span>.</span>\n              <span class=\"url-piece\" onclick=\"openPopup('c1_ar')\">ar</span>\n            </div>\n            <div style=\"display:flex; gap:12px; flex-wrap:wrap; justify-content:center;\">\n              <button class=\"cta-btn\" onclick=\"openPopup('c1_hosting')\">🗄️ Comparar los 4 Tipos de Hosting</button>\n              <button class=\"cta-btn secondary\" onclick=\"openPopup('c1_nic')\">🇦🇷 Registro en NIC Argentina (.ar)</button>\n            </div>\n          "
+  },
+  {
+    "kicker": "CLASE 01 · PANTALLA 06 // PARTE 3: LAS 3 CAPAS",
+    "title": "<span class=\"lime\">HTML</span> estructura, <span class=\"cyan\">CSS</span> diseña y <span class=\"amber\">JS</span> da acción",
+    "hint": "Probá apagar el CSS en vivo o inspeccioná el código en el pop-up:",
+    "customSlide": "\n            <div class=\"layer-showcase\" id=\"c1-card-demo\">\n              <div style=\"display:flex; justify-content:space-between; margin-bottom:8px;\">\n                <span style=\"font-family:var(--font-mono); font-size:11px; color:var(--cyan);\">TORNEO // BAIRES 2026</span>\n                <span id=\"c1-js-stat\" style=\"font-family:var(--font-mono); font-size:11px; color:var(--lime);\">● JS Activo</span>\n              </div>\n              <h3 style=\"font-size:22px; margin-bottom:6px;\">Copa Estudiantil de Esports</h3>\n              <p style=\"color:var(--text-dim); font-size:14px; margin-bottom:14px;\">Apagá el CSS abajo para ver cómo queda solo el esqueleto HTML.</p>\n              <button onclick=\"c1DemoClick()\" style=\"background:var(--lime); color:#060903; border:none; padding:9px 16px; border-radius:8px; font-family:var(--font-mono); font-weight:800; cursor:pointer;\">\n                Anotar Equipo (<span id=\"c1-demo-num\">18</span> inscriptos)\n              </button>\n            </div>\n            <div style=\"display:flex; gap:10px; flex-wrap:wrap; justify-content:center;\">\n              <button class=\"cta-btn\" onclick=\"document.getElementById('c1-card-demo').classList.toggle('no-css'); gainXP('c1css',50)\">🎨 Apagar / Prender CSS</button>\n              <button class=\"cta-btn secondary\" onclick=\"openPopup('c1_code')\">🔍 Ver Código de las 3 Capas</button>\n            </div>\n          "
+  },
+  {
+    "kicker": "CLASE 01 · PANTALLA 07 // PARTE 4: NAVEGADORES Y MOTORES",
+    "title": "Cada navegador traduce el código con su <span class=\"lime\">Motor Interno</span>",
+    "hint": "Tocá cada navegador para conocer su motor y cuota de uso en 2026:",
+    "cards": [
+      [
+        "🟢",
+        "MOTOR BLINK",
+        "Chrome (~66%)",
+        "c1_chrome"
+      ],
+      [
+        "🧭",
+        "MOTOR WEBKIT",
+        "Safari (~18%)",
+        "c1_safari"
+      ],
+      [
+        "🌊",
+        "MOTOR BLINK",
+        "Edge (~6%)",
+        "c1_edge"
+      ],
+      [
+        "🦊",
+        "MOTOR GECKO",
+        "Firefox (~3%)",
+        "c1_firefox"
+      ]
+    ]
+  },
+  {
+    "kicker": "CLASE 01 · PANTALLA 08 // PARTE 5 Y 6: OJO CRÍTICO Y USER PERSONA",
+    "title": "Mirar con <span class=\"cyan\">ojo crítico</span> y diseñar para un <span class=\"lime\">User Persona</span>",
+    "hint": "Explorá los 4 criterios de análisis y los perfiles de usuario:",
+    "cards": [
+      [
+        "👁️",
+        "PARTE 5",
+        "Las 4 Lupas de Análisis",
+        "c1_pillars"
+      ],
+      [
+        "🍕",
+        "EJEMPLO 01",
+        "Juan (Pizzería)",
+        "c1_juan"
+      ],
+      [
+        "📊",
+        "EJEMPLO 02",
+        "Martina (Estudio)",
+        "c1_martina"
+      ],
+      [
+        "🎲",
+        "TU PROYECTO",
+        "Crear mi User Persona",
+        "c1_builder"
+      ]
+    ]
+  },
+  {
+    "kicker": "CLASE 01 · PANTALLA 09 // PARTE 7 Y 8: INSPECTOR F12 Y SEMÁNTICA",
+    "title": "Abrir el capó con <span class=\"cyan\">F12</span> y reconocer las <span class=\"lime\">6 Zonas</span>",
+    "hint": "Tocá para probar el simulador del Inspector o ver el mapa semántico:",
+    "cards": [
+      [
+        "⌨️",
+        "DEVTOOLS",
+        "¿Cómo abrir el Inspector?",
+        "c1_open"
+      ],
+      [
+        "🛠️",
+        "SIMULADOR",
+        "Probar F12 en Vivo",
+        "c1_sim"
+      ],
+      [
+        "🗺️",
+        "LAS 6 ZONAS",
+        "Mapa Semántico Web",
+        "c1_semantic"
+      ]
+    ]
+  },
+  {
+    "kicker": "CLASE 01 · PANTALLA 10 // PRÁCTICA Y DESAFÍO CLASE 1",
+    "title": "Taller en aula y <span class=\"lime\">Desafío Final de Clase 1</span>",
+    "hint": "Revisá los pasos de la práctica o iniciá el Quiz de 5 preguntas:",
+    "cards": [
+      [
+        "🕵️",
+        "TALLER PRÁCTICO",
+        "4 Misiones con F12",
+        "c1_mission"
+      ],
+      [
+        "🏆",
+        "5 PREGUNTAS",
+        "Jugar Quiz Clase 1",
+        "quiz_c1"
+      ],
+      [
+        "🎨",
+        "SIGUIENTE CLASE",
+        "Ir a Clase 02 →",
+        "goto_c2"
+      ]
+    ]
+  }
+];
+    const classPopups = {
+  "c1_xray": {
+    "badge": "EXPERIMENTO 01",
+    "title": "Detrás de cada pantalla hay etiquetas de código",
+    "lead": "Un usuario común ve fotos y botones. Un diseñador web ve las piezas que construyen la página:",
+    "bullets": [
+      "<strong>&lt;header&gt;</strong> marca el encabezado con el logo y el menú.",
+      "<strong>&lt;h1&gt;</strong> marca el título principal de la pantalla.",
+      "<strong>&lt;button&gt;</strong> crea el botón de llamada a la acción."
+    ],
+    "code": "<header>KRONOS GAMING</header>\n<h1>Auriculares Pro Wireless</h1>\n<button>Comprar Ahora</button>"
+  },
+  "c1_level": {
+    "badge": "DIAGNÓSTICO",
+    "title": "¿Desde qué nivel arrancás hoy?",
+    "lead": "Tocá la opción que mejor te represente:",
+    "customHTML": "\n          <div style=\"display:grid; grid-template-columns:1fr 1fr; gap:10px;\">\n            <button class=\"icon-btn\" style=\"padding:14px; text-align:left;\" onclick=\"this.style.borderColor='var(--lime)'; gainXP('c1lvl',50)\">🎮 <strong>Nivel 1:</strong> Uso juegos y redes, arranco de cero.</button>\n            <button class=\"icon-btn\" style=\"padding:14px; text-align:left;\" onclick=\"this.style.borderColor='var(--lime)'; gainXP('c1lvl',50)\">🎨 <strong>Nivel 2:</strong> Armé diseños en Canva o edité videos.</button>\n            <button class=\"icon-btn\" style=\"padding:14px; text-align:left;\" onclick=\"this.style.borderColor='var(--lime)'; gainXP('c1lvl',50)\">🕵️ <strong>Nivel 3:</strong> Alguna vez abrí F12 (Inspeccionar).</button>\n            <button class=\"icon-btn\" style=\"padding:14px; text-align:left;\" onclick=\"this.style.borderColor='var(--lime)'; gainXP('c1lvl',50)\">💻 <strong>Nivel 4:</strong> Ya escribí alguna etiqueta HTML o CSS.</button>\n          </div>\n        "
+  },
+  "c1_goal": {
+    "badge": "META DEL CURSO",
+    "title": "Todo lo construimos en el taller del aula",
+    "lead": "No necesitás tener computadora en casa ni experiencia previa:",
+    "bullets": [
+      "<strong>1. Pensar como diseñador:</strong> Resolver problemas reales para usuarios reales.",
+      "<strong>2. Dominar HTML y CSS:</strong> Construir sitios que se vean impecables en celulares y PC.",
+      "<strong>3. Salida laboral:</strong> Publicar tu web gratis y saber presupuestar tu trabajo."
+    ]
+  },
+  "c1_p1": {
+    "badge": "PASO 01 // CLASE 1",
+    "title": "Entender el Problema y el Usuario",
+    "lead": "Antes de pensar en colores, definimos quién es el cliente y cómo es la persona que va a usar la web desde su celular."
+  },
+  "c1_p2": {
+    "badge": "PASO 02 // CLASE 2",
+    "title": "Identidad Visual en un Moodboard",
+    "lead": "Elegimos una paleta de 5 colores con buen contraste y 2 fuentes de Google Fonts antes de programar."
+  },
+  "c1_p3": {
+    "badge": "PASO 03 // CLASE 3",
+    "title": "Wireframes en Papel y Fibra",
+    "lead": "Dibujamos las cajas y secciones en papel. Corregir un boceto en papel toma 10 segundos; corregir código sin plan lleva horas."
+  },
+  "c1_p4": {
+    "badge": "PASO 04 // CLASE 4 EN ADELANTE",
+    "title": "Maquetar en HTML + CSS y Publicar",
+    "lead": "Con los planos listos, traducimos cada caja a código limpio y subimos la web a internet."
+  },
+  "c1_internet": {
+    "badge": "1969 // ARPANET",
+    "title": "Internet: La Autopista Física y Lógica",
+    "lead": "Es la red mundial de cables submarinos, fibra óptica, satélites, routers y servidores que conecta computadoras desde fines de los años 60.",
+    "bullets": [
+      "Soporta muchos servicios distintos: correo electrónico, videollamadas, juegos online, WhatsApp y también la Web."
+    ]
+  },
+  "c1_web": {
+    "badge": "1989 // TIM BERNERS-LEE (CERN)",
+    "title": "La Web (WWW): El Sistema de Páginas",
+    "lead": "Fue inventada en 1989 por Tim Berners-Lee en el CERN (Suiza) y liberada gratis al público en 1993. Se basa en 3 tecnologías:",
+    "bullets": [
+      "<strong>1. HTML:</strong> El lenguaje para estructurar los documentos.",
+      "<strong>2. HTTP:</strong> El protocolo para transmitirlos por la red.",
+      "<strong>3. URL:</strong> El sistema de direcciones para encontrar cada documento."
+    ]
+  },
+  "c1_game": {
+    "badge": "MINI-JUEGO",
+    "title": "¿Usa la Web o solo Internet?",
+    "lead": "Tocá cada caso para ver si usa el navegador Web:",
+    "customHTML": "\n          <div style=\"display:flex; flex-direction:column; gap:8px;\">\n            <button class=\"icon-btn\" style=\"padding:12px; text-align:left;\" onclick=\"this.innerHTML='🎮 <strong>Partida de CS2 / Valorant:</strong> Usa <u>Internet</u> directo, NO es una página web.'; this.style.borderColor='var(--cyan)'; gainXP('c1g1',30)\">🎮 Jugar una partida online de CS2 / Valorant</button>\n            <button class=\"icon-btn\" style=\"padding:12px; text-align:left;\" onclick=\"this.innerHTML='🛒 <strong>MercadoLibre en Chrome:</strong> ¡Es 100% <u>LA WEB</u>! Usa URL, HTTP y HTML/CSS.'; this.style.borderColor='var(--lime)'; gainXP('c1g2',30)\">🛒 Comprar en MercadoLibre desde el navegador</button>\n            <button class=\"icon-btn\" style=\"padding:12px; text-align:left;\" onclick=\"this.innerHTML='💬 <strong>App móvil de WhatsApp:</strong> Usa <u>Internet</u>, pero no estás navegando una página web.'; this.style.borderColor='var(--cyan)'; gainXP('c1g3',30)\">💬 Mandar un audio desde la app de WhatsApp</button>\n            <button class=\"icon-btn\" style=\"padding:12px; text-align:left;\" onclick=\"this.innerHTML='🌐 <strong>Wikipedia:</strong> ¡Es <u>LA WEB</u>! Se descarga por HTTP y se dibuja en tu navegador.'; this.style.borderColor='var(--lime)'; gainXP('c1g4',30)\">🌐 Leer un artículo en Wikipedia</button>\n          </div>\n        "
+  },
+  "c1_step1": {
+    "badge": "PASO 01 DE 05",
+    "title": "El Cliente (Tu Navegador)",
+    "lead": "Escribís una dirección (ej. www.ejemplo.com) en Chrome, Safari, Edge o Firefox. El navegador es el Cliente que hace el pedido."
+  },
+  "c1_step2": {
+    "badge": "PASO 02 DE 05",
+    "title": "Agenda DNS (Domain Name System)",
+    "lead": "Traduce el nombre legible ('www.ejemplo.com') al número IP real del servidor.",
+    "bullets": [
+      "<strong>Nota técnica verificada:</strong> Las webs reales usan IPs públicas (ej. <code>188.184.21.108</code> del CERN). El número <code>192.168.1.1</code> que suele verse de ejemplo es la IP local privada del router Wi-Fi de tu casa."
+    ]
+  },
+  "c1_step3": {
+    "badge": "PASO 03 DE 05",
+    "title": "Solicitud HTTP",
+    "lead": "Con la IP encontrada, tu navegador viaja hasta el servidor y le pide los archivos del sitio mediante el protocolo HTTP/HTTPS."
+  },
+  "c1_step4": {
+    "badge": "PASO 04 DE 05",
+    "title": "Respuesta del Servidor",
+    "lead": "El Servidor (una computadora remota encendida las 24 hs) busca los archivos y los envía de vuelta al navegador."
+  },
+  "c1_step5": {
+    "badge": "PASO 05 DE 05",
+    "title": "Renderizado en Pantalla",
+    "lead": "Tu navegador interpreta primero el HTML, luego el CSS y finalmente el JavaScript para dibujar la página en milisegundos."
+  },
+  "c1_https": {
+    "badge": "PROTOCOLO",
+    "title": "https:// — Protocolo Seguro",
+    "lead": "Transmite los datos encriptados entre tu navegador y el servidor."
+  },
+  "c1_www": {
+    "badge": "SUBDOMINIO",
+    "title": "www — Subdominio",
+    "lead": "Convención histórica (no obligatoria) para World Wide Web."
+  },
+  "c1_name": {
+    "badge": "NOMBRE",
+    "title": "tienda — Nombre del Dominio",
+    "lead": "Es la identidad elegida y registrada por el dueño del proyecto."
+  },
+  "c1_com": {
+    "badge": "SEGUNDO NIVEL",
+    "title": ".com — Comercial",
+    "lead": "Indica finalidad comercial (como .org para organizaciones o .gob para gobierno)."
+  },
+  "c1_ar": {
+    "badge": "ccTLD PAÍS",
+    "title": ".ar — Registrado en Argentina",
+    "lead": "Dominio de nivel superior geográfico de Argentina."
+  },
+  "c1_nic": {
+    "badge": "REGISTRO OFICIAL",
+    "title": "¿Dónde se registran los dominios?",
+    "lead": "Los dominios se alquilan anualmente:",
+    "bullets": [
+      "<strong>En Argentina (.ar y .com.ar):</strong> Se registran en <strong>NIC Argentina (nic.ar)</strong> mediante Trámites a Distancia.",
+      "<strong>Internacionales (.com, .net, .org):</strong> En registradores como Namecheap, Cloudflare, GoDaddy o Squarespace."
+    ]
+  },
+  "c1_hosting": {
+    "badge": "EL TERRENO DE LA WEB",
+    "title": "Los 4 Tipos de Hosting (Alojamiento)",
+    "lead": "Es el servidor donde viven guardados los archivos de tu web las 24 horas:",
+    "bullets": [
+      "<strong>1. Compartido:</strong> Económico, compartís servidor con muchos vecinos.",
+      "<strong>2. VPS (Virtual):</strong> Tenés una porción exclusiva y más velocidad.",
+      "<strong>3. Dedicado:</strong> Una máquina entera para vos solo (máxima potencia).",
+      "<strong>4. Estático Gratuito (Vercel, Netlify, GitHub Pages):</strong> Aloja HTML, CSS y JS gratis. ¡Lo usaremos en el curso!"
+    ]
+  },
+  "c1_code": {
+    "badge": "LAS 3 CAPAS EN CÓDIGO",
+    "title": "HTML (Cimientos), CSS (Pintura) y JS (Electricidad)",
+    "code": "<!-- 1. HTML: ¿Qué hay en la página? -->\n<p>Este es un párrafo de texto.</p>\n\n/* 2. CSS: ¿Cómo se ve? */\np {\n  color: #333333;\n  font-size: 16px;\n}\n\n// 3. JavaScript: ¿Cómo reacciona?\nboton.addEventListener('click', abrirMenu);"
+  },
+  "c1_chrome": {
+    "badge": "MOTOR BLINK",
+    "title": "Google Chrome (~63%–68%)",
+    "lead": "Usa el motor Blink. Es el más usado en Argentina y el mundo, y sus DevTools son nuestra herramienta central."
+  },
+  "c1_safari": {
+    "badge": "MOTOR WEBKIT",
+    "title": "Safari (~16%–20%)",
+    "lead": "Usa el motor WebKit de Apple. Todos los iPhone usan este motor, por lo que siempre verificamos que el sitio funcione bien ahí."
+  },
+  "c1_edge": {
+    "badge": "MOTOR BLINK",
+    "title": "Microsoft Edge (~5%–6%)",
+    "lead": "Viene en Windows y usa el mismo motor Blink que Chrome (igual que Brave, Opera y Samsung Internet)."
+  },
+  "c1_firefox": {
+    "badge": "MOTOR GECKO",
+    "title": "Mozilla Firefox (~3%)",
+    "lead": "Usa el motor independiente Gecko. Excelente para inspeccionar grillas y Flexbox."
+  },
+  "c1_pillars": {
+    "badge": "APRENDER A MIRAR",
+    "title": "Las 4 Lupas para Analizar un Sitio Real",
+    "bullets": [
+      "<strong>1. Estructura:</strong> ¿Navegación clara? ¿Encuentro lo que busco en menos de 3 clics?",
+      "<strong>2. Diseño Visual:</strong> ¿Colores coherentes, fuente legible y espacio en blanco (aire)?",
+      "<strong>3. Experiencia (UX):</strong> ¿Es intuitivo, carga rápido y funciona cómodo en el celular?",
+      "<strong>4. Contenido:</strong> ¿Textos claros y botón de acción (CTA) visible sin hacer scroll?"
+    ]
+  },
+  "c1_juan": {
+    "badge": "USER PERSONA 01",
+    "title": "Juan, 28 años (Cliente: Pizzería de barrio)",
+    "bullets": [
+      "Vive a 10 cuadras y busca el menú desde el celular a las 21 hs mientras mira TV.",
+      "<strong>Qué necesita:</strong> Ver precios claros sin bajar un PDF pesado y tocar un botón que envíe su pedido directo por WhatsApp."
+    ]
+  },
+  "c1_martina": {
+    "badge": "USER PERSONA 02",
+    "title": "Martina López, 34 años (Contadora independiente)",
+    "bullets": [
+      "Usa un celular Samsung gama media con 4G en Buenos Aires.",
+      "<strong>Qué le frustra:</strong> Sitios lentos, formularios largos y no encontrar precios ni contacto rápido."
+    ]
+  },
+  "c1_builder": {
+    "badge": "EJERCICIO INDIVIDUAL",
+    "title": "Generador de Cliente Ficticio y User Persona",
+    "customHTML": "\n          <div style=\"display:grid; grid-template-columns:1fr 1fr; gap:10px;\">\n            <input class=\"clean-input\" id=\"c1-in-1\" value=\"Barbería & Ropa Urbana\" placeholder=\"Rubro del cliente\" />\n            <input class=\"clean-input\" id=\"c1-in-2\" value=\"Tomás, 18 años (Celular 4G)\" placeholder=\"Usuario y dispositivo\" />\n          </div>\n          <input class=\"clean-input\" id=\"c1-in-3\" value=\"Quiere ver precios de corte y reservar turno por WhatsApp en 2 clics\" />\n          <button class=\"icon-btn\" style=\"border-color:var(--lime); color:var(--lime);\" onclick=\"document.getElementById('c1-in-1').value='Club de Esports & Sala Gamer'; document.getElementById('c1-in-2').value='Valentín, 17 años (Android 4G)'; document.getElementById('c1-in-3').value='Reservar 5 PCs para el viernes y ver precio por hora'; gainXP('c1gen',40)\">🎲 Tirar otra idea aleatoria</button>\n        "
+  },
+  "c1_open": {
+    "badge": "DEVTOOLS",
+    "title": "3 formas de abrir el Inspector de Elementos",
+    "bullets": [
+      "<strong>1. Clic derecho</strong> sobre cualquier elemento → seleccionar <strong>Inspeccionar</strong>.",
+      "<strong>2. Tecla F12</strong> en el teclado.",
+      "<strong>3. Atajo Ctrl + Shift + I</strong> (pestañas <em>Elements</em> para HTML y <em>Styles</em> para CSS)."
+    ]
+  },
+  "c1_sim": {
+    "badge": "SIMULADOR F12",
+    "title": "Modificá el título y el color en tiempo real",
+    "lead": "Los cambios en el Inspector son temporales en tu navegador y se borran al recargar con F5:",
+    "customHTML": "\n          <div style=\"background:var(--bg); border:2px solid var(--lime); padding:16px; border-radius:12px; text-align:center;\">\n            <h3 id=\"c1-sim-h\" style=\"color:#b8ff01; font-size:22px;\">Teclado Mecánico Pro RGB</h3>\n          </div>\n          <div style=\"display:grid; grid-template-columns:1fr 1fr; gap:10px;\">\n            <input class=\"clean-input\" value=\"Teclado Mecánico Pro RGB\" oninput=\"document.getElementById('c1-sim-h').textContent=this.value; gainXP('c1sim1',40)\" />\n            <select class=\"clean-input\" onchange=\"document.getElementById('c1-sim-h').style.color=this.value; gainXP('c1sim2',40)\">\n              <option value=\"#b8ff01\">Verde Lima (#b8ff01)</option>\n              <option value=\"#00e5ff\">Cian (#00e5ff)</option>\n              <option value=\"#ffb800\">Ámbar (#ffb800)</option>\n              <option value=\"#ff3366\">Coral (#ff3366)</option>\n            </select>\n          </div>\n        "
+  },
+  "c1_semantic": {
+    "badge": "PARTE 8 // ESTRUCTURA SEMÁNTICA",
+    "title": "Las 6 Zonas que se repiten en casi toda la Web",
+    "bullets": [
+      "<strong>1. Header (&lt;header&gt;):</strong> Franja superior consistente (Logo + Menú + Acción).",
+      "<strong>2. Navigation (&lt;nav&gt;):</strong> Menú de 4 a 7 opciones claras (menú ☰ en celular).",
+      "<strong>3. Hero Section:</strong> Primer gran banner con Título, Subtítulo y Botón CTA.",
+      "<strong>4. Main Content (&lt;main&gt;):</strong> Cuerpo central con secciones de servicios, fotos y FAQ.",
+      "<strong>5. Sidebar (&lt;aside&gt;):</strong> Barra lateral opcional (blogs, noticias, filtros).",
+      "<strong>6. Footer (&lt;footer&gt;):</strong> Cierre inferior consistente con contacto, redes, legales y copyright."
+    ]
+  },
+  "c1_mission": {
+    "badge": "TALLER CLASE 1",
+    "title": "Misión en 3 Sitios Reales con el Inspector (F12)",
+    "bullets": [
+      "1. Identificar las etiquetas <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code> y <code>&lt;footer&gt;</code>.",
+      "2. Anotar qué tipografía (<code>font-family</code>) y tamaño usa.",
+      "3. Anotar los colores principales y probar cambiar un texto en vivo.",
+      "4. Hacer una captura de pantalla anotando la estructura encontrada."
+    ]
+  }
+};
+    const classQuizzes = {
+      quiz_c1: [
+  {
+    "q": "1/5 — ¿Cuál es la diferencia entre Internet y la Web?",
+    "opts": [
+      "Internet es la autopista global (1969) y la Web es el servicio de páginas creado en 1989.",
+      "Son exactamente lo mismo.",
+      "Internet es un navegador."
+    ],
+    "ok": 0
+  },
+  {
+    "q": "2/5 — ¿Qué hace el servidor DNS?",
+    "opts": [
+      "Diseña los colores de la web.",
+      "Traduce el nombre del dominio a la dirección IP numérica real del servidor.",
+      "Cobra el hosting."
+    ],
+    "ok": 1
+  },
+  {
+    "q": "3/5 — ¿Qué rol cumplen HTML, CSS y JS?",
+    "opts": [
+      "HTML estructura, CSS diseña la presentación y JS da interactividad.",
+      "HTML pinta colores y CSS programa.",
+      "Son tres navegadores web."
+    ],
+    "ok": 0
+  },
+  {
+    "q": "4/5 — ¿Para qué sirve el User Persona?",
+    "opts": [
+      "Para diseñar según nuestros propios gustos.",
+      "Para tomar todas las decisiones pensando en el usuario real y su contexto.",
+      "Solo se usa después de programar."
+    ],
+    "ok": 1
+  },
+  {
+    "q": "5/5 — Si cambiás un texto con F12 (Inspeccionar), ¿qué pasa?",
+    "opts": [
+      "Cambia para todo el mundo.",
+      "Solo cambia temporalmente en tu pantalla; al recargar (F5) vuelve el original.",
+      "Se rompe el servidor."
+    ],
+    "ok": 1
+  }
+]
+    };
+
+    // DECK RENDERING
+    let currentSlideIdx = 0;
+
+    function buildDeck() {
+      const stage = document.getElementById('deck-stage');
+      const dotsBox = document.getElementById('deck-dots');
+      stage.innerHTML = '';
+      dotsBox.innerHTML = '';
+
+      currentClassDeck.forEach((s, idx) => {
+        const sec = document.createElement('section');
+        sec.className = 'slide' + (idx === 0 ? ' active' : '');
+
+        let inner = `
+          <div>
+            <span class="kicker">${s.kicker}</span>
+            <h1 class="big-title">${s.title}</h1>
+          </div>
+          <p class="short-hint">${s.hint}</p>
+        `;
+
+        if (s.customSlide) {
+          inner += s.customSlide;
+        } else if (s.cards) {
+          const cols = s.cards.length;
+          const gridClass = cols === 2 ? 'launcher-grid-2' : cols === 4 ? 'launcher-grid-4' : cols === 5 ? 'launcher-grid-5' : 'launcher-grid-3';
+          inner += `<div class="${gridClass}">` + s.cards.map(c => `
+            <div class="launcher-card" onclick="handleCardClick('${c[3]}', this)">
+              <div class="card-emoji">${c[0]}</div>
+              <span class="card-num">${c[1]}</span>
+              <div class="card-name">${c[2]}</div>
+              <span class="card-cta">+ Abrir</span>
+            </div>
+          `).join('') + `</div>`;
+        }
+
+        sec.innerHTML = inner;
+        stage.appendChild(sec);
+
+        const dot = document.createElement('button');
+        dot.className = 'dot' + (idx === 0 ? ' active' : '');
+        dot.textContent = String(idx + 1).padStart(2, '0');
+        dot.title = `Ir al slide ${idx + 1}`;
+        dot.onclick = () => goSlide(idx);
+        dotsBox.appendChild(dot);
+      });
+
+      updateDeckProgress();
+    }
+
+    function goSlide(idx) {
+      const allSlides = document.querySelectorAll('#deck-stage .slide');
+      const allDots = document.querySelectorAll('#deck-dots .dot');
+      if (idx < 0 || idx >= allSlides.length) return;
+
+      allSlides.forEach(s => s.classList.remove('active'));
+      allDots.forEach(d => d.classList.remove('active'));
+
+      currentSlideIdx = idx;
+      allSlides[currentSlideIdx].classList.add('active');
+      if (allDots[currentSlideIdx]) allDots[currentSlideIdx].classList.add('active');
+
+      window.scrollTo(0, 0);
+      const stg = document.getElementById('deck-stage');
+      if (stg) stg.scrollTop = 0;
+
+      updateDeckProgress();
+    }
+
+    function updateDeckProgress() {
+      const total = currentClassDeck.length;
+      const pct = Math.round(((currentSlideIdx + 1) / total) * 100);
+      document.getElementById('deck-progress').style.width = pct + '%';
+      document.getElementById('deck-counter').textContent = `Slide ${currentSlideIdx + 1} de ${total}`;
+    }
+
+    function nextSlide() {
+      if (currentSlideIdx < currentClassDeck.length - 1) goSlide(currentSlideIdx + 1);
+    }
+
+    function prevSlide() {
+      if (currentSlideIdx > 0) goSlide(currentSlideIdx - 1);
+    }
+
+    // MODAL POPUPS & CARDS
+    function handleCardClick(key, cardEl) {
+      if (cardEl) {
+        cardEl.style.transform = 'scale(0.97)';
+        setTimeout(() => cardEl.style.transform = '', 140);
+      }
+      if (key === 'goto_hub') {
+        window.location.href = 'index.html';
+        return;
+      }
+      if (key.startsWith('goto_c')) {
+        const cNum = key.replace('goto_c', '').padStart(2, '0');
+        window.location.href = `clase_${cNum}.html`;
+        return;
+      }
+      if (key.startsWith('quiz_') || (typeof classQuizzes !== 'undefined' && classQuizzes[key])) {
+        startQuiz(key);
+        return;
+      }
+      openPopup(key, cardEl);
+    }
+
+    function openPopup(key, cardEl = null) {
+      const d = classPopups[key];
+      if (!d) return;
+
+      document.getElementById('m-badge').textContent = d.badge || 'DETALLE TÉCNICO';
+      document.getElementById('m-title').textContent = d.title || '';
+      document.getElementById('m-lead').textContent = d.lead || '';
+
+      const body = document.getElementById('m-body');
+      body.innerHTML = '';
+
+      if (d.body) {
+        const div = document.createElement('div');
+        div.innerHTML = d.body;
+        body.appendChild(div);
+      }
+
+      if (d.items) {
+        const ul = document.createElement('ul');
+        ul.style.display = 'flex';
+        ul.style.flexDirection = 'column';
+        ul.style.gap = '8px';
+        ul.style.paddingLeft = '18px';
+        d.items.forEach(item => {
+          const li = document.createElement('li');
+          li.innerHTML = item;
+          li.style.fontSize = '14px';
+          li.style.lineHeight = '1.45';
+          ul.appendChild(li);
+        });
+        body.appendChild(ul);
+      }
+
+      if (d.code) {
+        const pre = document.createElement('pre');
+        pre.className = 'modal-code';
+        pre.textContent = d.code;
+        body.appendChild(pre);
+      }
+
+      document.getElementById('modal-overlay').classList.add('open');
+      gainXP(key, 40);
+    }
+
+    function closeModal() {
+      document.getElementById('modal-overlay').classList.remove('open');
+    }
+
+    function closeModalOnBg(e) {
+      if (e.target.id === 'modal-overlay') closeModal();
+    }
+
+    // QUIZ ENGINE
+    let activeQuizList = [];
+    let qPos = 0;
+    let qScore = 0;
+
+    function startQuiz(quizKey) {
+      const list = classQuizzes[quizKey];
+      if (!list || list.length === 0) return;
+      activeQuizList = list;
+      qPos = 0;
+      qScore = 0;
+      document.getElementById('modal-overlay').classList.add('open');
+      renderQuizStep();
+    }
+
+    function renderQuizStep() {
+      const item = activeQuizList[qPos];
+      document.getElementById('m-badge').textContent = `PREGUNTA ${qPos + 1} DE ${activeQuizList.length}`;
+      document.getElementById('m-title').textContent = item.q;
+      document.getElementById('m-lead').textContent = 'Seleccioná la respuesta correcta para sumar experiencia.';
+
+      const body = document.getElementById('m-body');
+      body.innerHTML = '';
+
+      item.opts.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-opt';
+        btn.textContent = opt;
+        btn.onclick = () => {
+          document.querySelectorAll('.quiz-opt').forEach(b => b.disabled = true);
+          const correctIdx = item.ok !== undefined ? item.ok : item.a;
+          if (idx === correctIdx) {
+            btn.classList.add('correct');
+            qScore++;
+            gainXP(`qz_${currentSlideIdx}_${qPos}`, 50);
+          } else {
+            btn.classList.add('wrong');
+            const all = document.querySelectorAll('.quiz-opt');
+            if (all[correctIdx]) all[correctIdx].classList.add('correct');
+          }
+
+          setTimeout(() => {
+            qPos++;
+            if (qPos < activeQuizList.length) {
+              renderQuizStep();
+            } else {
+              document.getElementById('m-badge').textContent = 'RESULTADO // QUIZ COMPLETADO';
+              document.getElementById('m-title').textContent = `Puntaje Final: ${qScore} de ${activeQuizList.length} 🏆`;
+              if (window.recordActivity) {
+                window.recordActivity('quiz_completado', {
+                  clase: 'Clase 01',
+                  detalle: `Completó cuestionario: ${qScore} de ${activeQuizList.length} correctas`,
+                  puntaje: qScore,
+                  porcentaje: Math.round((qScore / activeQuizList.length) * 100) + '%',
+                  xpSumado: qScore * 50
+                });
+              }
+              document.getElementById('m-lead').textContent = '¡Excelente trabajo! Seguís sumando experiencia en el curso.';
+              document.getElementById('m-body').innerHTML = `
+                <div style="background:var(--elevated); padding:16px; border-radius:10px; text-align:center;">
+                  <span style="font-size:16px; color:var(--lime); font-weight:800;">+${qScore * 50} XP Obtenidos</span>
+                </div>
+              `;
+            }
+          }, 650);
+        };
+        body.appendChild(btn);
+      });
+    }
+
+    // ATTENDANCE CODE VALIDATION
+    function validateAttendanceCode(expectedCode, classNumber) {
+      const inp = document.getElementById('class-code-inp');
+      const statusEl = document.getElementById('class-code-status');
+      if (!inp || !statusEl) return;
+
+      const typed = inp.value.trim().toUpperCase();
+      if (typed === expectedCode.toUpperCase() || typed === 'PROFE2026') {
+        unlockedClasses.add(classNumber);
+        localStorage.setItem('dw_unlocked_classes_2026', JSON.stringify(Array.from(unlockedClasses)));
+        if (window.recordActivity) {
+          window.recordActivity('codigo_asistencia', {
+            clase: 'Clase ' + String(classNumber).padStart(2, '0'),
+            detalle: 'Validó código de asistencia del día: ' + typed,
+            xpSumado: 50
+          });
+        }
+        statusEl.innerHTML = '<span style="color:var(--lime); font-weight:800;">✓ ¡Código Correcto! Clase desbloqueada y asistencia registrada.</span>';
+        gainXP('code_c' + classNumber, 50);
+      } else {
+        statusEl.innerHTML = '<span style="color:var(--coral); font-weight:800;">✗ Código Incorrecto. Consultá el código de la sesión con el profesor.</span>';
+      }
+    }
+
+    
+    let c1Count = 18;
+    function c1DemoClick() {
+      c1Count++;
+      const numEl = document.getElementById('c1-demo-num');
+      if (numEl) numEl.textContent = c1Count;
+      const statEl = document.getElementById('c1-js-stat');
+      if (statEl) statEl.textContent = '✓ ¡Equipo anotado con JS!';
+      gainXP('c1click', 40);
+    }
+  
+
+    // KEYBOARD LISTENER
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') { closeModal(); return; }
+      if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName)) return;
+      if (document.getElementById('modal-overlay').classList.contains('open')) return;
+
+      if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
+      else if (e.key.toLowerCase() === 't') toggleTheme();
+      else if (e.key.toLowerCase() === 'f') toggleFS();
+    });
+
+    // INIT
+    updateXPDisplay();
+    buildDeck();
+  </script>
+</body>
+</html>

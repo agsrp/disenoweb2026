@@ -1,0 +1,1481 @@
+{
+  "c5": {
+    "kicker": "CLASE 05 // MÓDULO 2 (MAQUETACIÓN Y ESTILOS)",
+    "title": "<span class=\"lime\">CSS:</span> Dándole Vida al Diseño",
+    "hint": "Enlazá tu CSS externo, dominá selectores y comprendé el Modelo de Caja.",
+    "cards": [
+      [
+        "🎨",
+        "01",
+        "Enlace CSS Externo",
+        "c5_link"
+      ],
+      [
+        "🎯",
+        "02",
+        "Selectores y Cascada",
+        "c5_selectors"
+      ],
+      [
+        "📦",
+        "03",
+        "El Modelo de Caja",
+        "c5_boxmodel"
+      ],
+      [
+        "🔤",
+        "04",
+        "Tipografía y Unidades",
+        "c5_units"
+      ]
+    ],
+    "popups": {
+      "c5_link": {
+        "badge": "CONEXIÓN DE ESTILOS // CLASE 5",
+        "title": "Enlazar CSS Externo con <link>",
+        "lead": "La etiqueta <link> va siempre dentro del <head> de tu index.html.",
+        "body": "<p>Se vincula con: <code>&lt;link rel=\"stylesheet\" href=\"style.css\"&gt;</code>.</p><p>Separar estructura (HTML) de presentación (CSS) es la regla de oro para mantener código limpio y profesional.</p>"
+      },
+      "c5_selectors": {
+        "badge": "ESPECIFICIDAD // CLASE 5",
+        "title": "Selectores: Etiqueta, Clase e ID",
+        "lead": "Cómo decirle al navegador qué elemento pintar y con qué prioridad.",
+        "body": "<p><strong>Etiqueta (h1, p):</strong> Afecta a todos. Prioridad baja.</p><p><strong>Clase (.btn, .card):</strong> Reutilizable. Es la más recomendada.</p><p><strong>ID (#menu):</strong> Único en toda la página. Prioridad muy alta (usar con moderación).</p>"
+      },
+      "c5_boxmodel": {
+        "badge": "FUNDAMENTO // CLASE 5",
+        "title": "El Sagrado Modelo de Caja (Box Model)",
+        "lead": "Toda etiqueta en la web es una caja rectangular compuesta por 4 capas.",
+        "body": "<p>1. <strong>Content:</strong> El texto o imagen interior.<br>2. <strong>Padding:</strong> Colchón interno entre el contenido y el borde.<br>3. <strong>Border:</strong> La línea perimetral.<br>4. <strong>Margin:</strong> La distancia hacia cajas vecinas.</p><p><em>Tip pro:</em> Usá siempre <code>* { box-sizing: border-box; }</code> para evitar cálculos molestos de ancho.</p>"
+      },
+      "c5_units": {
+        "badge": "MEDIDAS // CLASE 5",
+        "title": "Unidades Relativas: px vs rem",
+        "lead": "Dejá de usar píxeles fijos para todo y empezá a pensar de manera accesible.",
+        "body": "<p><strong>px:</strong> Absoluto y rígido. Si el usuario agranda la letra de su navegador por problemas visuales, el px no escala.</p><p><strong>rem:</strong> Relativo al tamaño de fuente raíz (generalmente 16px). 1rem = 16px, 1.5rem = 24px. Ideal para tipografía responsiva.</p>"
+      }
+    },
+    "lab": "\n      <div style=\"background:var(--surface); border:1px solid var(--border-hi); border-radius:16px; padding:24px; max-width:680px; width:100%;\">\n        <span class=\"card-num\" style=\"color:var(--lime); margin-bottom:8px; display:block;\">LABORATORIO INTERACTIVO // SIMULADOR DE BOX MODEL</span>\n        <h3 style=\"font-size:18px; margin-bottom:12px;\">Experimentá el Modelo de Caja en tiempo real</h3>\n        <div style=\"display:flex; gap:12px; margin-bottom:16px; flex-wrap:wrap;\">\n          <button class=\"cta-btn secondary\" onclick=\"document.getElementById('c5-box').style.padding='8px'; document.getElementById('c5-box').style.margin='8px'; document.getElementById('c5-info').textContent='Padding: 8px | Margin: 8px'; gainXP('c5box1', 30)\">Padding Compacto</button>\n          <button class=\"cta-btn secondary\" onclick=\"document.getElementById('c5-box').style.padding='28px'; document.getElementById('c5-box').style.margin='18px'; document.getElementById('c5-info').textContent='Padding: 28px | Margin: 18px (Mayor espacio interno)'; gainXP('c5box2', 40)\">Padding Amplio</button>\n          <button class=\"cta-btn secondary\" onclick=\"document.getElementById('c5-box').style.border='4px dashed var(--lime)'; document.getElementById('c5-info').textContent='Border: 4px dashed lime'; gainXP('c5box3', 30)\">Borde Destacado</button>\n        </div>\n        <div style=\"background:var(--elevated); border:1px solid var(--border); padding:20px; border-radius:12px; text-align:center;\">\n          <div id=\"c5-box\" style=\"background:var(--lime-soft); border:2px solid var(--cyan); padding:16px; margin:16px auto; max-width:320px; transition:all 0.25s ease; border-radius:8px;\">\n            <strong style=\"color:var(--text);\">[ CONTENIDO INTERNO ]</strong>\n            <p style=\"font-size:12px; color:var(--text-dim); margin-top:4px;\">Caja modificable</p>\n          </div>\n          <div id=\"c5-info\" style=\"font-family:var(--font-mono); font-size:12px; color:var(--cyan);\">Estado inicial: Padding: 16px | Margin: 16px</div>\n        </div>\n      </div>\n    ",
+    "quiz": [
+      {
+        "q": "¿En qué etiqueta de HTML se enlaza la hoja de estilos externa?",
+        "opts": [
+          "En <head> mediante <link>",
+          "En <body> mediante <style>",
+          "En el <footer> con <script>"
+        ],
+        "a": 0
+      },
+      {
+        "q": "¿Qué regla CSS evita que el padding y el border aumenten el ancho total de una caja?",
+        "opts": [
+          "display: flex",
+          "box-sizing: border-box",
+          "overflow: hidden"
+        ],
+        "a": 1
+      },
+      {
+        "q": "Si el font-size raíz es 16px, ¿a cuántos píxeles equivale 2rem?",
+        "opts": [
+          "18px",
+          "24px",
+          "32px"
+        ],
+        "a": 2
+      }
+    ]
+  },
+  "c6": {
+    "kicker": "CLASE 06 // MÓDULO 2 (MAQUETACIÓN Y ESTILOS)",
+    "title": "<span class=\"lime\">Flexbox:</span> Maquetación Flexible y Moderna",
+    "hint": "El estándar de oro para barras de navegación, tarjetas y grillas sin hacks ni floats.",
+    "cards": [
+      [
+        "🧭",
+        "01",
+        "Ejes: Main & Cross Axis",
+        "c6_axes"
+      ],
+      [
+        "↔️",
+        "02",
+        "Justify-Content",
+        "c6_justify"
+      ],
+      [
+        "↕️",
+        "03",
+        "Align-Items",
+        "c6_align"
+      ],
+      [
+        "🔄",
+        "04",
+        "Flex-Direction & Wrap",
+        "c6_wrap"
+      ]
+    ],
+    "popups": {
+      "c6_axes": {
+        "badge": "EJES CLAVE // CLASE 6",
+        "title": "Eje Principal vs. Eje Cruzado",
+        "lead": "Flexbox distribuye en 1 dimensión a la vez.",
+        "body": "<p>Si <code>flex-direction: row</code> (defecto): el <strong>Main Axis</strong> es horizontal y el <strong>Cross Axis</strong> es vertical.</p><p>Si <code>flex-direction: column</code>: se invierten por completo.</p>"
+      },
+      "c6_justify": {
+        "badge": "ALINEACIÓN // CLASE 6",
+        "title": "justify-content (Eje Principal)",
+        "lead": "Controla la distribución de espacio entre los hijos.",
+        "body": "<p>• <strong>flex-start:</strong> Todo al principio.<br>• <strong>center:</strong> Centrado perfecto.<br>• <strong>space-between:</strong> Primer y último elemento pegados a los bordes (ideal para navbars).</p>"
+      },
+      "c6_align": {
+        "badge": "ALINEACIÓN VERTICAL // CLASE 6",
+        "title": "align-items (Eje Cruzado)",
+        "lead": "Centrar verticalmente en CSS es 1 sola línea de código.",
+        "body": "<p>• <strong>center:</strong> Centrado vertical exacto.<br>• <strong>stretch:</strong> Las tarjetas ocupan toda la altura disponible.<br>• <strong>flex-end:</strong> Alinea todo en la base inferior.</p>"
+      },
+      "c6_wrap": {
+        "badge": "MULTILÍNEA // CLASE 6",
+        "title": "flex-wrap: nowrap vs wrap",
+        "lead": "Cómo hacer que los elementos bajen a una nueva línea si la pantalla se achica.",
+        "body": "<p>Por defecto, los elementos flex intentan comprimirse en una sola fila (<code>nowrap</code>). Con <code>flex-wrap: wrap</code>, si no caben, bajan ordenadamente a la siguiente línea.</p>"
+      }
+    },
+    "lab": "\n      <div style=\"background:var(--surface); border:1px solid var(--border-hi); border-radius:16px; padding:24px; max-width:680px; width:100%;\">\n        <span class=\"card-num\" style=\"color:var(--lime); margin-bottom:8px; display:block;\">SIMULADOR EN VIVO // FLEXBOX PLAYGROUND</span>\n        <h3 style=\"font-size:18px; margin-bottom:12px;\">Probá combinaciones de alineación en vivo</h3>\n        <div style=\"display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap;\">\n          <button class=\"cta-btn secondary\" onclick=\"const b=document.getElementById('c6-box'); b.style.flexDirection='row'; b.style.justifyContent='space-between'; document.getElementById('c6-txt').textContent='flex-direction: row | justify-content: space-between'; gainXP('c6f1', 35)\">Navbar Clásica (Space-Between)</button>\n          <button class=\"cta-btn secondary\" onclick=\"const b=document.getElementById('c6-box'); b.style.flexDirection='row'; b.style.justifyContent='center'; document.getElementById('c6-txt').textContent='justify-content: center'; gainXP('c6f2', 30)\">Centrado Total</button>\n          <button class=\"cta-btn secondary\" onclick=\"const b=document.getElementById('c6-box'); b.style.flexDirection='column'; b.style.justifyContent='center'; document.getElementById('c6-txt').textContent='flex-direction: column (Modo Mobile)'; gainXP('c6f3', 35)\">Columna Vertical (Mobile)</button>\n        </div>\n        <div id=\"c6-box\" style=\"display:flex; background:var(--elevated); border:2px dashed var(--cyan); border-radius:10px; padding:16px; min-height:120px; align-items:center; gap:10px; transition:all 0.3s ease;\">\n          <div style=\"background:var(--lime); color:#000; padding:10px 18px; border-radius:6px; font-weight:800;\">Logo 🚀</div>\n          <div style=\"background:var(--elevated); border:1px solid var(--border-hi); padding:10px 14px; border-radius:6px; font-size:13px;\">Item 1</div>\n          <div style=\"background:var(--elevated); border:1px solid var(--border-hi); padding:10px 14px; border-radius:6px; font-size:13px;\">Item 2</div>\n          <div style=\"background:var(--cyan); color:#000; padding:10px 18px; border-radius:6px; font-weight:800;\">CTA Contacto</div>\n        </div>\n        <div id=\"c6-txt\" style=\"font-family:var(--font-mono); font-size:12px; color:var(--text-dim); margin-top:10px;\">Estado: display: flex</div>\n      </div>\n    ",
+    "quiz": [
+      {
+        "q": "¿Qué propiedad distribuye el espacio a lo largo del eje principal (Main Axis)?",
+        "opts": [
+          "justify-content",
+          "align-items",
+          "flex-wrap"
+        ],
+        "a": 0
+      },
+      {
+        "q": "Si querés que una barra de navegación tenga el logo a la izquierda y el menú a la derecha, ¿qué usás?",
+        "opts": [
+          "justify-content: center",
+          "justify-content: space-between",
+          "align-items: baseline"
+        ],
+        "a": 1
+      },
+      {
+        "q": "¿Cuál es el valor por defecto de flex-direction?",
+        "opts": [
+          "column",
+          "row",
+          "grid"
+        ],
+        "a": 1
+      }
+    ]
+  },
+  "c7": {
+    "kicker": "CLASE 07 // MÓDULO 2 (MAQUETACIÓN Y ESTILOS)",
+    "title": "<span class=\"lime\">Responsividad:</span> Media Queries y Mobile First",
+    "hint": "Aprendé a adaptar cualquier sitio web a smartphones, tablets y pantallas gigantes de escritorio.",
+    "cards": [
+      [
+        "📱",
+        "01",
+        "Filosofía Mobile First",
+        "c7_mobile_first"
+      ],
+      [
+        "📏",
+        "02",
+        "Breakpoints con min-width",
+        "c7_breakpoints"
+      ],
+      [
+        "📐",
+        "03",
+        "Viewport Meta Tag",
+        "c7_viewport"
+      ],
+      [
+        "🖼️",
+        "04",
+        "Imágenes Responsivas",
+        "c7_images"
+      ]
+    ],
+    "popups": {
+      "c7_mobile_first": {
+        "badge": "FILOSOFÍA // CLASE 7",
+        "title": "Mobile First: Empezar por la Pantalla Chica",
+        "lead": "El 80% del tráfico web en Latinoamérica proviene de teléfonos móviles.",
+        "body": "<p>Escribimos el CSS base pensando en pantallas de 360px a 400px. Luego, usamos <code>@media (min-width: ...)</code> para expandir elementos a medida que la pantalla crece.</p>"
+      },
+      "c7_breakpoints": {
+        "badge": "PUNTOS DE QUIEBRE // CLASE 7",
+        "title": "Breakpoints Habituales",
+        "lead": "Los anchos de referencia estándar de la industria.",
+        "body": "<p>• <strong>Mobile:</strong> CSS base sin media query.<br>• <strong>Tablet:</strong> <code>@media (min-width: 768px)</code>.<br>• <strong>Desktop:</strong> <code>@media (min-width: 1024px)</code>.<br>• <strong>Widescreen:</strong> <code>@media (min-width: 1280px)</code>.</p>"
+      },
+      "c7_viewport": {
+        "badge": "ETIQUETA CLAVE // CLASE 7",
+        "title": "El Meta Tag Viewport Obligatorio",
+        "lead": "Sin esta línea en el head, los celulares simularán una pantalla de PC en miniatura.",
+        "body": "<p><code>&lt;meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"&gt;</code></p><p>Le indica al navegador que el ancho de la página coincida con el ancho físico del dispositivo.</p>"
+      },
+      "c7_images": {
+        "badge": "ASSETS // CLASE 7",
+        "title": "Imágenes Fluidas",
+        "lead": "Regla sagrada para que las fotos nunca rompan el ancho de la pantalla.",
+        "body": "<p><code>img { max-width: 100%; height: auto; display: block; }</code></p><p>Garantiza que la imagen se reduzca proporcionalmente sin desbordar el contenedor.</p>"
+      }
+    },
+    "lab": "\n      <div style=\"background:var(--surface); border:1px solid var(--border-hi); border-radius:16px; padding:24px; max-width:680px; width:100%;\">\n        <span class=\"card-num\" style=\"color:var(--lime); margin-bottom:8px; display:block;\">SIMULADOR DE VIEWPORTS // BREAKPOINTS EN VIVO</span>\n        <h3 style=\"font-size:18px; margin-bottom:12px;\">Simulá el cambio de resolución</h3>\n        <div style=\"display:flex; gap:10px; margin-bottom:14px; flex-wrap:wrap;\">\n          <button class=\"cta-btn secondary\" onclick=\"const f=document.getElementById('c7-frame'); f.style.maxWidth='340px'; document.getElementById('c7-info').textContent='Simulando Celular (340px) — 1 Columna'; gainXP('c7mob', 35)\">📱 Mobile (340px)</button>\n          <button class=\"cta-btn secondary\" onclick=\"const f=document.getElementById('c7-frame'); f.style.maxWidth='540px'; document.getElementById('c7-info').textContent='Simulando Tablet (540px) — 2 Columnas'; gainXP('c7tab', 35)\">📟 Tablet (540px)</button>\n          <button class=\"cta-btn secondary\" onclick=\"const f=document.getElementById('c7-frame'); f.style.maxWidth='100%'; document.getElementById('c7-info').textContent='Simulando Desktop (100%) — 3 Columnas'; gainXP('c7desk', 40)\">💻 Desktop (Full)</button>\n        </div>\n        <div id=\"c7-frame\" style=\"background:var(--elevated); border:2px solid var(--border-hi); border-radius:12px; padding:16px; margin:0 auto; max-width:340px; transition:all 0.3s ease;\">\n          <div style=\"display:flex; flex-wrap:wrap; gap:10px;\">\n            <div style=\"flex:1 1 120px; background:var(--surface); border:1px solid var(--border); padding:12px; border-radius:6px; font-size:12px;\">Columna A</div>\n            <div style=\"flex:1 1 120px; background:var(--surface); border:1px solid var(--border); padding:12px; border-radius:6px; font-size:12px;\">Columna B</div>\n            <div style=\"flex:1 1 120px; background:var(--surface); border:1px solid var(--border); padding:12px; border-radius:6px; font-size:12px;\">Columna C</div>\n          </div>\n        </div>\n        <div id=\"c7-info\" style=\"font-family:var(--font-mono); font-size:12px; color:var(--lime); margin-top:10px; text-align:center;\">Simulando Celular (340px)</div>\n      </div>\n    ",
+    "quiz": [
+      {
+        "q": "¿Qué enfoque de diseño web recomienda escribir estilos primero para pantallas pequeñas?",
+        "opts": [
+          "Desktop First",
+          "Mobile First",
+          "Print First"
+        ],
+        "a": 1
+      },
+      {
+        "q": "¿Qué consulta de medios se activa a partir de los 768px de ancho hacia arriba?",
+        "opts": [
+          "@media (max-width: 768px)",
+          "@media (min-width: 768px)",
+          "@media (orientation: portrait)"
+        ],
+        "a": 1
+      },
+      {
+        "q": "¿Qué regla CSS asegura que una foto nunca sobrepase el ancho de su contenedor?",
+        "opts": [
+          "img { width: 100vw; }",
+          "img { max-width: 100%; height: auto; }",
+          "img { object-fit: fill; }"
+        ],
+        "a": 1
+      }
+    ]
+  },
+  "c8": {
+    "kicker": "CLASE 08 // MÓDULO 3 (DISEÑO VISUAL Y ASSETS)",
+    "title": "<span class=\"lime\">Diseño de Assets:</span> Canva, Formatos Web e IA",
+    "hint": "Exportá imágenes optimizadas en SVG y WebP, y utilizá IA para crear textos reales.",
+    "cards": [
+      [
+        "⚡",
+        "01",
+        "Formatos Web (WebP vs SVG)",
+        "c8_formats"
+      ],
+      [
+        "🎨",
+        "02",
+        "Canva para Desarrolladores",
+        "c8_canva"
+      ],
+      [
+        "🤖",
+        "03",
+        "Copywriting con IA Real",
+        "c8_copy"
+      ],
+      [
+        "🗜️",
+        "04",
+        "Compresión de Peso (<100KB)",
+        "c8_compression"
+      ]
+    ],
+    "popups": {
+      "c8_formats": {
+        "badge": "FORMATOS // CLASE 8",
+        "title": "SVG vs WebP vs PNG",
+        "lead": "Cada formato tiene su propósito específico en la web moderna.",
+        "body": "<p>• <strong>SVG:</strong> Vectores matemáticos. Ideal para logos e íconos. Pesa casi nada y nunca se pixela.<br>• <strong>WebP:</strong> El sucesor del JPG/PNG. 30% más liviano manteniendo máxima calidad fotográfica.<br>• <strong>PNG:</strong> Usar únicamente cuando se requiera transparencia que no pueda ser SVG.</p>"
+      },
+      "c8_canva": {
+        "badge": "HERRAMIENTA // CLASE 8",
+        "title": "Canva: De la Plantilla al Código",
+        "lead": "Cómo usar Canva para crear banners, tarjetas y recursos sin perder horas.",
+        "body": "<p>En lugar de exportar JPGs gigantescos, aprendemos a exportar con dimensiones exactas para el contenedor web (ej: 1200x630 para banners) y optimizarlos antes de subir.</p>"
+      },
+      "c8_copy": {
+        "badge": "INTELIGENCIA ARTIFICIAL // CLASE 8",
+        "title": "Basta de 'Lorem Ipsum': Textos Reales con IA",
+        "lead": "Una web con 'Lorem Ipsum' no vende y no emociona al cliente.",
+        "body": "<p>Utilizamos prompts precisos en IA para redactar la propuesta de valor, los beneficios y las llamadas a la acción (CTA) adaptadas al rubro del cliente real.</p>"
+      },
+      "c8_compression": {
+        "badge": "RENDIMIENTO // CLASE 8",
+        "title": "Compresión de Peso: La Regla de los 100KB",
+        "lead": "Un sitio web rápido retiene el 50% más de visitantes.",
+        "body": "<p>Ninguna imagen de un sitio web común debería pesar más de 150-200KB. Herramientas como Squoosh.app o TinyPNG reducen el peso drásticamente en segundos.</p>"
+      }
+    },
+    "lab": "\n      <div style=\"background:var(--surface); border:1px solid var(--border-hi); border-radius:16px; padding:24px; max-width:680px; width:100%;\">\n        <span class=\"card-num\" style=\"color:var(--lime); margin-bottom:8px; display:block;\">COMPARADOR DE PESOS // IMPACTO EN VELOCIDAD</span>\n        <h3 style=\"font-size:18px; margin-bottom:12px;\">Compará la compresión de una misma fotografía</h3>\n        <div style=\"display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:12px; margin-bottom:16px;\">\n          <div style=\"background:var(--elevated); border:1px solid var(--border); padding:14px; border-radius:10px; text-align:center;\">\n            <div style=\"font-size:20px; margin-bottom:4px;\">📸 JPG Original</div>\n            <div style=\"color:var(--coral); font-weight:800; font-size:16px;\">2.4 MB</div>\n            <p style=\"font-size:11px; color:var(--text-dim); margin-top:4px;\">Pesado y lento en 4G</p>\n          </div>\n          <div style=\"background:var(--elevated); border:1px solid var(--cyan); padding:14px; border-radius:10px; text-align:center;\">\n            <div style=\"font-size:20px; margin-bottom:4px;\">⚡ WebP Optimizado</div>\n            <div style=\"color:var(--cyan); font-weight:800; font-size:16px;\">85 KB (-96%)</div>\n            <p style=\"font-size:11px; color:var(--text-dim); margin-top:4px;\">Carga casi instantánea</p>\n          </div>\n          <div style=\"background:var(--elevated); border:1px solid var(--lime); padding:14px; border-radius:10px; text-align:center;\">\n            <div style=\"font-size:20px; margin-bottom:4px;\">📐 Ícono SVG</div>\n            <div style=\"color:var(--lime); font-weight:800; font-size:16px;\">4 KB (-99%)</div>\n            <p style=\"font-size:11px; color:var(--text-dim); margin-top:4px;\">Vectorial infinito</p>\n          </div>\n        </div>\n        <button class=\"cta-btn secondary\" style=\"width:100%;\" onclick=\"gainXP('c8lab', 40)\">✓ Entendido: Optimizar siempre mis imágenes (+40 XP)</button>\n      </div>\n    ",
+    "quiz": [
+      {
+        "q": "¿Cuál es el mejor formato para un logotipo que debe verse nítido en cualquier resolución?",
+        "opts": [
+          "JPG",
+          "SVG",
+          "GIF"
+        ],
+        "a": 1
+      },
+      {
+        "q": "¿Qué formato moderno ofrece hasta un 30% más de compresión fotográfica que el JPG tradicional?",
+        "opts": [
+          "WebP",
+          "BMP",
+          "TIFF"
+        ],
+        "a": 0
+      },
+      {
+        "q": "¿Por qué no se recomienda usar 'Lorem Ipsum' en la versión que se le presenta al cliente?",
+        "opts": [
+          "Porque ocupa demasiado espacio en el servidor",
+          "Porque impide evaluar la jerarquía real del contenido y el impacto comercial",
+          "Porque los navegadores no admiten latín"
+        ],
+        "a": 1
+      }
+    ]
+  },
+  "c9": {
+    "kicker": "CLASE 09 // MÓDULO 3 (DISEÑO VISUAL Y ASSETS)",
+    "title": "<span class=\"lime\">CSS Avanzado:</span> CSS Grid, Variables y Estados",
+    "hint": "Creá grillas bidimensionales, centralizá colores con variables :root y dominá estados interactivos.",
+    "cards": [
+      [
+        "🏁",
+        "01",
+        "CSS Grid Bidimensional",
+        "c9_grid"
+      ],
+      [
+        "🎛️",
+        "02",
+        "Variables Globales (:root)",
+        "c9_vars"
+      ],
+      [
+        "✨",
+        "03",
+        "Pseudo-clases (:hover, :focus)",
+        "c9_states"
+      ],
+      [
+        "🌊",
+        "04",
+        "Transiciones Fluidas (transition)",
+        "c9_trans"
+      ]
+    ],
+    "popups": {
+      "c9_grid": {
+        "badge": "SISTEMA GRID // CLASE 9",
+        "title": "CSS Grid: Filas y Columnas Simultáneas",
+        "lead": "A diferencia de Flexbox (1D), Grid controla dos dimensiones a la vez.",
+        "body": "<p>Con <code>display: grid</code> y <code>grid-template-columns: repeat(3, 1fr)</code> tenés 3 columnas iguales en segundos.</p><p>La unidad <code>fr</code> (fracción) distribuye el espacio sobrante automáticamente.</p>"
+      },
+      "c9_vars": {
+        "badge": "ORGANIZACIÓN // CLASE 9",
+        "title": "Variables Globales en :root",
+        "lead": "Cambiá el color de toda tu web modificando una sola línea.",
+        "body": "<p>Se declaran con dos guiones: <code>--color-primario: #00e5ff;</code></p><p>Se consumen con: <code>color: var(--color-primario);</code></p><p>Son el corazón de cualquier sistema de diseño o modo claro/oscuro profesional.</p>"
+      },
+      "c9_states": {
+        "badge": "MICRO-INTERACCIÓN // CLASE 9",
+        "title": "Pseudo-clases: :hover, :focus y :active",
+        "lead": "Una web que no reacciona al cursor se siente muerta.",
+        "body": "<p>• <strong>:hover:</strong> Cuando el cursor pasa por encima.<br>• <strong>:focus:</strong> Vital para accesibilidad cuando navegan con la tecla TAB.<br>• <strong>:active:</strong> El instante en que el botón es presionado.</p>"
+      },
+      "c9_trans": {
+        "badge": "SUAVIDAD // CLASE 9",
+        "title": "Transiciones en CSS (transition)",
+        "lead": "Evitá cambios bruscos de color o tamaño.",
+        "body": "<p><code>transition: all 0.25s ease;</code></p><p>Le da una sensación orgánica y premium a cualquier interacción del usuario.</p>"
+      }
+    },
+    "lab": "\n      <div style=\"background:var(--surface); border:1px solid var(--border-hi); border-radius:16px; padding:24px; max-width:680px; width:100%;\">\n        <span class=\"card-num\" style=\"color:var(--lime); margin-bottom:8px; display:block;\">LABORATORIO EN VIVO // CSS GRID PLAYGROUND</span>\n        <h3 style=\"font-size:18px; margin-bottom:12px;\">Probá la distribución de columnas con CSS Grid</h3>\n        <div style=\"display:flex; gap:10px; margin-bottom:14px; flex-wrap:wrap;\">\n          <button class=\"cta-btn secondary\" onclick=\"const g=document.getElementById('c9-grid'); g.style.gridTemplateColumns='repeat(2, 1fr)'; gainXP('c9g1', 30)\">2 Columnas (1fr 1fr)</button>\n          <button class=\"cta-btn secondary\" onclick=\"const g=document.getElementById('c9-grid'); g.style.gridTemplateColumns='repeat(4, 1fr)'; gainXP('c9g2', 35)\">4 Columnas (repeat 4, 1fr)</button>\n          <button class=\"cta-btn secondary\" onclick=\"const g=document.getElementById('c9-grid'); g.style.gridTemplateColumns='1fr 2fr 1fr'; gainXP('c9g3', 35)\">1fr 2fr 1fr (Centro Grande)</button>\n        </div>\n        <div id=\"c9-grid\" style=\"display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; background:var(--elevated); padding:16px; border-radius:10px; transition:all 0.3s ease;\">\n          <div style=\"background:var(--lime-soft); border:1px solid var(--lime); padding:14px; text-align:center; border-radius:6px;\">Item 1</div>\n          <div style=\"background:var(--cyan-soft); border:1px solid var(--cyan); padding:14px; text-align:center; border-radius:6px;\">Item 2</div>\n          <div style=\"background:var(--amber-soft); border:1px solid var(--amber); padding:14px; text-align:center; border-radius:6px;\">Item 3</div>\n          <div style=\"background:var(--coral-soft); border:1px solid var(--coral); padding:14px; text-align:center; border-radius:6px;\">Item 4</div>\n        </div>\n      </div>\n    ",
+    "quiz": [
+      {
+        "q": "¿Cómo se define una variable CSS llamada 'marca' en el selector :root?",
+        "opts": [
+          "$marca: #ff0000;",
+          "--marca: #ff0000;",
+          "var-marca: #ff0000;"
+        ],
+        "a": 1
+      },
+      {
+        "q": "¿Qué unidad en CSS Grid representa una fracción del espacio libre disponible?",
+        "opts": [
+          "px",
+          "rem",
+          "fr"
+        ],
+        "a": 2
+      },
+      {
+        "q": "¿Qué pseudo-clase se activa cuando un usuario enfoca un campo de formulario con el teclado?",
+        "opts": [
+          ":hover",
+          ":focus",
+          ":checked"
+        ],
+        "a": 1
+      }
+    ]
+  },
+  "c10": {
+    "kicker": "CLASE 10 // MÓDULO 3 (DISEÑO VISUAL Y ASSETS)",
+    "title": "<span class=\"lime\">IA y Organización:</span> Asistencia en el IDE y Tableros Trello",
+    "hint": "Usá la IA como copiloto para programar más rápido y organizá tus proyectos con metodología Kanban.",
+    "cards": [
+      [
+        "🤖",
+        "01",
+        "IA Asistente en el IDE",
+        "c10_ide"
+      ],
+      [
+        "🐛",
+        "02",
+        "Debugging y Explicación de Errores",
+        "c10_debug"
+      ],
+      [
+        "📋",
+        "03",
+        "Tableros Kanban en Trello",
+        "c10_kanban"
+      ],
+      [
+        "🎯",
+        "04",
+        "Historias de Usuario y Tareas Claras",
+        "c10_stories"
+      ]
+    ],
+    "popups": {
+      "c10_ide": {
+        "badge": "PRODUCTIVIDAD // CLASE 10",
+        "title": "La IA como Copiloto en tu Editor",
+        "lead": "Multiplicá tu velocidad de maquetación sin perder el control.",
+        "body": "<p>Podés pedirle a la IA: 'Escribí la estructura HTML semántica para una tarjeta de producto con imagen, precio y botón de compra'.</p><p><em>Regla de oro:</em> Nunca copies y pegues código que no entiendas. La IA asiste, pero el criterio es tuyo.</p>"
+      },
+      "c10_debug": {
+        "badge": "RESOLUCIÓN // CLASE 10",
+        "title": "Debugging Inteligente",
+        "lead": "Cuando el CSS no responde, la IA te ayuda a encontrar el bug.",
+        "body": "<p>Pegá tu fragmento de CSS roto y preguntale: '¿Por qué mi div no se centra con margin auto?'. La IA detectará rápidamente si te faltó un <code>display: block</code> o si tenés un error de sintaxis.</p>"
+      },
+      "c10_kanban": {
+        "badge": "GESTIÓN ÁGIL // CLASE 10",
+        "title": "Kanban: Por Hacer, En Proceso y Hecho",
+        "lead": "Visualizar el progreso evita la parálisis por análisis.",
+        "body": "<p>Un tablero Trello divide el proyecto en columnas:<br>1. <strong>Backlog:</strong> Todas las ideas.<br>2. <strong>En Curso:</strong> Máximo 2 tareas activas por persona.<br>3. <strong>Listo:</strong> Tareas terminadas y probadas.</p>"
+      },
+      "c10_stories": {
+        "badge": "REQUERIMIENTOS // CLASE 10",
+        "title": "Historias de Usuario Efectivas",
+        "lead": "Diseñar para personas reales, no para el vacío.",
+        "body": "<p>Estructura: 'Como [usuario], quiero [acción], para [beneficio]'.<br>Ejemplo: 'Como cliente del gimnasio, quiero ver los horarios de clases desde mi celular para organizar mi semana'.</p>"
+      }
+    },
+    "lab": "\n      <div style=\"background:var(--surface); border:1px solid var(--border-hi); border-radius:16px; padding:24px; max-width:680px; width:100%;\">\n        <span class=\"card-num\" style=\"color:var(--lime); margin-bottom:8px; display:block;\">SIMULADOR KANBAN // FLUJO DE TRABAJO AGIL</span>\n        <h3 style=\"font-size:18px; margin-bottom:12px;\">Mové tareas por el tablero de tu proyecto</h3>\n        <div style=\"display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; margin-bottom:14px;\">\n          <div style=\"background:var(--elevated); padding:10px; border-radius:8px;\">\n            <strong style=\"font-size:12px; color:var(--text-dim);\">📌 POR HACER</strong>\n            <div id=\"c10-t1\" style=\"background:var(--surface); border:1px solid var(--border); padding:8px; border-radius:6px; margin-top:8px; font-size:12px; cursor:pointer;\" onclick=\"this.parentElement.nextElementSibling.appendChild(this); gainXP('c10k1', 25)\">\n              Maquetar Navbar Flexbox →\n            </div>\n          </div>\n          <div style=\"background:var(--elevated); padding:10px; border-radius:8px;\">\n            <strong style=\"font-size:12px; color:var(--cyan);\">⏳ EN PROCESO</strong>\n          </div>\n          <div style=\"background:var(--elevated); padding:10px; border-radius:8px;\">\n            <strong style=\"font-size:12px; color:var(--lime);\">✅ TERMINADO</strong>\n          </div>\n        </div>\n        <p style=\"font-size:12px; color:var(--text-dim);\">Hacé clic en la tarjeta para moverla a la siguiente columna.</p>\n      </div>\n    ",
+    "quiz": [
+      {
+        "q": "¿Cuál es la regla principal al usar IA para generar código?",
+        "opts": [
+          "Copiar todo sin leer para terminar más rápido",
+          "Comprender cada línea de código generada antes de incorporarla al proyecto",
+          "Usarla solo para generar contraseñas"
+        ],
+        "a": 1
+      },
+      {
+        "q": "¿Cuáles son las 3 columnas básicas de un tablero Kanban?",
+        "opts": [
+          "Inicio, Mitad, Fin",
+          "Por Hacer (To Do), En Proceso (In Progress), Terminado (Done)",
+          "HTML, CSS, JS"
+        ],
+        "a": 1
+      },
+      {
+        "q": "¿Qué estructura tiene una Historia de Usuario?",
+        "opts": [
+          "Como [rol], quiero [acción], para [beneficio]",
+          "Si [condición], entonces [resultado]",
+          "Función [nombre] (parámetros)"
+        ],
+        "a": 0
+      }
+    ]
+  },
+  "c11": {
+    "kicker": "CLASE 11 // MÓDULO 4 (PROYECTO INTEGRADOR)",
+    "title": "<span class=\"lime\">Proyecto Integrador:</span> Lanzamiento y Brief Comercial",
+    "hint": "Presentación oficial de la consigna final: creá un sitio web real para un cliente o negocio comercial.",
+    "cards": [
+      [
+        "🚀",
+        "01",
+        "Consigna y Alcance del MVP",
+        "c11_brief"
+      ],
+      [
+        "🏪",
+        "02",
+        "Elección de Rubro y Cliente",
+        "c11_niche"
+      ],
+      [
+        "🗺️",
+        "03",
+        "Las 4 Secciones Obligatorias",
+        "c11_sections"
+      ],
+      [
+        "📅",
+        "04",
+        "Cronograma de Hitos",
+        "c11_schedule"
+      ]
+    ],
+    "popups": {
+      "c11_brief": {
+        "badge": "CONSIGNA // CLASE 11",
+        "title": "Qué es el Proyecto Integrador",
+        "lead": "Tu carta de presentación al mercado laboral.",
+        "body": "<p>Desarrollarás un sitio web estático completo, semántico, responsive y optimizado para un negocio o servicio real (o ficticio pero verosímil).</p>"
+      },
+      "c11_niche": {
+        "badge": "CLIENTE // CLASE 11",
+        "title": "Elegir el Rubro Correcto",
+        "lead": "Negocios con necesidades concretas de comunicación.",
+        "body": "<p>Ejemplos aprobados:<br>• Gastronomía (Cafetería de especialidad, Pizzería artesanal)<br>• Servicios profesionales (Estudio contable, Kinesiólogo, Taller mecánico)<br>• Comercio barrial o Portafolio personal.</p>"
+      },
+      "c11_sections": {
+        "badge": "ESTRUCTURA // CLASE 11",
+        "title": "Las 4 Secciones Mínimas Obligatorias",
+        "lead": "Todo sitio profesional requiere esta arquitectura.",
+        "body": "<p>1. <strong>Hero Section:</strong> Título impactante, propuesta de valor y CTA.<br>2. <strong>Servicios / Productos:</strong> Tarjetas con precios o detalle.<br>3. <strong>Sobre Nosotros / Por qué elegirnos:</strong> Confianza y credibilidad.<br>4. <strong>Contacto y Ubicación:</strong> Formulario, mapa y datos de atención.</p>"
+      },
+      "c11_schedule": {
+        "badge": "CALENDARIO // CLASE 11",
+        "title": "Hitos de Entrega",
+        "lead": "Un paso a la vez para llegar a la meta sin estrés.",
+        "body": "<p>• Clase 14: Parcial teórico-práctico.<br>• Clase 18: Primer Deploy público en vivo.<br>• Clase 21: Defensa final ante la clase.</p>"
+      }
+    },
+    "lab": "\n      <div style=\"background:var(--surface); border:1px solid var(--border-hi); border-radius:16px; padding:24px; max-width:680px; width:100%;\">\n        <span class=\"card-num\" style=\"color:var(--lime); margin-bottom:8px; display:block;\">CONFIGURADOR DE PROYECTO // DEFINICIÓN DE BRIEF</span>\n        <h3 style=\"font-size:18px; margin-bottom:12px;\">Elegí el rubro de tu proyecto</h3>\n        <div style=\"display:flex; gap:10px; flex-wrap:wrap; margin-bottom:16px;\">\n          <button class=\"cta-btn secondary\" onclick=\"document.getElementById('c11-res').textContent='☕ Elegiste: Cafetería de Especialidad (Palermo). Foco en fotos de producto y mapa.'; gainXP('c11p1', 35)\">☕ Cafetería / Bar</button>\n          <button class=\"cta-btn secondary\" onclick=\"document.getElementById('c11-res').textContent='⚖️ Elegiste: Estudio Jurídico / Contable. Foco en formalidad, confianza y formulario.'; gainXP('c11p2', 35)\">⚖️ Servicios Profesionales</button>\n          <button class=\"cta-btn secondary\" onclick=\"document.getElementById('c11-res').textContent='💻 Elegiste: Portafolio de Desarrollador Web. Foco en proyectos y contacto rápido.'; gainXP('c11p3', 35)\">💻 Portafolio Personal</button>\n        </div>\n        <div id=\"c11-res\" style=\"background:var(--elevated); border:1px solid var(--border); padding:14px; border-radius:8px; font-family:var(--font-mono); font-size:13px; color:var(--cyan);\">Seleccioná un rubro para comenzar</div>\n      </div>\n    ",
+    "quiz": [
+      {
+        "q": "¿Cuántas secciones mínimas obligatorias componen el Proyecto Integrador?",
+        "opts": [
+          "1 sola página con texto",
+          "4 secciones (Hero, Servicios, Confianza, Contacto)",
+          "10 páginas independientes"
+        ],
+        "a": 1
+      },
+      {
+        "q": "¿Cuál es el objetivo principal del Proyecto Integrador?",
+        "opts": [
+          "Crear una maqueta compleja que solo funcione en pantallas 4K",
+          "Tener un sitio web real, responsive y publicado en la nube para mostrar a clientes",
+          "Aprender a instalar software pesado"
+        ],
+        "a": 1
+      },
+      {
+        "q": "¿En qué clase se realiza el primer deploy público en vivo del proyecto?",
+        "opts": [
+          "Clase 11",
+          "Clase 18",
+          "Clase 21"
+        ],
+        "a": 1
+      }
+    ]
+  },
+  "c12": {
+    "kicker": "CLASE 12 // MÓDULO 4 (PROYECTO INTEGRADOR)",
+    "title": "<span class=\"lime\">Taller + Animaciones:</span> Micro-interacciones y Keyframes",
+    "hint": "Dales vida a tus componentes con animaciones sutiles que guíen la mirada del usuario.",
+    "cards": [
+      [
+        "🎬",
+        "01",
+        "La Regla @keyframes",
+        "c12_keyframes"
+      ],
+      [
+        "🔘",
+        "02",
+        "Micro-interacciones en Botones",
+        "c12_buttons"
+      ],
+      [
+        "🔄",
+        "03",
+        "transform: translate y scale",
+        "c12_transform"
+      ],
+      [
+        "♿",
+        "04",
+        "Accesibilidad y reduced-motion",
+        "c12_motion"
+      ]
+    ],
+    "popups": {
+      "c12_keyframes": {
+        "badge": "ANIMACIÓN // CLASE 12",
+        "title": "@keyframes: Animaciones por Cuadros",
+        "lead": "Definí estados desde el 0% hasta el 100%.",
+        "body": "<p><code>@keyframes aparecer { from { opacity: 0; } to { opacity: 1; } }</code></p><p>Luego se asigna al elemento: <code>animation: aparecer 0.6s ease forwards;</code></p>"
+      },
+      "c12_buttons": {
+        "badge": "UX // CLASE 12",
+        "title": "Feedback en Botones",
+        "lead": "El usuario debe saber de inmediato que su clic fue registrado.",
+        "body": "<p>Un leve cambio de elevación o escala al hacer hover (<code>transform: translateY(-2px);</code>) incrementa un 20% la tasa de clics.</p>"
+      },
+      "c12_transform": {
+        "badge": "RENDIMIENTO GPU // CLASE 12",
+        "title": "Por qué usar transform y opacity",
+        "lead": "Son las dos únicas propiedades animables que no recalculan el diseño de la página.",
+        "body": "<p>Animar <code>top</code>, <code>left</code> o <code>width</code> produce tirones (jank). Animar <code>transform</code> es fluido a 60 fotogramas por segundo porque corre en la tarjeta de video.</p>"
+      },
+      "c12_motion": {
+        "badge": "ACCESIBILIDAD // CLASE 12",
+        "title": "Respetar prefers-reduced-motion",
+        "lead": "Algunos usuarios sufren mareos con animaciones excesivas.",
+        "body": "<p>Usamos: <code>@media (prefers-reduced-motion: reduce) { * { animation: none !important; } }</code> para cuidar a los visitantes con sensibilidad vestibular.</p>"
+      }
+    },
+    "lab": "\n      <div style=\"background:var(--surface); border:1px solid var(--border-hi); border-radius:16px; padding:24px; max-width:680px; width:100%;\">\n        <span class=\"card-num\" style=\"color:var(--lime); margin-bottom:8px; display:block;\">LABORATORIO VISUAL // ANIMACIONES CSS EN VIVO</span>\n        <h3 style=\"font-size:18px; margin-bottom:12px;\">Probá efectos de animación por hardware</h3>\n        <div style=\"display:flex; gap:10px; margin-bottom:16px; flex-wrap:wrap;\">\n          <button class=\"cta-btn secondary\" onclick=\"const b=document.getElementById('c12-demo'); b.style.transform='scale(1.08)'; setTimeout(()=>b.style.transform='scale(1)', 300); gainXP('c12a1', 30)\">Pulso (Scale)</button>\n          <button class=\"cta-btn secondary\" onclick=\"const b=document.getElementById('c12-demo'); b.style.transform='translateY(-10px)'; setTimeout(()=>b.style.transform='translateY(0)', 300); gainXP('c12a2', 30)\">Elevación (TranslateY)</button>\n          <button class=\"cta-btn secondary\" onclick=\"const b=document.getElementById('c12-demo'); b.style.boxShadow='0 0 20px var(--cyan)'; setTimeout(()=>b.style.boxShadow='none', 600); gainXP('c12a3', 30)\">Resplandor (Glow)</button>\n        </div>\n        <div id=\"c12-demo\" style=\"background:var(--elevated); border:2px solid var(--lime); padding:20px; border-radius:12px; text-align:center; max-width:280px; margin:0 auto; transition:all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);\">\n          <strong style=\"color:var(--text);\">Tarjeta Interactiva ⚡</strong>\n          <p style=\"font-size:12px; color:var(--text-dim); margin-top:4px;\">Transición fluida a 60fps</p>\n        </div>\n      </div>\n    ",
+    "quiz": [
+      {
+        "q": "¿Qué propiedades de CSS son las más eficientes para animar sin degradar el rendimiento?",
+        "opts": [
+          "width y height",
+          "transform y opacity",
+          "margin y padding"
+        ],
+        "a": 1
+      },
+      {
+        "q": "¿Qué directiva define secuencias de animación en CSS?",
+        "opts": [
+          "@keyframes",
+          "@animate",
+          "@transition-rule"
+        ],
+        "a": 0
+      },
+      {
+        "q": "¿Para qué sirve la consulta de medios (prefers-reduced-motion)?",
+        "opts": [
+          "Para ahorrar batería",
+          "Para apagar animaciones para personas con sensibilidad visual o mareos",
+          "Para acelerar la conexión WiFi"
+        ],
+        "a": 1
+      }
+    ]
+  },
+  "c13": {
+    "kicker": "CLASE 13 // MÓDULO 4 (PROYECTO INTEGRADOR)",
+    "title": "<span class=\"lime\">Repaso General:</span> Simulación y Clínica de Código",
+    "hint": "Resolución de dudas colectivas y simulacro contrarreloj previo al examen parcial.",
+    "cards": [
+      [
+        "🔍",
+        "01",
+        "Trampas de Flexbox",
+        "c13_flex_traps"
+      ],
+      [
+        "📦",
+        "02",
+        "Colapsos de Margen",
+        "c13_margin"
+      ],
+      [
+        "📱",
+        "03",
+        "Desbordes en Mobile (Overflow)",
+        "c13_overflow"
+      ],
+      [
+        "⏱️",
+        "04",
+        "Simulacro Cronometrado",
+        "c13_mock"
+      ]
+    ],
+    "popups": {
+      "c13_flex_traps": {
+        "badge": "CLÍNICA // CLASE 13",
+        "title": "El error de aplicar flex a los hijos",
+        "lead": "display: flex se aplica siempre en el CONTENEDOR padre.",
+        "body": "<p>Los hijos se acomodan automáticamente. Un error común es ponerle <code>display: flex</code> a cada tarjeta individual en lugar de a la grilla que las contiene.</p>"
+      },
+      "c13_margin": {
+        "badge": "CLÍNICA // CLASE 13",
+        "title": "Colapso de Márgenes Verticales",
+        "lead": "Por qué margin-bottom de 20px + margin-top de 20px suman 20px y no 40px.",
+        "body": "<p>En el flujo normal de CSS, los márgenes verticales contiguos colapsan al mayor de los dos. En Flexbox y Grid, esto no sucede (se usa <code>gap</code>).</p>"
+      },
+      "c13_overflow": {
+        "badge": "CLÍNICA // CLASE 13",
+        "title": "La temida barra de scroll horizontal en celular",
+        "lead": "El error N°1 en exámenes de maquetación responsive.",
+        "body": "<p>Ocurre cuando un elemento tiene un ancho fijo en píxeles (ej: <code>width: 500px</code>) o una imagen sin <code>max-width: 100%</code>. Diagnosticar con <code>* { outline: 1px solid red; }</code>.</p>"
+      },
+      "c13_mock": {
+        "badge": "SIMULACRO // CLASE 13",
+        "title": "Estrategia para el Examen Parcial",
+        "lead": "Cómo administrar las 2 horas de evaluación.",
+        "body": "<p>1. Primero armá el esqueleto HTML semántico completo (25 min).<br>2. Estilos base y tipografías (25 min).<br>3. Maquetación con Flexbox en Mobile (30 min).<br>4. Media queries para desktop y chequeo en F12 (40 min).</p>"
+      }
+    },
+    "lab": "\n      <div style=\"background:var(--surface); border:1px solid var(--border-hi); border-radius:16px; padding:24px; max-width:680px; width:100%;\">\n        <span class=\"card-num\" style=\"color:var(--lime); margin-bottom:8px; display:block;\">DETECTOR DE BUGS // DIAGNÓSTICO EN VIVO</span>\n        <h3 style=\"font-size:18px; margin-bottom:12px;\">Encontrá el error en este código</h3>\n        <pre style=\"background:var(--bg); border:1px solid var(--border); padding:14px; border-radius:8px; font-family:var(--font-mono); font-size:12px; color:var(--text); overflow-x:auto;\">\n.contenedor {\n  width: 600px; /* Error: Rompe el celular */\n}\n        </pre>\n        <button class=\"cta-btn\" style=\"margin-top:12px;\" onclick=\"this.textContent='✓ ¡Corregido! max-width: 100% + width: 600px (+40 XP)'; this.style.borderColor='var(--lime)'; gainXP('c13fix', 40)\">Corregir para Mobile</button>\n      </div>\n    ",
+    "quiz": [
+      {
+        "q": "¿En qué elemento se debe declarar 'display: flex'?",
+        "opts": [
+          "En el elemento padre contenedor",
+          "En cada uno de los elementos hijos",
+          "En la etiqueta <body> únicamente"
+        ],
+        "a": 0
+      },
+      {
+        "q": "¿Qué propiedad moderna reemplaza la necesidad de márgenes complejos entre hijos en Flexbox?",
+        "opts": [
+          "spacing",
+          "gap",
+          "margin-between"
+        ],
+        "a": 1
+      },
+      {
+        "q": "¿Qué causa habitualmente la aparición de una barra de scroll horizontal indeseada en celulares?",
+        "opts": [
+          "El uso de fuentes de Google Fonts",
+          "Elementos con anchos fijos mayores al viewport de la pantalla",
+          "El uso de la etiqueta <header>"
+        ],
+        "a": 1
+      }
+    ]
+  },
+  "c14": {
+    "kicker": "CLASE 14 // MÓDULO 4 (PROYECTO INTEGRADOR)",
+    "title": "<span class=\"lime\">Examen Parcial:</span> Evaluación Teórico-Práctica",
+    "hint": "Puesta a prueba de tus habilidades de maquetación semántica y adaptabilidad responsive.",
+    "cards": [
+      [
+        "📝",
+        "01",
+        "Pautas y Rúbrica",
+        "c14_rubric"
+      ],
+      [
+        "💻",
+        "02",
+        "HTML Semántico Riguroso",
+        "c14_html"
+      ],
+      [
+        "📐",
+        "03",
+        "Fidelidad de Maquetación",
+        "c14_css"
+      ],
+      [
+        "⏱️",
+        "04",
+        "Entrega y Subida de Archivos",
+        "c14_turnin"
+      ]
+    ],
+    "popups": {
+      "c14_rubric": {
+        "badge": "EVALUACIÓN // CLASE 14",
+        "title": "Criterios de Aprobación",
+        "lead": "Qué mira el profesor Agustín al corregir.",
+        "body": "<p>• 30% Estructura semántica (header, nav, main, section, footer).<br>• 40% Responsividad real sin desbordes horizontales.<br>• 20% Fidelidad visual al diseño propuesto.<br>• 10% Limpieza de código y nomenclatura de clases.</p>"
+      },
+      "c14_html": {
+        "badge": "ESTRUCTURA // CLASE 14",
+        "title": "Cero 'Divitis'",
+        "lead": "El uso excesivo de <div> indiscriminados resta puntaje.",
+        "body": "<p>Demostrá que sabés cuándo usar <code>&lt;article&gt;</code> para una tarjeta, <code>&lt;nav&gt;</code> para navegación y <code>&lt;h1&gt;</code> únicamente para el título principal.</p>"
+      },
+      "c14_css": {
+        "badge": "ESTILOS // CLASE 14",
+        "title": "Mobile First Comprobado",
+        "lead": "La evaluación se abre primero en simulación de celular.",
+        "body": "<p>Si el diseño funciona en 375px y se expande armoniosamente en 1024px mediante media queries limpias, la aprobación práctica está asegurada.</p>"
+      },
+      "c14_turnin": {
+        "badge": "ENTREGA // CLASE 14",
+        "title": "Formato de Entrega",
+        "lead": "Carpeta comprimida .zip con tu nombre.",
+        "body": "<p>Estructura: <code>Apellido_Nombre_Parcial/</code> conteniendo <code>index.html</code>, <code>style.css</code> y carpeta <code>img/</code> con rutas relativas.</p>"
+      }
+    },
+    "lab": "\n      <div style=\"background:var(--surface); border:1px solid var(--border-hi); border-radius:16px; padding:24px; max-width:680px; width:100%;\">\n        <span class=\"card-num\" style=\"color:var(--lime); margin-bottom:8px; display:block;\">CHECKLIST PRE-ENTREGA // REVISIÓN FINAL</span>\n        <h3 style=\"font-size:18px; margin-bottom:12px;\">Chequeá estos puntos antes de entregar tu parcial</h3>\n        <label style=\"display:flex; align-items:center; gap:8px; margin-bottom:8px; font-size:13px; cursor:pointer;\">\n          <input type=\"checkbox\" onchange=\"gainXP('c14chk1', 20)\"> ¿Hay solo un &lt;h1&gt; en toda la página?\n        </label>\n        <label style=\"display:flex; align-items:center; gap:8px; margin-bottom:8px; font-size:13px; cursor:pointer;\">\n          <input type=\"checkbox\" onchange=\"gainXP('c14chk2', 20)\"> ¿Todas las imágenes tienen atributo alt descriptivo?\n        </label>\n        <label style=\"display:flex; align-items:center; gap:8px; margin-bottom:8px; font-size:13px; cursor:pointer;\">\n          <input type=\"checkbox\" onchange=\"gainXP('c14chk3', 20)\"> ¿No hay scroll horizontal en resolución mobile (F12)?\n        </label>\n      </div>\n    ",
+    "quiz": [
+      {
+        "q": "¿Cuántas etiquetas <h1> principales deben existir por página web?",
+        "opts": [
+          "Solo 1",
+          "Una por cada sección",
+          "Tantas como queramos"
+        ],
+        "a": 0
+      },
+      {
+        "q": "¿Qué atributo de las imágenes es indispensable para accesibilidad y SEO?",
+        "opts": [
+          "src",
+          "alt",
+          "title"
+        ],
+        "a": 1
+      },
+      {
+        "q": "¿Cómo deben especificarse las rutas a imágenes en un proyecto para que no fallen al compartirse?",
+        "opts": [
+          "Rutas absolutas del disco C:",
+          "Rutas relativas a la carpeta del proyecto",
+          "URLs temporales de Canva"
+        ],
+        "a": 1
+      }
+    ]
+  },
+  "c15": {
+    "kicker": "CLASE 15 // MÓDULO 4 (PROYECTO INTEGRADOR)",
+    "title": "<span class=\"lime\">Taller Post-Parcial:</span> Refactorización y Feedback",
+    "hint": "Análisis de correcciones, transformación de código frágil en código profesional y avance del proyecto.",
+    "cards": [
+      [
+        "📊",
+        "01",
+        "Devolución Colectiva",
+        "c15_feedback"
+      ],
+      [
+        "🧹",
+        "02",
+        "Refactorización: Código Limpio",
+        "c15_clean"
+      ],
+      [
+        "🏷️",
+        "03",
+        "Nomenclatura BEM Simplificada",
+        "c15_bem"
+      ],
+      [
+        "⏩",
+        "04",
+        "Avance al Proyecto Integrador",
+        "c15_advance"
+      ]
+    ],
+    "popups": {
+      "c15_feedback": {
+        "badge": "DEVOLUCIÓN // CLASE 15",
+        "title": "Aprender de los Errores Reales",
+        "lead": "El feedback técnico es el momento de mayor crecimiento profesional.",
+        "body": "<p>Revisamos los aciertos y las fallas más recurrentes de la cohorte para que nadie repita los mismos tropiezos en la entrega final.</p>"
+      },
+      "c15_clean": {
+        "badge": "REFACTOR // CLASE 15",
+        "title": "Qué es Refactorizar",
+        "lead": "Mejorar la estructura interna del código sin cambiar su aspecto visual.",
+        "body": "<p>Eliminar estilos duplicados, agrupar variables comunes, quitar !important innecesarios y consolidar selectores redundantes.</p>"
+      },
+      "c15_bem": {
+        "badge": "CONVENCIÓN // CLASE 15",
+        "title": "Nombres de Clases Predecibles",
+        "lead": "Bloque__Elemento--Modificador.",
+        "body": "<p>En lugar de nombres ambiguos como <code>.caja2</code> o <code>.texto-azul</code>, usamos nombres funcionales como <code>.card</code>, <code>.card__title</code>, <code>.btn--primary</code>.</p>"
+      },
+      "c15_advance": {
+        "badge": "AVANCE // CLASE 15",
+        "title": "Consolidación del Proyecto",
+        "lead": "Aplicar las mejoras al sitio web de tu cliente.",
+        "body": "<p>Con los fundamentos afianzados, dedicamos esta segunda mitad a terminar la maquetación completa de las 4 secciones del Proyecto Integrador.</p>"
+      }
+    },
+    "lab": "\n      <div style=\"background:var(--surface); border:1px solid var(--border-hi); border-radius:16px; padding:24px; max-width:680px; width:100%;\">\n        <span class=\"card-num\" style=\"color:var(--lime); margin-bottom:8px; display:block;\">LABORATORIO DE REFACTORIZACIÓN // ANTES Y DESPUÉS</span>\n        <h3 style=\"font-size:18px; margin-bottom:12px;\">Compará código sucio vs. código limpio</h3>\n        <div style=\"display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px;\">\n          <div style=\"background:var(--elevated); border:1px solid var(--coral); padding:10px; border-radius:8px; font-family:var(--font-mono); font-size:11px;\">\n            <strong style=\"color:var(--coral);\">❌ Código Frágil:</strong><br>\n            div &gt; div &gt; p { color: blue !important; font-size: 14px; }\n          </div>\n          <div style=\"background:var(--elevated); border:1px solid var(--lime); padding:10px; border-radius:8px; font-family:var(--font-mono); font-size:11px;\">\n            <strong style=\"color:var(--lime);\">✅ Código Limpio:</strong><br>\n            .card__desc { color: var(--text-dim); font-size: 0.875rem; }\n          </div>\n        </div>\n        <button class=\"cta-btn secondary\" style=\"width:100%;\" onclick=\"gainXP('c15rf', 35)\">✓ Entendido: Priorizar siempre nombres semánticos (+35 XP)</button>\n      </div>\n    ",
+    "quiz": [
+      {
+        "q": "¿Qué significa refactorizar código?",
+        "opts": [
+          "Borrar todo y empezar desde cero",
+          "Mejorar la calidad y legibilidad del código sin alterar su comportamiento visual",
+          "Cambiar el color de fondo a negro"
+        ],
+        "a": 1
+      },
+      {
+        "q": "¿Por qué se desaconseja abusar de '!important' en CSS?",
+        "opts": [
+          "Porque ralentiza el navegador en 10 segundos",
+          "Porque rompe la cascada natural y hace muy difícil mantener el código en el futuro",
+          "Porque solo funciona en Google Chrome"
+        ],
+        "a": 1
+      },
+      {
+        "q": "¿Cuál de estos nombres de clase sigue mejores prácticas profesionales?",
+        "opts": [
+          ".texto-rojo-negrita-2",
+          ".product-card__price",
+          ".div3"
+        ],
+        "a": 1
+      }
+    ]
+  },
+  "c16": {
+    "kicker": "CLASE 16 // MÓDULO 5 (PUBLICACIÓN Y CLIENTE)",
+    "title": "<span class=\"lime\">Presupuestos Web:</span> Cómo Cobrar y Trato con Clientes",
+    "hint": "Calculá tu valor hora en Argentina, redactá propuestas comerciales claras y evitá pedidos sin fin.",
+    "cards": [
+      [
+        "💵",
+        "01",
+        "Cálculo del Valor Hora (ARS)",
+        "c16_rate"
+      ],
+      [
+        "📑",
+        "02",
+        "Estructura de una Cotización",
+        "c16_quote"
+      ],
+      [
+        "🛡️",
+        "03",
+        "El Contrato y el 'Scope Creep'",
+        "c16_contract"
+      ],
+      [
+        "🔄",
+        "04",
+        "Cobro por Mantenimiento Mensual",
+        "c16_retainer"
+      ]
+    ],
+    "popups": {
+      "c16_rate": {
+        "badge": "FINANZAS FREELANCE // CLASE 16",
+        "title": "¿Cuánto vale tu hora de desarrollo?",
+        "lead": "Fórmula real para no regalar tu trabajo.",
+        "body": "<p><code>(Sueldo deseado + Costos fijos + Impuestos) / Horas productivas reales al mes (aprox. 100 hs) = Valor Hora</code>.</p><p>Nunca cotices solo por lo que te lleva escribir el código; cotizá las reuniones, el diseño y las revisiones.</p>"
+      },
+      "c16_quote": {
+        "badge": "PROPUESTA // CLASE 16",
+        "title": "La Regla del 50% de Anticipo",
+        "lead": "Regla sagrada e inquebrantable del desarrollo web.",
+        "body": "<p><strong>NUNCA</strong> se abre el editor ni se escribe una línea de código sin el 50% de anticipo acreditado. El 50% restante se abona contra entrega y previa publicación final.</p>"
+      },
+      "c16_contract": {
+        "badge": "PROTECCIÓN // CLASE 16",
+        "title": "Frenar el 'Scope Creep' (Pedidos infinitos)",
+        "lead": "Cómo evitar que el cliente te pida 10 cambios extra gratis.",
+        "body": "<p>El presupuesto debe detallar exactamente:<br>• 4 secciones específicas incluidas.<br>• Hasta 2 rondas de correcciones menores.<br>• Cualquier sección o cambio adicional se cotiza por separado por hora.</p>"
+      },
+      "c16_retainer": {
+        "badge": "INGRESOS RECURRENTES // CLASE 16",
+        "title": "El Negocio del Mantenimiento Web",
+        "lead": "La verdadera estabilidad económica del profesional web.",
+        "body": "<p>Ofrecé un abono mensual por hosting, renovación de dominio, copias de seguridad y hasta 2 horas de cambios de texto/precios para los negocios.</p>"
+      }
+    },
+    "lab": "\n      <div style=\"background:var(--surface); border:1px solid var(--border-hi); border-radius:16px; padding:24px; max-width:680px; width:100%;\">\n        <span class=\"card-num\" style=\"color:var(--lime); margin-bottom:8px; display:block;\">CALCULADORA FREELANCE // COTIZADOR ESTIMATIVO ARS</span>\n        <h3 style=\"font-size:18px; margin-bottom:12px;\">Estimador de proyecto web Landing Page (4 secciones)</h3>\n        <div style=\"background:var(--elevated); padding:14px; border-radius:10px; margin-bottom:14px;\">\n          <div style=\"display:flex; justify-content:space-between; margin-bottom:6px; font-size:13px;\">\n            <span>Horas estimadas de desarrollo:</span>\n            <strong>30 horas</strong>\n          </div>\n          <div style=\"display:flex; justify-content:space-between; margin-bottom:6px; font-size:13px;\">\n            <span>Valor hora estimado:</span>\n            <strong>$12.000 ARS</strong>\n          </div>\n          <hr style=\"border:none; border-top:1px solid var(--border); margin:8px 0;\">\n          <div style=\"display:flex; justify-content:space-between; font-size:15px; color:var(--lime);\">\n            <strong>Presupuesto Total Sugerido:</strong>\n            <strong>$360.000 ARS</strong>\n          </div>\n          <div style=\"display:flex; justify-content:space-between; font-size:13px; color:var(--cyan); margin-top:4px;\">\n            <span>Anticipo a solicitar (50%):</span>\n            <strong>$180.000 ARS</strong>\n          </div>\n        </div>\n        <button class=\"cta-btn secondary\" style=\"width:100%;\" onclick=\"gainXP('c16calc', 40)\">✓ Entendido: Trabajar siempre con 50% de anticipo (+40 XP)</button>\n      </div>\n    ",
+    "quiz": [
+      {
+        "q": "¿Cuál es la regla de cobro obligatoria antes de iniciar un trabajo freelance?",
+        "opts": [
+          "Cobrar todo al final cuando el cliente esté 100% conforme",
+          "Cobrar el 50% de anticipo antes de comenzar a trabajar",
+          "Hacer el primer sitio gratis para ganar confianza"
+        ],
+        "a": 1
+      },
+      {
+        "q": "¿Qué es el 'Scope Creep' en un proyecto?",
+        "opts": [
+          "Un error de JavaScript",
+          "La expansión descontrolada del alcance de un proyecto con pedidos adicionales no presupuestados",
+          "Una herramienta de diseño"
+        ],
+        "a": 1
+      },
+      {
+        "q": "¿Cómo se genera un ingreso recurrente mensual con clientes web?",
+        "opts": [
+          "Ofreciendo planes de mantenimiento, hosting, backups y soporte mensual",
+          "Cobrándoles intereses diarios",
+          "Pidiéndoles donaciones"
+        ],
+        "a": 0
+      }
+    ]
+  },
+  "c17": {
+    "kicker": "CLASE 17 // MÓDULO 5 (PUBLICACIÓN Y CLIENTE)",
+    "title": "<span class=\"lime\">SEO On-Page:</span> Metas, Open Graph y Conversión",
+    "hint": "Hacé que tu sitio aparezca en Google y se comparta con tarjeta atractiva en WhatsApp y redes.",
+    "cards": [
+      [
+        "🏷️",
+        "01",
+        "Metas Esenciales (Title & Desc)",
+        "c17_meta"
+      ],
+      [
+        "📱",
+        "02",
+        "Open Graph (WhatsApp Preview)",
+        "c17_og"
+      ],
+      [
+        "🎯",
+        "03",
+        "Landing Pages de Alta Conversión",
+        "c17_cro"
+      ],
+      [
+        "♿",
+        "04",
+        "Accesibilidad y Estructura Hn",
+        "c17_a11y"
+      ]
+    ],
+    "popups": {
+      "c17_meta": {
+        "badge": "POSICIONAMIENTO // CLASE 17",
+        "title": "Title y Meta Description",
+        "lead": "La carta de presentación en los resultados de Google.",
+        "body": "<p>• <code>&lt;title&gt;</code>: Máximo 60 caracteres. Incluye la palabra clave y el lugar (ej: 'Cafetería de Especialidad en Palermo | Café Aroma').<br>• <code>&lt;meta name=\"description\" ...&gt;</code>: Entre 140 y 160 caracteres. Resumen persuasivo que invite al clic.</p>"
+      },
+      "c17_og": {
+        "badge": "REDES SOCIALES // CLASE 17",
+        "title": "Open Graph (og:image, og:title)",
+        "lead": "Cuando mandás el link por WhatsApp, ¿aparece una foto linda o un link pelado?",
+        "body": "<p>Con etiquetas como <code>&lt;meta property=\"og:image\" content=\"https://misitio.com/img/portada.jpg\"&gt;</code>, WhatsApp, LinkedIn y Twitter generan una tarjeta enriquecida con foto, título y descripción automáticamente.</p>"
+      },
+      "c17_cro": {
+        "badge": "CONVERSIÓN // CLASE 17",
+        "title": "Llamadas a la Acción (CTA) Claras",
+        "lead": "El objetivo de una web comercial es que el usuario haga una acción concreta.",
+        "body": "<p>Un botón llamativo con contraste que diga 'Pedir Presupuesto por WhatsApp' o 'Reservar Turno Ahora' convierte 5 veces más que un link genérico de 'Más información'.</p>"
+      },
+      "c17_a11y": {
+        "badge": "ACCESIBILIDAD // CLASE 17",
+        "title": "Jerarquía de Encabezados (h1 a h6)",
+        "lead": "Los motores de búsqueda leen tu web como si fueran ciegos.",
+        "body": "<p>Google usa los encabezados para entender la estructura lógica. No saltes de un h1 a un h4 por capricho visual; usá CSS para cambiar el tamaño de fuente sin quebrar la jerarquía.</p>"
+      }
+    },
+    "lab": "\n      <div style=\"background:var(--surface); border:1px solid var(--border-hi); border-radius:16px; padding:24px; max-width:680px; width:100%;\">\n        <span class=\"card-num\" style=\"color:var(--lime); margin-bottom:8px; display:block;\">PREVISUALIZADOR EN VIVO // VISTA PREVIA EN GOOGLE & WHATSAPP</span>\n        <h3 style=\"font-size:18px; margin-bottom:12px;\">Mirá cómo se ve tu sitio en WhatsApp</h3>\n        <div style=\"background:var(--elevated); border:1px solid var(--border); border-radius:12px; padding:12px; max-width:340px; margin:0 auto; box-shadow:0 4px 12px rgba(0,0,0,0.2);\">\n          <div style=\"background:var(--surface); height:120px; border-radius:8px; display:flex; align-items:center; justify-content:center; color:var(--text-dim); font-size:13px; border:1px dashed var(--border-hi);\">\n            [ Foto og:image 1200x630 ]\n          </div>\n          <div style=\"padding:8px 4px 2px;\">\n            <div style=\"font-weight:700; font-size:13px; color:var(--text);\">Cafetería Especialidad | Café Aroma</div>\n            <p style=\"font-size:11px; color:var(--text-dim); margin-top:2px;\">El mejor café de granos tostados en Palermo. Vení a disfrutar un brunch único.</p>\n            <span style=\"font-size:10px; color:var(--cyan); margin-top:4px; display:block;\">cafearoma.com.ar</span>\n          </div>\n        </div>\n        <button class=\"cta-btn secondary\" style=\"width:100%; margin-top:14px;\" onclick=\"gainXP('c17og', 35)\">✓ Incluir siempre og:tags en mis proyectos (+35 XP)</button>\n      </div>\n    ",
+    "quiz": [
+      {
+        "q": "¿Qué etiqueta define la imagen de vista previa al compartir un link en WhatsApp?",
+        "opts": [
+          "<link rel='icon'>",
+          "<meta property='og:image' content='...'>",
+          "<img src='...'>"
+        ],
+        "a": 1
+      },
+      {
+        "q": "¿Cuál es la extensión recomendada para el title de una página en Google?",
+        "opts": [
+          "Hasta 60 caracteres",
+          "Más de 300 caracteres",
+          "1 palabra"
+        ],
+        "a": 0
+      },
+      {
+        "q": "¿Qué es un Call To Action (CTA)?",
+        "opts": [
+          "Un virus informático",
+          "Un botón o enlace persuasivo diseñado para que el usuario realice una acción concreta",
+          "Una directiva de servidor"
+        ],
+        "a": 1
+      }
+    ]
+  },
+  "c18": {
+    "kicker": "CLASE 18 // MÓDULO 5 (PUBLICACIÓN Y CLIENTE)",
+    "title": "<span class=\"lime\">Deploy Temprano:</span> Publicación Gratuita en Vivo",
+    "hint": "Llevá tu código de tu computadora a internet con GitHub Pages o Vercel y conseguí tu link público.",
+    "cards": [
+      [
+        "☁️",
+        "01",
+        "Qué es un Deploy",
+        "c18_deploy"
+      ],
+      [
+        "🐙",
+        "02",
+        "GitHub Pages Paso a Paso",
+        "c18_ghpages"
+      ],
+      [
+        "⚡",
+        "03",
+        "Vercel & Netlify",
+        "c18_vercel"
+      ],
+      [
+        "🔒",
+        "04",
+        "HTTPS y Rutas Relativas",
+        "c18_ssl"
+      ]
+    ],
+    "popups": {
+      "c18_deploy": {
+        "badge": "PUBLICACIÓN // CLASE 18",
+        "title": "¿Qué significa hacer Deploy?",
+        "lead": "Hacer tu sitio accesible desde cualquier dispositivo del planeta.",
+        "body": "<p>Pasamos de tener archivos locales en nuestro disco a subirlos a un servidor web público con conexión permanente y dirección web propia.</p>"
+      },
+      "c18_ghpages": {
+        "badge": "GITHUB // CLASE 18",
+        "title": "GitHub Pages en 3 Clics",
+        "lead": "Alojamiento gratuito y rápido para sitios estáticos.",
+        "body": "<p>1. Subís tu proyecto a un repositorio en GitHub.<br>2. Vas a <strong>Settings → Pages</strong>.<br>3. Elegís la rama <code>main</code> y la carpeta <code>/root</code>.<br>¡En 2 minutos tu web está en <code>tuusuario.github.io/tu-repo</code>!</p>"
+      },
+      "c18_vercel": {
+        "badge": "MODERNO // CLASE 18",
+        "title": "Vercel: Arrastrar y Soltar",
+        "lead": "La alternativa más rápida del mercado.",
+        "body": "<p>Con Vercel podés simplemente arrastrar la carpeta de tu proyecto a su panel web y en 10 segundos te entrega un link con certificado SSL (HTTPS) automático y CDN global.</p>"
+      },
+      "c18_ssl": {
+        "badge": "VERIFICACIÓN // CLASE 18",
+        "title": "El error de las rutas absolutas",
+        "lead": "Por qué las imágenes andan en tu PC pero se rompen al subir la web.",
+        "body": "<p>Si en tu código pusiste <code>src=\"C:/Users/foto.jpg\"</code> o <code>src=\"/img/foto.jpg\"</code>, en el servidor fallará. Usá siempre rutas relativas: <code>src=\"./img/foto.jpg\"</code> o <code>src=\"img/foto.jpg\"</code>.</p>"
+      }
+    },
+    "lab": "\n      <div style=\"background:var(--surface); border:1px solid var(--border-hi); border-radius:16px; padding:24px; max-width:680px; width:100%;\">\n        <span class=\"card-num\" style=\"color:var(--lime); margin-bottom:8px; display:block;\">SIMULADOR DE DEPLOY // VERIFICACIÓN PRE-SUBIDA</span>\n        <h3 style=\"font-size:18px; margin-bottom:12px;\">Checklist antes de apretar 'Publicar'</h3>\n        <label style=\"display:flex; align-items:center; gap:8px; margin-bottom:8px; font-size:13px; cursor:pointer;\">\n          <input type=\"checkbox\" onchange=\"gainXP('c18chk1', 20)\"> El archivo principal se llama exactamente 'index.html' (en minúsculas)\n        </label>\n        <label style=\"display:flex; align-items:center; gap:8px; margin-bottom:8px; font-size:13px; cursor:pointer;\">\n          <input type=\"checkbox\" onchange=\"gainXP('c18chk2', 20)\"> No hay nombres de imágenes con espacios o acentos (ej: 'foto café.jpg' ❌)\n        </label>\n        <label style=\"display:flex; align-items:center; gap:8px; margin-bottom:8px; font-size:13px; cursor:pointer;\">\n          <input type=\"checkbox\" onchange=\"gainXP('c18chk3', 20)\"> Todas las rutas son relativas (./img/foto.webp)\n        </label>\n      </div>\n    ",
+    "quiz": [
+      {
+        "q": "¿Cómo debe llamarse obligatoriamente el archivo principal de inicio de un sitio web?",
+        "opts": [
+          "inicio.html",
+          "index.html",
+          "home.html"
+        ],
+        "a": 1
+      },
+      {
+        "q": "¿Por qué se deben evitar espacios y caracteres especiales en los nombres de archivos e imágenes?",
+        "opts": [
+          "Porque ocupan más memoria",
+          "Porque muchos servidores web Linux no interpretan bien los espacios y las imágenes no cargarán",
+          "Porque el navegador no los puede leer"
+        ],
+        "a": 1
+      },
+      {
+        "q": "¿Qué servicio gratuito permite publicar sitios HTML/CSS directamente desde un repositorio Git?",
+        "opts": [
+          "GitHub Pages",
+          "Google Drive",
+          "WhatsApp Web"
+        ],
+        "a": 0
+      }
+    ]
+  },
+  "c19": {
+    "kicker": "CLASE 19 // MÓDULO 6 (AUDITORÍA Y DEFENSA)",
+    "title": "<span class=\"lime\">Optimización:</span> WPO y Auditoría con Google Lighthouse",
+    "hint": "Medí el rendimiento real de tu sitio, corregí fallas de accesibilidad y lográ un puntaje de 90+.",
+    "cards": [
+      [
+        "🚦",
+        "01",
+        "Google Lighthouse en DevTools",
+        "c19_lighthouse"
+      ],
+      [
+        "⏱️",
+        "02",
+        "Core Web Vitals (LCP y CLS)",
+        "c19_vitals"
+      ],
+      [
+        "🗜️",
+        "03",
+        "Minificación y Carga Diferida",
+        "c19_minify"
+      ],
+      [
+        "♿",
+        "04",
+        "Auditoría de Accesibilidad (a11y)",
+        "c19_a11y"
+      ]
+    ],
+    "popups": {
+      "c19_lighthouse": {
+        "badge": "HERRAMIENTA F12 // CLASE 19",
+        "title": "Google Lighthouse: El Juez Imparcial",
+        "lead": "Evaluá Performance, Accesibilidad, Buenas Prácticas y SEO.",
+        "body": "<p>Abrí F12 en Chrome, andá a la pestaña Lighthouse y corré la auditoría en modo Mobile. Te dará un puntaje de 0 a 100 y una lista exacta de qué optimizar.</p>"
+      },
+      "c19_vitals": {
+        "badge": "MÉTRICAS OFICIALES // CLASE 19",
+        "title": "Core Web Vitals",
+        "lead": "Las métricas que definen el ranking en Google.",
+        "body": "<p>• <strong>LCP (Largest Contentful Paint):</strong> Cuánto tarda en verse el elemento principal (meta: menos de 2.5 segundos).<br>• <strong>CLS (Cumulative Layout Shift):</strong> Cuánto se mueven los textos mientras cargan las imágenes (meta: casi cero).</p>"
+      },
+      "c19_minify": {
+        "badge": "WPO // CLASE 19",
+        "title": "Minificación y Optimización",
+        "lead": "Quitar comentarios y espacios en blanco innecesarios.",
+        "body": "<p>Reducir el peso del CSS y comprimir imágenes ahorra ancho de banda y hace que la web cargue instantáneamente en redes móviles 3G/4G.</p>"
+      },
+      "c19_a11y": {
+        "badge": "INCLUSIÓN // CLASE 19",
+        "title": "Contraste y Etiquetas de Accesibilidad",
+        "lead": "Garantizar que cualquiera pueda usar el sitio.",
+        "body": "<p>Lighthouse te marcará si el contraste de color de tus textos es insuficiente o si faltan etiquetas <code>aria-label</code> en botones que solo tienen íconos.</p>"
+      }
+    },
+    "lab": "\n      <div style=\"background:var(--surface); border:1px solid var(--border-hi); border-radius:16px; padding:24px; max-width:680px; width:100%;\">\n        <span class=\"card-num\" style=\"color:var(--lime); margin-bottom:8px; display:block;\">SIMULADOR DE AUDITORÍA // GOOGLE LIGHTHOUSE EN VIVO</span>\n        <h3 style=\"font-size:18px; margin-bottom:12px;\">Resultados de la auditoría técnica</h3>\n        <div style=\"display:grid; grid-template-columns:repeat(4, 1fr); gap:8px; text-align:center; margin-bottom:14px;\">\n          <div style=\"background:var(--elevated); border:2px solid var(--lime); padding:12px; border-radius:10px;\">\n            <div style=\"font-size:22px; font-weight:800; color:var(--lime);\">98</div>\n            <div style=\"font-size:10px; color:var(--text-dim); margin-top:2px;\">Performance</div>\n          </div>\n          <div style=\"background:var(--elevated); border:2px solid var(--lime); padding:12px; border-radius:10px;\">\n            <div style=\"font-size:22px; font-weight:800; color:var(--lime);\">100</div>\n            <div style=\"font-size:10px; color:var(--text-dim); margin-top:2px;\">Accesibilidad</div>\n          </div>\n          <div style=\"background:var(--elevated); border:2px solid var(--lime); padding:12px; border-radius:10px;\">\n            <div style=\"font-size:22px; font-weight:800; color:var(--lime);\">100</div>\n            <div style=\"font-size:10px; color:var(--text-dim); margin-top:2px;\">Buenas Prácticas</div>\n          </div>\n          <div style=\"background:var(--elevated); border:2px solid var(--lime); padding:12px; border-radius:10px;\">\n            <div style=\"font-size:22px; font-weight:800; color:var(--lime);\">100</div>\n            <div style=\"font-size:10px; color:var(--text-dim); margin-top:2px;\">SEO</div>\n          </div>\n        </div>\n        <button class=\"cta-btn secondary\" style=\"width:100%;\" onclick=\"gainXP('c19lh', 40)\">✓ Aplicar auditoría a mi proyecto integrador (+40 XP)</button>\n      </div>\n    ",
+    "quiz": [
+      {
+        "q": "¿En qué panel del navegador se encuentra la herramienta de auditoría Lighthouse?",
+        "opts": [
+          "En el panel de Configuración de Windows",
+          "En las Herramientas para Desarrolladores (F12) de Chrome",
+          "En el Administrador de Tareas"
+        ],
+        "a": 1
+      },
+      {
+        "q": "¿Qué mide la métrica Core Web Vital llamada 'CLS' (Cumulative Layout Shift)?",
+        "opts": [
+          "El color de fondo",
+          "La estabilidad visual y los saltos inesperados de contenido al cargar la página",
+          "La cantidad de clics por minuto"
+        ],
+        "a": 1
+      },
+      {
+        "q": "¿Cuál es el puntaje deseable en Lighthouse para considerar un sitio optimizado?",
+        "opts": [
+          "Entre 20 y 40 puntos",
+          "Más de 90 puntos (zona verde)",
+          "Exactamente 50 puntos"
+        ],
+        "a": 1
+      }
+    ]
+  },
+  "c20": {
+    "kicker": "CLASE 20 // MÓDULO 6 (AUDITORÍA Y DEFENSA)",
+    "title": "<span class=\"lime\">Clínica de Código:</span> Pulido Final y Simulacro de Pitch",
+    "hint": "Último repaso técnico individual y preparación de la presentación oral de tu sitio web.",
+    "cards": [
+      [
+        "🩺",
+        "01",
+        "Auditoría Final 1 a 1",
+        "c20_audit"
+      ],
+      [
+        "🎤",
+        "02",
+        "Estructura del Pitch (3 minutos)",
+        "c20_pitch"
+      ],
+      [
+        "🖥️",
+        "03",
+        "Demostración en Vivo sin Fallas",
+        "c20_live"
+      ],
+      [
+        "📋",
+        "04",
+        "Checklist de Cierre de Proyecto",
+        "c20_close"
+      ]
+    ],
+    "popups": {
+      "c20_audit": {
+        "badge": "CLÍNICA // CLASE 20",
+        "title": "Revisión 1 a 1 con el Profesor",
+        "lead": "Asegurar que cada proyecto cumpla con el estándar profesional.",
+        "body": "<p>Chequeamos que los enlaces internos funcionen, que el formulario tenga validación básica y que el diseño se adapte armoniosamente a pantallas de 360px a 1440px.</p>"
+      },
+      "c20_pitch": {
+        "badge": "COMUNICACIÓN // CLASE 20",
+        "title": "Cómo presentar tu web en 3 minutos",
+        "lead": "La habilidad blanda más cotizada en el mercado laboral.",
+        "body": "<p>1. <strong>Problema y Cliente (45s):</strong> A quién ayuda este negocio.<br>2. <strong>Decisiones de Diseño (45s):</strong> Paleta de colores, tipografía y wireframes.<br>3. <strong>Demostración Responsive (60s):</strong> Mostrar la web en mobile y desktop.<br>4. <strong>Desafío Técnico (30s):</strong> Qué aprendiste a resolver en el camino.</p>"
+      },
+      "c20_live": {
+        "badge": "DEMO EN VIVO // CLASE 20",
+        "title": "Demostración Segura",
+        "lead": "Tener siempre el link público abierto y una copia local lista.",
+        "body": "<p>Si internet falla durante la exposición, tenés tu proyecto en el disco listo para proyectar con F12. Un profesional siempre tiene un plan de contingencia.</p>"
+      },
+      "c20_close": {
+        "badge": "CHECKLIST // CLASE 20",
+        "title": "Entrega Formal del Repositorio",
+        "lead": "El README.md que acompaña tu código.",
+        "body": "<p>Un buen archivo README con captura de pantalla, link en vivo y breve descripción del proyecto eleva inmediatamente la percepción de tu perfil técnico en GitHub.</p>"
+      }
+    },
+    "lab": "\n      <div style=\"background:var(--surface); border:1px solid var(--border-hi); border-radius:16px; padding:24px; max-width:680px; width:100%;\">\n        <span class=\"card-num\" style=\"color:var(--lime); margin-bottom:8px; display:block;\">SIMULADOR DE PITCH // ESTRUCTURA ORAL EN 3 MINUTOS</span>\n        <h3 style=\"font-size:18px; margin-bottom:12px;\">Cronograma de tu presentación</h3>\n        <div style=\"display:flex; flex-direction:column; gap:8px; font-size:13px;\">\n          <div style=\"background:var(--elevated); padding:8px 12px; border-radius:6px; border-left:3px solid var(--lime);\">\n            <strong>0:00 - 0:45</strong> — Presentación del cliente, rubro y propuesta de valor.\n          </div>\n          <div style=\"background:var(--elevated); padding:8px 12px; border-radius:6px; border-left:3px solid var(--cyan);\">\n            <strong>0:45 - 1:30</strong> — Moodboard, paleta de colores y arquitectura de 4 secciones.\n          </div>\n          <div style=\"background:var(--elevated); padding:8px 12px; border-radius:6px; border-left:3px solid var(--amber);\">\n            <strong>1:30 - 2:30</strong> — Recorrido de la web en vivo mostrando adaptabilidad mobile.\n          </div>\n          <div style=\"background:var(--elevated); padding:8px 12px; border-radius:6px; border-left:3px solid var(--coral);\">\n            <strong>2:30 - 3:00</strong> — Cierre, métricas de Lighthouse y link del proyecto.\n          </div>\n        </div>\n        <button class=\"cta-btn secondary\" style=\"width:100%; margin-top:12px;\" onclick=\"gainXP('c20pitch', 40)\">✓ Practicar mi discurso de 3 minutos (+40 XP)</button>\n      </div>\n    ",
+    "quiz": [
+      {
+        "q": "¿Cuánto tiempo debe durar idealmente la presentación técnica del sitio web?",
+        "opts": [
+          "1 hora completa",
+          "3 minutos concretos y al grano",
+          "10 segundos"
+        ],
+        "a": 1
+      },
+      {
+        "q": "¿Cuál de estos elementos NO debe faltar al mostrar la web?",
+        "opts": [
+          "Mostrar cómo se adapta a pantallas de celular (Mobile First)",
+          "Mostrar el código fuente línea por línea de 3000 líneas",
+          "Contar anécdotas no relacionadas con el proyecto"
+        ],
+        "a": 0
+      },
+      {
+        "q": "¿Por qué es importante tener un buen archivo README en tu repositorio de GitHub?",
+        "opts": [
+          "Porque ocupa menos espacio",
+          "Porque presenta tu proyecto profesionalmente ante potenciales clientes o reclutadores",
+          "Porque es obligatorio por ley"
+        ],
+        "a": 1
+      }
+    ]
+  },
+  "c21": {
+    "kicker": "CLASE 21 // MÓDULO 6 (AUDITORÍA Y DEFENSA)",
+    "title": "<span class=\"lime\">Defensa de Proyectos:</span> Graduación y Cierre del Curso",
+    "hint": "Presentación final de los sitios web terminados ante la clase, balance de logros y próximos pasos profesionales.",
+    "cards": [
+      [
+        "🎓",
+        "01",
+        "Defensas y Exposición Final",
+        "c21_defense"
+      ],
+      [
+        "💼",
+        "02",
+        "Tu Nuevo Portafolio Profesional",
+        "c21_portfolio"
+      ],
+      [
+        "🚀",
+        "03",
+        "Salida Laboral: Freelance y Agencias",
+        "c21_career"
+      ],
+      [
+        "🏆",
+        "04",
+        "Entrega de Certificados y Cierre",
+        "c21_certs"
+      ]
+    ],
+    "popups": {
+      "c21_defense": {
+        "badge": "GRADUACIÓN // CLASE 21",
+        "title": "La Gran Jornada de Presentaciones",
+        "lead": "El momento de ver materializado todo el esfuerzo del cuatrimestre.",
+        "body": "<p>Cada estudiante comparte su pantalla, navega su sitio web publicado en vivo y recibe la devolución cálida y constructiva del docente y sus pares.</p>"
+      },
+      "c21_portfolio": {
+        "badge": "CARRERA // CLASE 21",
+        "title": "Tu Primer Caso de Estudio Real",
+        "lead": "Ya no sos alguien que 'quiere aprender'; sos alguien que construye webs reales.",
+        "body": "<p>Este proyecto se suma directamente a tu perfil de LinkedIn y portafolio como un caso de estudio con cliente real, código limpio y deploy comprobable.</p>"
+      },
+      "c21_career": {
+        "badge": "FUTURO // CLASE 21",
+        "title": "Hacia Dónde Continuar",
+        "lead": "La web es un camino infinito de crecimiento.",
+        "body": "<p>Próximos pasos recomendados:<br>• Profundizar en JavaScript interactivo y APIs.<br>• Aprender frameworks modernos como React o Astro.<br>• Crear tu propia marca freelance y empezar a presupuestar a comercios locales.</p>"
+      },
+      "c21_certs": {
+        "badge": "RECONOCIMIENTO // CLASE 21",
+        "title": "¡Felicitaciones por completar las 84 horas!",
+        "lead": "Un recorrido riguroso de 21 clases dominando diseño, estructura y publicación web.",
+        "body": "<p>El Prof. Agustín R. Pérez y la institución celebran tu compromiso y dedicación. ¡Que este sea solo el inicio de una exitosa carrera en el desarrollo digital!</p>"
+      }
+    },
+    "lab": "\n      <div style=\"background:var(--surface); border:1px solid var(--border-hi); border-radius:16px; padding:24px; max-width:680px; width:100%; text-align:center;\">\n        <span class=\"card-num\" style=\"color:var(--lime); margin-bottom:8px; display:block;\">DIPLOMA DE FINALIZACIÓN // CURSO DE DISEÑO WEB 2026</span>\n        <h3 style=\"font-size:20px; margin-bottom:8px;\">🎓 Certificado de Graduación</h3>\n        <p style=\"font-size:14px; color:var(--text-dim); margin-bottom:16px;\">\n          Por haber completado satisfactoriamente las 21 clases (84 horas) del programa oficial de Diseño Web, dominando HTML5 Semántico, CSS3 Flexbox & Grid, Diseño Responsive, Optimización WPO y Publicación en Vivo.\n        </p>\n        <div style=\"background:var(--elevated); border:2px solid var(--lime); padding:16px; border-radius:12px; margin-bottom:16px;\">\n          <div style=\"font-size:13px; color:var(--cyan); font-family:var(--font-mono); font-weight:700;\">PROF. AGUSTÍN R. PÉREZ</div>\n          <div style=\"font-size:11px; color:var(--text-dim);\">Docente Titular // Contexto Buenos Aires 2026</div>\n        </div>\n        <button class=\"cta-btn\" style=\"width:100%;\" onclick=\"gainXP('c21grad', 100); this.textContent='🏆 ¡Felicidades! Completaste el curso oficial (+100 XP)'\">🏆 Reclamar Insignia de Graduado (+100 XP)</button>\n      </div>\n    ",
+    "quiz": [
+      {
+        "q": "¿Cuál es el activo más importante que te llevás al completar este curso?",
+        "opts": [
+          "Un conjunto de notas escritas en papel",
+          "Un sitio web real, responsive y publicado en la nube que demuestra tus habilidades técnicas",
+          "Un archivo comprimido sin probar"
+        ],
+        "a": 1
+      },
+      {
+        "q": "¿Cuál es el siguiente paso formativo natural tras dominar HTML5 y CSS3?",
+        "opts": [
+          "Volver a empezar desde cero",
+          "Avanzar hacia la interactividad dinámica con JavaScript y frameworks modernos",
+          "Dejar de maquetar"
+        ],
+        "a": 1
+      },
+      {
+        "q": "¿Quién fue tu profesor a lo largo de este curso de 21 clases?",
+        "opts": [
+          "Prof. Agustín R. Pérez",
+          "Prof. Alan Turing",
+          "Prof. John Doe"
+        ],
+        "a": 0
+      }
+    ]
+  }
+}
