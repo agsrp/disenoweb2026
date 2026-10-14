@@ -545,9 +545,9 @@
         "c11_sections"
       ],
       [
-        "📅",
+        "🚀",
         "04",
-        "Cronograma de Hitos",
+        "Criterios de Entrega Profesional",
         "c11_schedule"
       ]
     ],
@@ -571,10 +571,10 @@
         "body": "<p>1. <strong>Hero Section:</strong> Título impactante, propuesta de valor y CTA.<br>2. <strong>Servicios / Productos:</strong> Tarjetas con precios o detalle.<br>3. <strong>Sobre Nosotros / Por qué elegirnos:</strong> Confianza y credibilidad.<br>4. <strong>Contacto y Ubicación:</strong> Formulario, mapa y datos de atención.</p>"
       },
       "c11_schedule": {
-        "badge": "CALENDARIO // CLASE 11",
-        "title": "Hitos de Entrega",
-        "lead": "Un paso a la vez para llegar a la meta sin estrés.",
-        "body": "<p>• Clase 14: Parcial teórico-práctico.<br>• Clase 18: Primer Deploy público en vivo.<br>• Clase 21: Defensa final ante la clase.</p>"
+        "badge": "ENTREGA // CLASE 11",
+        "title": "Criterios de Calidad del Proyecto",
+        "lead": "Pautas indispensables para que tu sitio sea aprobado.",
+        "body": "<p>• Estructura HTML5 100% semántica y válida.<br>• Maquetación responsive sin scroll horizontal.<br>• Sitio publicado online con enlace funcional para clientes.</p>"
       }
     },
     "lab": "\n      <div style=\"background:var(--surface); border:1px solid var(--border-hi); border-radius:16px; padding:24px; max-width:680px; width:100%;\">\n        <span class=\"card-num\" style=\"color:var(--lime); margin-bottom:8px; display:block;\">CONFIGURADOR DE PROYECTO // DEFINICIÓN DE BRIEF</span>\n        <h3 style=\"font-size:18px; margin-bottom:12px;\">Elegí el rubro de tu proyecto</h3>\n        <div style=\"display:flex; gap:10px; flex-wrap:wrap; margin-bottom:16px;\">\n          <button class=\"cta-btn secondary\" onclick=\"document.getElementById('c11-res').textContent='☕ Elegiste: Cafetería de Especialidad (Palermo). Foco en fotos de producto y mapa.'; gainXP('c11p1', 35)\">☕ Cafetería / Bar</button>\n          <button class=\"cta-btn secondary\" onclick=\"document.getElementById('c11-res').textContent='⚖️ Elegiste: Estudio Jurídico / Contable. Foco en formalidad, confianza y formulario.'; gainXP('c11p2', 35)\">⚖️ Servicios Profesionales</button>\n          <button class=\"cta-btn secondary\" onclick=\"document.getElementById('c11-res').textContent='💻 Elegiste: Portafolio de Desarrollador Web. Foco en proyectos y contacto rápido.'; gainXP('c11p3', 35)\">💻 Portafolio Personal</button>\n        </div>\n        <div id=\"c11-res\" style=\"background:var(--elevated); border:1px solid var(--border); padding:14px; border-radius:8px; font-family:var(--font-mono); font-size:13px; color:var(--cyan);\">Seleccioná un rubro para comenzar</div>\n      </div>\n    ",
@@ -1360,7 +1360,7 @@
         "body": "<p>Un buen archivo README con captura de pantalla, link en vivo y breve descripción del proyecto eleva inmediatamente la percepción de tu perfil técnico en GitHub.</p>"
       }
     },
-    "lab": "\n      <div style=\"background:var(--surface); border:1px solid var(--border-hi); border-radius:16px; padding:24px; max-width:680px; width:100%;\">\n        <span class=\"card-num\" style=\"color:var(--lime); margin-bottom:8px; display:block;\">SIMULADOR DE PITCH // ESTRUCTURA ORAL EN 3 MINUTOS</span>\n        <h3 style=\"font-size:18px; margin-bottom:12px;\">Cronograma de tu presentación</h3>\n        <div style=\"display:flex; flex-direction:column; gap:8px; font-size:13px;\">\n          <div style=\"background:var(--elevated); padding:8px 12px; border-radius:6px; border-left:3px solid var(--lime);\">\n            <strong>0:00 - 0:45</strong> — Presentación del cliente, rubro y propuesta de valor.\n          </div>\n          <div style=\"background:var(--elevated); padding:8px 12px; border-radius:6px; border-left:3px solid var(--cyan);\">\n            <strong>0:45 - 1:30</strong> — Moodboard, paleta de colores y arquitectura de 4 secciones.\n          </div>\n          <div style=\"background:var(--elevated); padding:8px 12px; border-radius:6px; border-left:3px solid var(--amber);\">\n            <strong>1:30 - 2:30</strong> — Recorrido de la web en vivo mostrando adaptabilidad mobile.\n          </div>\n          <div style=\"background:var(--elevated); padding:8px 12px; border-radius:6px; border-left:3px solid var(--coral);\">\n            <strong>2:30 - 3:00</strong> — Cierre, métricas de Lighthouse y link del proyecto.\n          </div>\n        </div>\n        <button class=\"cta-btn secondary\" style=\"width:100%; margin-top:12px;\" onclick=\"gainXP('c20pitch', 40)\">✓ Practicar mi discurso de 3 minutos (+40 XP)</button>\n      </div>\n    ",
+    "lab": "\n      <div style=\"background:var(--surface); border:1px solid var(--border-hi); border-radius:16px; padding:24px; max-width:680px; width:100%;\">\n        <span class=\"card-num\" style=\"color:var(--lime); margin-bottom:8px; display:block;\">SIMULADOR DE PITCH // ESTRUCTURA ORAL EN 3 MINUTOS</span>\n        <h3 style=\"font-size:18px; margin-bottom:12px;\">Estructura de tu presentación</h3>\n        <div style=\"display:flex; flex-direction:column; gap:8px; font-size:13px;\">\n          <div style=\"background:var(--elevated); padding:8px 12px; border-radius:6px; border-left:3px solid var(--lime);\">\n            <strong>0:00 - 0:45</strong> — Presentación del cliente, rubro y propuesta de valor.\n          </div>\n          <div style=\"background:var(--elevated); padding:8px 12px; border-radius:6px; border-left:3px solid var(--cyan);\">\n            <strong>0:45 - 1:30</strong> — Moodboard, paleta de colores y arquitectura de 4 secciones.\n          </div>\n          <div style=\"background:var(--elevated); padding:8px 12px; border-radius:6px; border-left:3px solid var(--amber);\">\n            <strong>1:30 - 2:30</strong> — Recorrido de la web en vivo mostrando adaptabilidad mobile.\n          </div>\n          <div style=\"background:var(--elevated); padding:8px 12px; border-radius:6px; border-left:3px solid var(--coral);\">\n            <strong>2:30 - 3:00</strong> — Cierre, métricas de Lighthouse y link del proyecto.\n          </div>\n        </div>\n        <button class=\"cta-btn secondary\" style=\"width:100%; margin-top:12px;\" onclick=\"gainXP('c20pitch', 40)\">✓ Practicar mi discurso de 3 minutos (+40 XP)</button>\n      </div>\n    ",
     "quiz": [
       {
         "q": "¿Cuánto tiempo debe durar idealmente la presentación técnica del sitio web?",

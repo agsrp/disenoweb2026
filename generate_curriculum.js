@@ -384,7 +384,7 @@ const fullCurriculum = {
       ["🚀", "01", "Consigna y Alcance del MVP", "c11_brief"],
       ["🏪", "02", "Elección de Rubro y Cliente", "c11_niche"],
       ["🗺️", "03", "Las 4 Secciones Obligatorias", "c11_sections"],
-      ["📅", "04", "Cronograma de Hitos", "c11_schedule"]
+      ["🚀", "04", "Criterios de Entrega Profesional", "c11_schedule"]
     ],
     popups: {
       c11_brief: {
@@ -406,10 +406,10 @@ const fullCurriculum = {
         body: `<p>1. <strong>Hero Section:</strong> Título impactante, propuesta de valor y CTA.<br>2. <strong>Servicios / Productos:</strong> Tarjetas con precios o detalle.<br>3. <strong>Sobre Nosotros / Por qué elegirnos:</strong> Confianza y credibilidad.<br>4. <strong>Contacto y Ubicación:</strong> Formulario, mapa y datos de atención.</p>`
       },
       c11_schedule: {
-        badge: "CALENDARIO // CLASE 11",
-        title: "Hitos de Entrega",
-        lead: "Un paso a la vez para llegar a la meta sin estrés.",
-        body: `<p>• Clase 14: Parcial teórico-práctico.<br>• Clase 18: Primer Deploy público en vivo.<br>• Clase 21: Defensa final ante la clase.</p>`
+        badge: "ENTREGA // CLASE 11",
+        title: "Criterios de Calidad del Proyecto",
+        lead: "Pautas indispensables para que tu sitio sea aprobado.",
+        body: `<p>• Estructura HTML5 100% semántica y válida.<br>• Maquetación responsive sin scroll horizontal.<br>• Sitio publicado online con enlace funcional para clientes.</p>`
       }
     },
     lab: `
@@ -956,7 +956,7 @@ const fullCurriculum = {
     lab: `
       <div style="background:var(--surface); border:1px solid var(--border-hi); border-radius:16px; padding:24px; max-width:680px; width:100%;">
         <span class="card-num" style="color:var(--lime); margin-bottom:8px; display:block;">SIMULADOR DE PITCH // ESTRUCTURA ORAL EN 3 MINUTOS</span>
-        <h3 style="font-size:18px; margin-bottom:12px;">Cronograma de tu presentación</h3>
+        <h3 style="font-size:18px; margin-bottom:12px;">Estructura de tu presentación</h3>
         <div style="display:flex; flex-direction:column; gap:8px; font-size:13px;">
           <div style="background:var(--elevated); padding:8px 12px; border-radius:6px; border-left:3px solid var(--lime);">
             <strong>0:00 - 0:45</strong> — Presentación del cliente, rubro y propuesta de valor.
